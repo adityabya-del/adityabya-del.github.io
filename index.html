@@ -67,6 +67,13 @@
     color: white;
     border: 1px solid rgba(255,255,255,0.3);
   }
+  .links a.disabled {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.4);
+    border: 1px solid rgba(255,255,255,0.15);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
   footer {
     color: rgba(255,255,255,0.6);
     font-size: 13px;
@@ -85,7 +92,7 @@
   </div>
   <div class="links">
     <a href="https://apps.apple.com/in/app/clearberth/id6802574946">Download on the App Store</a>
-    <a class="secondary" href="https://play.google.com/store/apps/details?id=com.aditya.clearberth">Get it on Google Play</a>
+    <a class="disabled" href="#" onclick="return false;">Get it on Google Play (Coming Soon)</a>
   </div>
   <footer>
     <a href="/clearberth/privacy.htm">Privacy Policy</a> &nbsp;&middot;&nbsp;
