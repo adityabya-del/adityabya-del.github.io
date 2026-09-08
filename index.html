@@ -11,12 +11,15 @@
     background: linear-gradient(180deg, #425CF5 0%, #3046D2 100%);
     color: white;
     min-height: 100vh;
+    padding: 24px;
+  }
+  .hero {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 24px;
+    padding: 40px 0;
   }
   .badge {
     background: #FF6F4A;
@@ -51,7 +54,7 @@
     gap: 16px;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 16px;
   }
   .links a {
     background: white;
@@ -62,11 +65,6 @@
     font-weight: 700;
     font-size: 15px;
   }
-  .links a.secondary {
-    background: rgba(255,255,255,0.15);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.3);
-  }
   .links a.disabled {
     background: rgba(255,255,255,0.08);
     color: rgba(255,255,255,0.4);
@@ -74,28 +72,77 @@
     cursor: not-allowed;
     pointer-events: none;
   }
+  .why-section {
+    max-width: 640px;
+    margin: 24px auto 0;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 36px;
+    text-align: left;
+  }
+  .why-section h2 {
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
+  .why-section h3 {
+    font-size: 19px;
+    margin-top: 28px;
+    margin-bottom: 14px;
+    color: #FFBEA0;
+  }
+  .why-section p {
+    color: rgba(255,255,255,0.85);
+    line-height: 1.7;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+  .signoff {
+    font-style: italic;
+    color: rgba(255,255,255,0.7);
+  }
   footer {
     color: rgba(255,255,255,0.6);
     font-size: 13px;
-    margin-top: 20px;
+    text-align: center;
+    margin-top: 32px;
+    padding-bottom: 24px;
   }
   footer a { color: rgba(255,255,255,0.8); }
 </style>
 </head>
 <body>
-  <div class="badge">NOW LIVE ON APP STORE</div>
-  <h1>ClearBerth</h1>
-  <div class="tagline">TRAINS, MADE CLEAR</div>
-  <div class="features">
-    PNR status with a visual seat diagram &middot; Live train tracking<br>
-    Boarding &amp; arrival alerts &middot; Built for Indian Railways travellers
+  <div class="hero">
+    <div class="badge">NOW LIVE ON APP STORE</div>
+    <h1>ClearBerth</h1>
+    <div class="tagline">TRAINS, MADE CLEAR</div>
+    <div class="features">
+      PNR status with a visual seat diagram &middot; Live train tracking<br>
+      Boarding &amp; arrival alerts &middot; Built for Indian Railways travellers
+    </div>
+    <div class="links">
+      <a href="https://apps.apple.com/in/app/clearberth/id6802574946">Download on the App Store</a>
+      <a class="disabled" href="#" onclick="return false;">Get it on Google Play (Coming Soon)</a>
+    </div>
   </div>
-  <div class="links">
-    <a href="https://apps.apple.com/in/app/clearberth/id6802574946">Download on the App Store</a>
-    <a class="disabled" href="#" onclick="return false;">Get it on Google Play (Coming Soon)</a>
+
+  <div class="why-section">
+    <h2>Why ClearBerth?</h2>
+    <p>Indian train travel is stressful — and honestly, most of that stress vanishes the moment you actually board the train. So why is it so stressful before that?</p>
+    <p>If you have a waitlisted ticket, you're manually checking to see if it's confirmed, or waiting for an SMS from IRCTC to tell you. If you're about to board, you're checking whether the train is on time, running late, or — worse — cancelled. ClearBerth is here to take that worry off your hands. It shows your PNR status and the exact time your train will reach your station.</p>
+
+    <h3>Why pay for it?</h3>
+    <p>If you're like me, in the days before your journey, all you're doing is checking your PNR status. Then on the day itself, a new task begins — where is the train right now? Is it on time? How many hours or minutes late, plus the scheduled time, means you need to be at the station 30 minutes early? So many calculations, so much time spent.</p>
+    <p>That time would be much happier spent elsewhere — having a nice phone call with family or friends, or making sure you remembered everything you need to carry. You know exactly what I mean.</p>
+    <p>For a small amount, PNR waiting list upgrades will reach your phone instantly. On the day of your journey, your screen tells you exactly when your train will reach your station — no calculations needed.</p>
+    <p>I built this app because I want train passengers to not just enjoy their journey, but to also feel relaxed and calm in the days and hours leading up to boarding. And the best part — ClearBerth keeps working all the way to your destination, calculating delays and scheduled times so you know exactly when you will arrive, while you enjoy the hot food you ordered straight to your seat, through the same app.</p>
+    <p>That's a win-win, if you ask me.</p>
+    <p>So go ahead and try it — I'm confident you'll love it. And if you have suggestions to make it better, I'll happily make the changes, provided they're reasonable.</p>
+    <p class="signoff">Thank you for being part of the ClearBerth family. It means the world to me.</p>
   </div>
+
   <footer>
-    <a href="/clearberth/privacy.htm">Privacy Policy</a> &nbsp;&middot;&nbsp;
+    <a href="https://clearberth.app/clearberth/privacy.htm">Privacy Policy</a> &nbsp;&middot;&nbsp;
     <a href="mailto:clearberth.support@gmail.com">Contact Support</a>
   </footer>
 </body>
