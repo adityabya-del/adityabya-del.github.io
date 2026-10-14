@@ -370,6 +370,24 @@ footer a:hover{color:#fff}
   .check-tabs button{font-size:14px;padding:11px 6px}
   .check-panel{padding:16px}
 }
+
+.chip.big{padding:7px 14px;font-size:14px}
+.ck-map{height:280px;border-radius:16px;overflow:hidden;border:1.5px solid var(--line);margin:12px 0 6px;isolation:isolate;position:relative;z-index:0}
+.ck-tip{font:600 12px var(--font-body);color:var(--ink);border:0;box-shadow:0 4px 14px -4px rgba(0,0,0,.35)}
+.ck-line{display:flex;align-items:center;gap:10px;margin:14px 0 6px}
+.ck-end{font:600 13px var(--font-body);color:var(--ink);max-width:28%}
+.ck-track{position:relative;flex:1;height:0;border-top:3px dotted var(--indigo);margin:0 6px}
+.ck-dot{position:absolute;top:-10px;width:17px;height:17px;margin-left:-8px;border-radius:50%;background:var(--coral);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.ck-mapnote{font-size:12px;color:#7A819E;margin-bottom:12px}
+.ck-rows{border:1.5px solid var(--line);border-radius:14px;margin:10px 0}
+.ck-row{display:flex;justify-content:space-between;gap:14px;padding:11px 14px;border-bottom:1px solid var(--line);font-size:14px}
+.ck-row:last-child{border-bottom:0}
+.ck-row span{color:#7A819E}
+.ck-row b{color:var(--ink);font-weight:600;text-align:right}
+.ck-all{margin-top:10px}
+.ck-all summary{cursor:pointer;font:600 14px var(--font-body);color:var(--indigo);padding:6px 0}
+.ck-msg + .ck-msg{margin-top:8px}
+@media (max-width:640px){.ck-map{height:240px}}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8595461358711655" crossorigin="anonymous"></script>
 </head>
@@ -1057,6 +1075,147 @@ footer a:hover{color:#fff}
     });
   });
 
+  /* ---------- live train: route map + the same details as the app ---------- */
+  // Approximate station positions (map only). Any other station is looked up by
+  // name on OpenStreetMap; if that fails too the map falls back to a plain line.
+  var STN = { NDLS: [28.6425, 77.2194], DLI: [28.659, 77.228], NZM: [28.588, 77.253], CSMT: [18.9398, 72.8355], BCT: [18.969, 72.8196], LTT: [19.069, 72.889], BDTS: [19.0617, 72.8408],
+    HWH: [22.5835, 88.3425], SDAH: [22.567, 88.37], KOAA: [22.625, 88.382], MAS: [13.0827, 80.2757], SBC: [12.978, 77.57], YPR: [13.0228, 77.55], SC: [17.434, 78.501], HYB: [17.393, 78.472],
+    PUNE: [18.529, 73.874], ADI: [23.026, 72.601], JP: [26.9196, 75.7878], LKO: [26.831, 80.923], CNB: [26.454, 80.35], PNBE: [25.602, 85.138], GKP: [26.75, 83.379], BSB: [25.321, 82.987],
+    NJP: [26.683, 88.436], GHY: [26.181, 91.751], DBRG: [27.483, 94.911], BBS: [20.267, 85.843], PURI: [19.807, 85.826], TVC: [8.488, 76.952], ERS: [9.969, 76.291], CBE: [10.998, 76.967],
+    BPL: [23.265, 77.412], NGP: [21.152, 79.088], ASR: [31.634, 74.872], CDG: [30.704, 76.801], DDN: [30.317, 78.033], JAT: [32.708, 74.873], RNC: [23.341, 85.333], MAO: [15.399, 73.957] };
+  function titleCase(s) { return String(s || '').toLowerCase().replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); }); }
+  function geocode(code, name) {
+    if (STN[code]) return Promise.resolve(STN[code]);
+    var key = 'cb_geo_' + code;
+    try { var c = JSON.parse(localStorage.getItem(key) || 'null'); if (c) return Promise.resolve(c); } catch (e) {}
+    return fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=in&q=' + encodeURIComponent(titleCase(name) + ' railway station'))
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j[0]) return null;
+        var p = [parseFloat(j[0].lat), parseFloat(j[0].lon)];
+        try { localStorage.setItem(key, JSON.stringify(p)); } catch (e) {}
+        return p;
+      }).catch(function () { return null; });
+  }
+  var leafletP = null;
+  function loadLeaflet() {
+    if (window.L && window.L.map) return Promise.resolve();
+    if (leafletP) return leafletP;
+    leafletP = new Promise(function (res, rej) {
+      var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'; document.head.appendChild(l);
+      var s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+      s.onload = function () { res(); }; s.onerror = function () { leafletP = null; rej(new Error('leaflet')); };
+      document.head.appendChild(s);
+    });
+    return leafletP;
+  }
+  function nm(s) { return String(s || '').toUpperCase().replace(/\s+/g, ' ').trim(); }
+  function findStation(list, name) {
+    var n = nm(name); if (!n) return -1;
+    for (var i = 0; i < list.length; i++) if (nm(list[i].station_name) === n) return i;
+    for (var j = 0; j < list.length; j++) { var m = nm(list[j].station_name); if (m && (m.indexOf(n) === 0 || n.indexOf(m) === 0)) return j; }
+    return -1;
+  }
+  // Where is the train? Everything is read from the live report text and the station list.
+  function analyse(x) {
+    var st = x.stations || [], last = x.last_update || '';
+    var o = { st: st, first: st[0], end: st[st.length - 1], cancelled: !!x.cancelled };
+    o.notStarted = /yet to start/i.test(last) || !st.length;
+    o.terminated = /reached its destination/i.test(last);
+    var m = last.match(/^(Departed from|Arrived at|Crossed)\s+(.+?)\s+at\s+(\d{2}-[A-Za-z]{3}-\d{4}\s+\d{2}:\d{2})/i);
+    if (m) { o.kind = m[1].toLowerCase(); o.where = m[2]; o.when = m[3]; }
+    var nx = last.match(/(?:Next stoppage station is|Upcoming station is|Next station is)\s+([^.]+)\./i);
+    o.nextName = nx ? nx[1].trim() : '';
+    var total = st.length ? Number(st[st.length - 1].distance) || 0 : 0;
+    var f = null;
+    if (o.notStarted) f = 0;
+    else if (o.terminated) f = 1;
+    else if (total > 0) {
+      var i = findStation(st, o.where);
+      if (i >= 0) f = (Number(st[i].distance) || 0) / total;
+      else { var k = findStation(st, o.nextName); if (k > 0) f = (((Number(st[k - 1].distance) || 0) + (Number(st[k].distance) || 0)) / 2) / total; }
+    }
+    o.frac = f == null ? null : Math.max(0, Math.min(1, f));
+    o.total = total;
+    o.nextIdx = findStation(st, o.nextName);
+    return o;
+  }
+  function delayBadge(x, a) {
+    var dm = typeof x.delay_minutes === 'number' ? x.delay_minutes : null;
+    var hm = function (m) { return m >= 60 ? Math.floor(m / 60) + 'h ' + (m % 60) + 'm' : m + ' min'; };
+    if (a.cancelled) return { t: 'Cancelled', c: 'bad' };
+    if (a.notStarted) return { t: 'Yet to start', c: '' };
+    if (dm == null) return null;
+    if (a.terminated) return dm > 4 ? { t: 'Journey ended · arrived ' + hm(dm) + ' late', c: dm > 30 ? 'bad' : 'warn' } : { t: 'Journey ended · on time', c: 'ok' };
+    return dm > 4 ? { t: 'Running ' + hm(dm) + ' late', c: dm > 30 ? 'bad' : 'warn' } : { t: dm <= 0 ? 'On time' : 'Running on time', c: 'ok' };
+  }
+  function row(box, label, value) { if (!value) return; var r = el('div', 'ck-row'); r.appendChild(el('span', null, label)); r.appendChild(el('b', null, value)); box.appendChild(r); }
+
+  function drawMap(holder, a) {
+    var f = a.frac == null ? 0.5 : a.frac;
+    var A = a.first, B = a.end;
+    var pct = Math.round(f * 100);
+    // Plain line (always shown first, and kept if the real map cannot load).
+    var plain = el('div', 'ck-line');
+    var left = el('span', 'ck-end', titleCase(A.station_name)), right = el('span', 'ck-end', titleCase(B.station_name));
+    var track = el('div', 'ck-track'), dot = el('i', 'ck-dot'); dot.style.left = pct + '%'; track.appendChild(dot);
+    plain.appendChild(left); plain.appendChild(track); plain.appendChild(right);
+    holder.appendChild(plain);
+    var note = el('div', 'ck-mapnote', 'The dot shows roughly how far along the journey the train is. The details below are the real data.');
+    holder.appendChild(note);
+    Promise.all([geocode(A.station_code, A.station_name), geocode(B.station_code, B.station_name), loadLeaflet()]).then(function (v) {
+      var p1 = v[0], p2 = v[1]; if (!p1 || !p2 || !window.L) return;
+      var box = el('div', 'ck-map'); holder.insertBefore(box, plain); plain.style.display = 'none';
+      var L = window.L, map = L.map(box, { scrollWheelZoom: false, attributionControl: true, zoomControl: true });
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 12, attribution: '&copy; OpenStreetMap' }).addTo(map);
+      L.polyline([p1, p2], { color: '#3654FF', weight: 4, dashArray: '2 8', lineCap: 'round' }).addTo(map);
+      var at = [p1[0] + (p2[0] - p1[0]) * f, p1[1] + (p2[1] - p1[1]) * f];
+      L.circleMarker(p1, { radius: 7, color: '#fff', weight: 3, fillColor: '#0B1030', fillOpacity: 1 }).bindTooltip(titleCase(A.station_name), { permanent: true, direction: 'top', className: 'ck-tip' }).addTo(map);
+      L.circleMarker(p2, { radius: 7, color: '#fff', weight: 3, fillColor: '#0B1030', fillOpacity: 1 }).bindTooltip(titleCase(B.station_name), { permanent: true, direction: 'top', className: 'ck-tip' }).addTo(map);
+      L.circleMarker(at, { radius: 10, color: '#fff', weight: 3, fillColor: '#FF6B4A', fillOpacity: 1 }).addTo(map);
+      map.fitBounds(L.latLngBounds([p1, p2]), { padding: [40, 40] });
+      setTimeout(function () { map.invalidateSize(); }, 50);
+    }).catch(function () {});
+  }
+
+  function renderLive(out, x, no) {
+    clear(out);
+    var a = analyse(x);
+    out.appendChild(el('div', 'ck-title', (x.train_number || no) + ' ' + titleCase(x.train_name)));
+    var b = delayBadge(x, a);
+    if (b) { var bw = el('div', 'ck-sub'); bw.appendChild(el('span', 'chip big ' + b.c, b.t)); out.appendChild(bw); }
+    if (x.cancelled) out.appendChild(el('div', 'ck-msg err', x.cancelled.message || 'This train is cancelled for this date.'));
+    if (x.diversion && x.diversion.message) out.appendChild(el('div', 'ck-msg err', x.diversion.message));
+    if (x.partialCancel && x.partialCancel.message) out.appendChild(el('div', 'ck-msg', x.partialCancel.message));
+    if (x.rescheduled && x.rescheduled.message) out.appendChild(el('div', 'ck-msg', x.rescheduled.message));
+    if (a.first && a.end && !x.cancelled) { var mh = el('div', 'ck-maphold'); out.appendChild(mh); drawMap(mh, a); }
+
+    var rows = el('div', 'ck-rows');
+    var now = a.notStarted ? 'Yet to start' : (a.where ? (a.kind === 'arrived at' ? 'At ' : a.kind === 'departed from' ? 'Left ' : 'Passed ') + titleCase(a.where) : '');
+    if (a.terminated && a.end) now = 'Reached ' + titleCase(a.end.station_name);
+    row(rows, 'Now', now);
+    if (!a.terminated && a.nextName) row(rows, 'Next stop', titleCase(a.nextName) + (a.nextIdx >= 0 && a.st[a.nextIdx].platform ? ' (platform ' + a.st[a.nextIdx].platform + ')' : ''));
+    if (!a.terminated && a.nextIdx >= 0) row(rows, 'Expected there', a.st[a.nextIdx].est_arrival_time || a.st[a.nextIdx].arrival_time);
+    if (a.end && !a.terminated) row(rows, 'Arrives ' + titleCase(a.end.station_name), a.end.est_arrival_time || a.end.arrival_time);
+    if (a.total > 0 && a.frac != null && !a.notStarted) { var km = Math.round(a.frac * a.total); row(rows, 'Distance', 'about ' + km + ' of ' + Math.round(a.total) + ' km'); }
+    row(rows, 'Last updated', a.when || (x.last_update || ''));
+    out.appendChild(rows);
+
+    if (a.st.length) {
+      var det = el('details', 'ck-all'); det.appendChild(el('summary', null, 'All stations'));
+      var wrap = el('div', 'ck-stations'), t = el('table'), h = el('tr');
+      ['Station', 'Arrives', 'Departs', 'Plat.'].forEach(function (s) { h.appendChild(el('th', null, s)); });
+      var thead = el('thead'); thead.appendChild(h); t.appendChild(thead);
+      var tb = el('tbody');
+      a.st.forEach(function (s) {
+        var tr = el('tr');
+        [s.station_name || s.station_code, s.est_arrival_time || s.arrival_time, s.est_departure_time || s.departure_time, s.platform].forEach(function (v) { tr.appendChild(el('td', null, v || '-')); });
+        tb.appendChild(tr);
+      });
+      t.appendChild(tb); wrap.appendChild(t); det.appendChild(wrap); out.appendChild(det);
+    }
+  }
+
   /* ---------- live train ---------- */
   function ddmmyyyy(offsetDays) {
     var d = new Date(); d.setDate(d.getDate() - offsetDays);
@@ -1069,27 +1228,7 @@ footer a:hover{color:#fff}
     run('live', 'GN', out, { action: 'live', trainNo: no, doj: ddmmyyyy(parseInt($('ckStart').value, 10) || 0) }, function (r) {
       var d = r.body;
       if (r.status === 200 && d && d.code === 200 && d.response) {
-        var x = d.response; clear(out);
-        out.appendChild(el('div', 'ck-title', (x.train_number || no) + ' ' + (x.train_name || '')));
-        out.appendChild(el('div', 'ck-sub', x.last_update || ''));
-        if (x.cancelled) out.appendChild(el('div', 'ck-msg err', x.cancelled.message || 'This train is cancelled for this date.'));
-        else {
-          if (typeof x.delay_minutes === 'number') {
-            var dl = el('div', 'ck-sub'); dl.appendChild(el('span', 'chip ' + (x.delay_minutes > 15 ? 'warn' : 'ok'), x.delay_minutes > 0 ? x.delay_minutes + ' min late' : 'On time'));
-            out.appendChild(dl);
-          }
-          if (x.diversion && x.diversion.message) out.appendChild(el('div', 'ck-msg', x.diversion.message));
-          var wrap = el('div', 'ck-stations'), t = el('table'), h = el('tr');
-          ['Station', 'Arrives', 'Departs', 'Plat.'].forEach(function (s) { h.appendChild(el('th', null, s)); });
-          var thead = el('thead'); thead.appendChild(h); t.appendChild(thead);
-          var tb = el('tbody');
-          (x.stations || []).forEach(function (s) {
-            var tr = el('tr');
-            [s.station_name || s.station_code, s.est_arrival_time || s.arrival_time, s.est_departure_time || s.departure_time, s.platform].forEach(function (v) { tr.appendChild(el('td', null, v || '-')); });
-            tb.appendChild(tr);
-          });
-          t.appendChild(tb); wrap.appendChild(t); out.appendChild(wrap);
-        }
+        renderLive(out, d.response, no);
         appNote(out);
         return true;
       }
