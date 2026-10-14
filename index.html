@@ -309,6 +309,67 @@ footer a:hover{color:#fff}
   .float,.panel.show{animation:none}
   .result{transition:none}
 }
+
+/* ---- live checks ---- */
+.check{padding:56px 0 24px;scroll-margin-top:90px}
+.check-head{max-width:720px;margin:0 auto 26px;text-align:center}
+.check-head h2{font-family:var(--font-head);color:var(--ink);font-size:clamp(28px,4vw,42px);line-height:1.15;margin-bottom:12px}
+.check-card{max-width:880px;margin:0 auto;background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);box-shadow:0 24px 60px -30px rgba(11,16,48,.28);overflow:hidden}
+.check-tabs{display:flex;gap:6px;padding:10px;background:var(--mist);border-bottom:1.5px solid var(--line)}
+.check-tabs button{flex:1;padding:12px 10px;border:0;border-radius:14px;background:transparent;color:var(--text);font:600 15px var(--font-body);cursor:pointer}
+.check-tabs button[aria-selected="true"]{background:var(--ink);color:#fff}
+.check-panel{padding:22px}
+.ck-form{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end}
+.ck-form-seats{grid-template-columns:repeat(2,1fr)}
+.ck-form-seats .btn{grid-column:1/-1}
+.ck-form .field input,.ck-form .field select{border:0;outline:0;background:none;width:100%;padding:2px 0;font:600 18px var(--font-head);letter-spacing:0;color:var(--ink)}
+.ck-form .field input::placeholder{font-weight:500;color:#A4AAC4}
+.ck-out{margin-top:18px}
+.ck-out:empty{display:none}
+.ck-msg{padding:14px 16px;border-radius:14px;background:var(--mist);color:var(--ink);font-size:15px}
+.ck-msg.err{background:var(--coral-tint)}
+.ck-load{display:flex;align-items:center;gap:10px;color:var(--text);font-size:15px}
+.ck-load i{width:18px;height:18px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--indigo);animation:ckspin .8s linear infinite}
+@keyframes ckspin{to{transform:rotate(360deg)}}
+.ck-title{font:600 18px var(--font-head);color:var(--ink);margin-bottom:4px}
+.ck-sub{font-size:14px;margin-bottom:14px}
+.ck-pax{display:grid;gap:8px;margin:12px 0}
+.ck-pax div{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;font-size:15px;color:var(--ink)}
+.ck-pax b{font-weight:600}
+.chip{display:inline-block;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:600;background:var(--mist);color:var(--ink)}
+.chip.ok{background:#DDF5E7;color:#0E7A3E}
+.chip.warn{background:#FFF1D6;color:#8A5A00}
+.chip.bad{background:var(--coral-tint);color:#B73A1E}
+.ck-stations{max-height:360px;overflow:auto;border:1.5px solid var(--line);border-radius:14px}
+.ck-stations table{width:100%;border-collapse:collapse;font-size:14px}
+.ck-stations th,.ck-stations td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line)}
+.ck-stations th{position:sticky;top:0;background:var(--mist);color:var(--ink);font-weight:600}
+.ck-train{border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:10px}
+.ck-train h4{font:600 16px var(--font-head);color:var(--ink)}
+.ck-train p{font-size:14px;margin:2px 0 10px}
+.ck-classes{display:flex;flex-wrap:wrap;gap:8px}
+.ck-classes button{padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font:600 14px var(--font-body);cursor:pointer}
+.ck-classes button:hover,.ck-classes button[aria-pressed="true"]{border-color:var(--indigo);color:var(--indigo)}
+.ck-cal{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.ck-cal div{padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;font-size:13px}
+.ck-cal b{display:block;color:var(--ink);font-size:13px;margin-bottom:4px}
+.ck-app{margin-top:16px;padding:14px 16px;border-radius:16px;background:var(--indigo-tint);color:var(--ink);font-size:14px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between}
+.ck-app a{color:var(--indigo);font-weight:600;text-decoration:underline}
+.gate{position:fixed;inset:0;z-index:200;background:rgba(11,16,48,.6);display:flex;align-items:center;justify-content:center;padding:16px}
+.gate[hidden]{display:none}
+.gate-card{width:min(440px,100%);background:#fff;border-radius:24px;padding:26px;box-shadow:0 30px 80px -20px rgba(0,0,0,.5)}
+.gate-card h3{font:600 22px var(--font-head);color:var(--ink);margin-bottom:8px}
+.gate-app{margin:16px 0;padding:14px 16px;border-radius:16px;background:var(--indigo-tint);color:var(--ink);font-size:14px;display:grid;gap:4px}
+.gate-stores{display:flex;gap:14px;margin-top:4px}
+.gate-stores a{color:var(--indigo);font-weight:600;text-decoration:underline}
+.gate-msg{min-height:22px;font-size:14px;color:#B73A1E;margin-bottom:8px}
+.gate-actions{display:flex;flex-wrap:wrap;gap:10px}
+.gate-actions .btn{flex:1;padding:14px 18px;font-size:15px}
+@media (max-width:640px){
+  .ck-form{grid-template-columns:1fr}
+  .check-tabs button{font-size:14px;padding:11px 6px}
+  .check-panel{padding:16px}
+}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8595461358711655" crossorigin="anonymous"></script>
 </head>
@@ -323,6 +384,7 @@ footer a:hover{color:#fff}
       ClearBerth
     </a>
     <ul>
+      <li><a href="#check">Check now</a></li>
       <li><a href="#features">Features</a></li>
       <li><a href="#book">Book</a></li>
       <li><a href="#pricing">Pricing</a></li>
@@ -409,6 +471,71 @@ footer a:hover{color:#fff}
 </section>
 
 <!-- dark tabbed section -->
+<!-- live checks (PNR / live status / seats) -->
+<section class="check" id="check" aria-labelledby="check-h">
+  <div class="wrap">
+    <div class="check-head">
+      <h2 id="check-h">Check it right now.</h2>
+      <p>PNR status, where your train is, and seats on any train. Free. A short ad plays first, and there are no banner ads. It is easier to see in the app.</p>
+    </div>
+    <div class="check-card">
+      <div class="check-tabs" role="tablist" aria-label="What to check">
+        <button role="tab" id="ck-t-pnr" aria-selected="true" aria-controls="ck-pnr" data-tab="pnr">PNR status</button>
+        <button role="tab" id="ck-t-live" aria-selected="false" aria-controls="ck-live" data-tab="live" tabindex="-1">Track a train</button>
+        <button role="tab" id="ck-t-seats" aria-selected="false" aria-controls="ck-seats" data-tab="seats" tabindex="-1">Seats</button>
+      </div>
+
+      <div class="check-panel" id="ck-pnr" role="tabpanel" aria-labelledby="ck-t-pnr">
+        <form class="ck-form" id="ckPnrForm" novalidate>
+          <div class="field"><label for="ckPnr">10-digit PNR</label>
+            <input id="ckPnr" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="e.g. 1234567890"></div>
+          <button class="btn btn-coral" type="submit">Check PNR</button>
+        </form>
+        <div class="ck-out" id="ckPnrOut" aria-live="polite"></div>
+      </div>
+
+      <div class="check-panel" id="ck-live" role="tabpanel" aria-labelledby="ck-t-live" hidden>
+        <form class="ck-form" id="ckLiveForm" novalidate>
+          <div class="field"><label for="ckTrain">Train number</label>
+            <input id="ckTrain" inputmode="numeric" autocomplete="off" maxlength="5" placeholder="e.g. 12301"></div>
+          <div class="field"><label for="ckStart">Train left its first station</label>
+            <select id="ckStart"><option value="0">Today</option><option value="1">Yesterday</option><option value="2">2 days ago</option></select></div>
+          <button class="btn btn-coral" type="submit">Track train</button>
+        </form>
+        <div class="ck-out" id="ckLiveOut" aria-live="polite"></div>
+      </div>
+
+      <div class="check-panel" id="ck-seats" role="tabpanel" aria-labelledby="ck-t-seats" hidden>
+        <form class="ck-form ck-form-seats" id="ckSeatsForm" novalidate>
+          <div class="field"><label for="ckFrom">From (station code)</label>
+            <input id="ckFrom" list="ckStations" autocomplete="off" maxlength="5" placeholder="e.g. NDLS" style="text-transform:uppercase"></div>
+          <div class="field"><label for="ckTo">To (station code)</label>
+            <input id="ckTo" list="ckStations" autocomplete="off" maxlength="5" placeholder="e.g. HWH" style="text-transform:uppercase"></div>
+          <div class="field"><label for="ckDate">Date</label>
+            <input id="ckDate" type="date"></div>
+          <div class="field"><label for="ckQuota">Quota</label>
+            <select id="ckQuota"><option value="GN">General</option><option value="TQ">Tatkal</option><option value="PT">Premium Tatkal</option><option value="LD">Ladies</option><option value="SS">Senior citizen</option></select></div>
+          <button class="btn btn-coral" type="submit">Find trains</button>
+        </form>
+        <datalist id="ckStations">
+          <option value="NDLS">New Delhi</option><option value="DLI">Old Delhi</option><option value="NZM">Hazrat Nizamuddin</option>
+          <option value="CSMT">Mumbai CSMT</option><option value="BCT">Mumbai Central</option><option value="LTT">Lokmanya Tilak T</option><option value="BDTS">Bandra Terminus</option>
+          <option value="HWH">Howrah</option><option value="SDAH">Sealdah</option><option value="KOAA">Kolkata</option>
+          <option value="MAS">Chennai Central</option><option value="SBC">KSR Bengaluru</option><option value="YPR">Yesvantpur</option>
+          <option value="SC">Secunderabad</option><option value="HYB">Hyderabad Deccan</option><option value="PUNE">Pune</option>
+          <option value="ADI">Ahmedabad</option><option value="JP">Jaipur</option><option value="LKO">Lucknow</option><option value="CNB">Kanpur Central</option>
+          <option value="PNBE">Patna</option><option value="GKP">Gorakhpur</option><option value="BSB">Varanasi</option><option value="NJP">New Jalpaiguri</option>
+          <option value="GHY">Guwahati</option><option value="DBRG">Dibrugarh</option><option value="BBS">Bhubaneswar</option><option value="PURI">Puri</option>
+          <option value="TVC">Thiruvananthapuram</option><option value="ERS">Ernakulam</option><option value="CBE">Coimbatore</option>
+          <option value="BPL">Bhopal</option><option value="NGP">Nagpur</option><option value="ASR">Amritsar</option><option value="CDG">Chandigarh</option>
+          <option value="DDN">Dehradun</option><option value="JAT">Jammu Tawi</option><option value="RNC">Ranchi</option><option value="MAO">Madgaon</option>
+        </datalist>
+        <div class="ck-out" id="ckSeatsOut" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="dark" id="features" aria-labelledby="dark-h">
   <div class="wrap">
     <h2 id="dark-h">One app for the whole journey.</h2>
@@ -658,6 +785,27 @@ footer a:hover{color:#fff}
   </div>
 </footer>
 
+<!-- rewarded-ad gate + "easier in the app" pop-up -->
+<div class="gate" id="adGate" hidden>
+  <div class="gate-card" role="dialog" aria-modal="true" aria-labelledby="gateH" aria-describedby="gateP">
+    <h3 id="gateH">Watch a short ad to see your result</h3>
+    <p id="gateP">ClearBerth's checks are free. A short ad pays for them. The result appears right after.</p>
+    <div class="gate-app">
+      <b>It is easier to see in the app.</b>
+      <span>Live alerts, your berth on a diagram, and everything in one place.</span>
+      <div class="gate-stores">
+        <a target="_blank" rel="noopener" href="https://apps.apple.com/in/app/clearberth/id6802574946">App Store</a>
+        <a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.aditya.clearberth">Google Play</a>
+      </div>
+    </div>
+    <div class="gate-msg" id="gateMsg" role="status" aria-live="polite"></div>
+    <div class="gate-actions">
+      <button class="btn btn-coral" type="button" id="gateGo">Watch ad and see result</button>
+      <button class="btn btn-ghost" type="button" id="gateNo">Not now</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   /* berth diagram. bay n holds berths 8(n-1)+1 .. 8n; 1 LB, 2 MB, 3 UB, 4 LB, 5 MB, 6 UB, 7 SL, 8 SU */
@@ -718,6 +866,308 @@ footer a:hover{color:#fff}
       var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
       if (!d) return;
       var n = tabs[(i + d + tabs.length) % tabs.length]; n.focus(); select(n);
+    });
+  });
+})();
+</script>
+<script>
+/* ---- live checks: PNR / tracking / seats, with a rewarded-ad gate ----
+   Rules mirror the app: an ad before each PNR and live check; seats: 2 free
+   searches then an ad then 2 free, and per search 2 free class taps then an ad;
+   Tatkal never shows an ad; a failed check keeps the ad credit (retry is
+   free); if no ad is ready within 4 seconds the check goes ahead. No banners.
+   Web ads cannot be verified by a server, so the server also limits each
+   visitor per day (see the web-check function). */
+(function () {
+  var CFG = {
+    API: 'https://cmjdywcobehvrnicgiwn.supabase.co/functions/v1/web-check',
+    // Google's public TEST rewarded unit. Replace with your own once Ad Manager is approved:
+    // '/<your network code>/<your rewarded ad unit>'
+    AD_UNIT: '/22639388115/rewarded_web_example',
+    AD_WAIT_MS: 4000
+  };
+  var STORES = { ios: 'https://apps.apple.com/in/app/clearberth/id6802574946', android: 'https://play.google.com/store/apps/details?id=com.aditya.clearberth' };
+  var state = { credit: null, between: 0, klass: 0 }; // credit = the kind of check an ad was watched for
+  var $ = function (id) { return document.getElementById(id); };
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
+  function msg(out, text, err) { clear(out); out.appendChild(el('div', 'ck-msg' + (err ? ' err' : ''), text)); }
+  function loading(out, text) {
+    clear(out);
+    var d = el('div', 'ck-load'); d.appendChild(el('i')); d.appendChild(el('span', null, text)); out.appendChild(d);
+  }
+  function appNote(out) {
+    var d = el('div', 'ck-app');
+    d.appendChild(el('span', null, 'Easier to see in the app, with live alerts and your berth on a diagram.'));
+    var s = el('span');
+    var a = el('a', null, 'App Store'); a.href = STORES.ios; a.target = '_blank'; a.rel = 'noopener';
+    var b = el('a', null, 'Google Play'); b.href = STORES.android; b.target = '_blank'; b.rel = 'noopener';
+    s.appendChild(a); s.appendChild(document.createTextNode('  ')); s.appendChild(b);
+    d.appendChild(s); out.appendChild(d);
+  }
+  function chipFor(status) {
+    var t = String(status || '').toUpperCase();
+    var cls = /^(CNF|AVAILABLE|AVL)/.test(t) ? 'ok' : /^(RAC|GNWL|RLWL|PQWL|WL|CKWL)/.test(t) ? 'warn' : /(REGRET|NOT AVAIL|CAN|NA)/.test(t) ? 'bad' : '';
+    return el('span', 'chip ' + cls, status || '-');
+  }
+
+  /* ---------- rewarded ad (Google Publisher Tag, out-of-page rewarded) ---------- */
+  var gptPromise = null;
+  function loadGpt() {
+    if (gptPromise) return gptPromise;
+    gptPromise = new Promise(function (res, rej) {
+      window.googletag = window.googletag || { cmd: [] };
+      if (window.googletag.apiReady) return res();
+      var s = document.createElement('script');
+      s.async = true; s.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+      s.onload = function () { res(); }; s.onerror = function () { gptPromise = null; rej(new Error('gpt')); };
+      document.head.appendChild(s);
+    });
+    return gptPromise;
+  }
+  // Resolves 'granted' | 'closed' (closed before the reward) | 'failopen' (no ad within 4 s).
+  function playRewarded() {
+    return new Promise(function (resolve) {
+      var done = false, shown = false, granted = false, slot = null, timer = null;
+      function finish(r) { if (done) return; done = true; clearTimeout(timer); resolve(r); }
+      timer = setTimeout(function () {
+        if (!shown) {
+          try { if (slot) window.googletag.destroySlots([slot]); } catch (e) {}
+          finish('failopen');
+        }
+      }, CFG.AD_WAIT_MS);
+      loadGpt().then(function () {
+        window.googletag.cmd.push(function () {
+          try {
+            var g = window.googletag;
+            slot = g.defineOutOfPageSlot(CFG.AD_UNIT, g.enums.OutOfPageFormat.REWARDED);
+            if (!slot) return finish('failopen');
+            slot.addService(g.pubads());
+            g.pubads().addEventListener('rewardedSlotReady', function (e) {
+              if (e.slot !== slot || done) return;
+              shown = true; clearTimeout(timer); e.makeRewardedVisible();
+            });
+            g.pubads().addEventListener('rewardedSlotGranted', function (e) { if (e.slot === slot) granted = true; });
+            g.pubads().addEventListener('rewardedSlotClosed', function (e) {
+              if (e.slot !== slot) return;
+              try { g.destroySlots([slot]); } catch (x) {}
+              finish(granted ? 'granted' : 'closed');
+            });
+            g.enableServices(); g.display(slot);
+          } catch (err) { finish('failopen'); }
+        });
+      }, function () { finish('failopen'); });
+    });
+  }
+
+  // The pop-up: opt in to the ad, and a nudge that the app is easier.
+  var gate = $('adGate'), gateGo = $('gateGo'), gateNo = $('gateNo'), gateMsg = $('gateMsg');
+  var lastFocus = null;
+  function askAd() {
+    return new Promise(function (resolve) {
+      lastFocus = document.activeElement;
+      gateMsg.textContent = ''; gateGo.disabled = false; gateGo.textContent = 'Watch ad and see result';
+      gate.hidden = false; gateGo.focus();
+      function close(v) { gate.hidden = true; gateGo.onclick = gateNo.onclick = null; document.removeEventListener('keydown', onKey); if (lastFocus && lastFocus.focus) lastFocus.focus(); resolve(v); }
+      function onKey(e) { if (e.key === 'Escape') close(false); }
+      document.addEventListener('keydown', onKey);
+      gateNo.onclick = function () { close(false); };
+      gateGo.onclick = function () {
+        gateGo.disabled = true; gateGo.textContent = 'Loading ad...'; gateMsg.textContent = '';
+        playRewarded().then(function (r) {
+          if (r === 'granted' || r === 'failopen') return close(true);
+          gateGo.disabled = false; gateGo.textContent = 'Watch ad and see result';
+          gateMsg.textContent = 'The ad closed early. Watch it to the end to see your result.';
+        });
+      };
+    });
+  }
+
+  /* ---------- calling the server ---------- */
+  function call(payload) {
+    return fetch(CFG.API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, body: j }; }); });
+  }
+  function limitText(r) {
+    if (r.status === 429) return 'You have used today\'s checks on the website. The app has no daily limit like this. Get it below.';
+    return null;
+  }
+
+  // The ad rule for each kind of check.
+  function needsAd(kind, quota) {
+    if (quota === 'TQ' || quota === 'PT') return false;        // Tatkal: never an ad
+    if (kind === 'between') return state.between >= 2;
+    if (kind === 'klass') return state.klass >= 2;
+    return true;                                                // pnr, live
+  }
+  function bump(kind, usedCredit, quota) {
+    if (quota === 'TQ' || quota === 'PT') return;
+    if (kind === 'pnr' || kind === 'live') return;
+    if (usedCredit) state[kind] = 0; else state[kind]++;
+  }
+
+  // gate -> request -> render. A failed request keeps the credit (retry is free).
+  function run(kind, quota, out, payload, render) {
+    var need = state.credit !== kind && needsAd(kind, quota);
+    var pre = need ? askAd().then(function (ok) { if (ok) state.credit = kind; return ok; }) : Promise.resolve(true);
+    return pre.then(function (ok) {
+      if (!ok) return;
+      loading(out, 'Checking...');
+      return call(payload).then(function (r) {
+        var lim = limitText(r);
+        if (lim) { msg(out, lim, true); appNote(out); return; }
+        var res = render(r);
+        if (res === true) { bump(kind, state.credit === kind, quota); state.credit = null; }
+      }, function () { msg(out, 'Could not reach the server. Check your internet and tap the button again.', true); });
+    });
+  }
+  var HICCUP = 'Our server had a hiccup. Please tap the button again.';
+
+  /* ---------- PNR ---------- */
+  $('ckPnrForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var out = $('ckPnrOut'), pnr = $('ckPnr').value.replace(/\D/g, '');
+    if (!/^\d{10}$/.test(pnr)) return msg(out, 'Enter your 10-digit PNR.', true);
+    run('pnr', 'GN', out, { action: 'pnr', pnr: pnr }, function (r) {
+      var d = r.body;
+      if (r.status === 200 && d && d.code === 200 && d.response) {
+        var x = d.response; clear(out);
+        out.appendChild(el('div', 'ck-title', (x.train_no || '') + ' ' + (x.train_name || '')));
+        out.appendChild(el('div', 'ck-sub', (x.boarding_station || x.boarding_station_code || '') + ' to ' + (x.reservation_upto || x.reservation_upto_code || '') + (x.doj ? ' - ' + x.doj : '') + (x.class ? ' - ' + x.class : '')));
+        var box = el('div', 'ck-pax');
+        (x.passenger_details || []).forEach(function (p, i) {
+          var row = el('div'); row.appendChild(el('b', null, 'Passenger ' + (p.number || i + 1)));
+          var right = el('span'); right.appendChild(chipFor(p.current_status));
+          if (p.coach || p.berth) right.appendChild(el('span', null, '  ' + [p.coach, p.berth].filter(Boolean).join(' / ')));
+          row.appendChild(right); box.appendChild(row);
+        });
+        out.appendChild(box);
+        if (x.chart_status) out.appendChild(el('div', 'ck-sub', 'Chart: ' + x.chart_status));
+        appNote(out);
+        return true;
+      }
+      if (d && (d.code === 422 || /invalid|flushed/i.test(String(d.message || '')))) { msg(out, 'This PNR was not found, or it is too old. Check the number.', true); return false; }
+      msg(out, HICCUP, true); return false;
+    });
+  });
+
+  /* ---------- live train ---------- */
+  function ddmmyyyy(offsetDays) {
+    var d = new Date(); d.setDate(d.getDate() - offsetDays);
+    return String(d.getDate()).padStart(2, '0') + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + d.getFullYear();
+  }
+  $('ckLiveForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var out = $('ckLiveOut'), no = $('ckTrain').value.replace(/\D/g, '');
+    if (!/^\d{4,5}$/.test(no)) return msg(out, 'Enter a 5-digit train number.', true);
+    run('live', 'GN', out, { action: 'live', trainNo: no, doj: ddmmyyyy(parseInt($('ckStart').value, 10) || 0) }, function (r) {
+      var d = r.body;
+      if (r.status === 200 && d && d.code === 200 && d.response) {
+        var x = d.response; clear(out);
+        out.appendChild(el('div', 'ck-title', (x.train_number || no) + ' ' + (x.train_name || '')));
+        out.appendChild(el('div', 'ck-sub', x.last_update || ''));
+        if (x.cancelled) out.appendChild(el('div', 'ck-msg err', x.cancelled.message || 'This train is cancelled for this date.'));
+        else {
+          if (typeof x.delay_minutes === 'number') {
+            var dl = el('div', 'ck-sub'); dl.appendChild(el('span', 'chip ' + (x.delay_minutes > 15 ? 'warn' : 'ok'), x.delay_minutes > 0 ? x.delay_minutes + ' min late' : 'On time'));
+            out.appendChild(dl);
+          }
+          if (x.diversion && x.diversion.message) out.appendChild(el('div', 'ck-msg', x.diversion.message));
+          var wrap = el('div', 'ck-stations'), t = el('table'), h = el('tr');
+          ['Station', 'Arrives', 'Departs', 'Plat.'].forEach(function (s) { h.appendChild(el('th', null, s)); });
+          var thead = el('thead'); thead.appendChild(h); t.appendChild(thead);
+          var tb = el('tbody');
+          (x.stations || []).forEach(function (s) {
+            var tr = el('tr');
+            [s.station_name || s.station_code, s.est_arrival_time || s.arrival_time, s.est_departure_time || s.departure_time, s.platform].forEach(function (v) { tr.appendChild(el('td', null, v || '-')); });
+            tb.appendChild(tr);
+          });
+          t.appendChild(tb); wrap.appendChild(t); out.appendChild(wrap);
+        }
+        appNote(out);
+        return true;
+      }
+      if (d && (d.code === 404 || /invalid train/i.test(String(d.message || '')))) { msg(out, 'Train number not found. Check the number.', true); return false; }
+      msg(out, HICCUP, true); return false;
+    });
+  });
+
+  /* ---------- seats ---------- */
+  var dateIn = $('ckDate');
+  (function () { var d = new Date(); d.setDate(d.getDate() + 1); var iso = d.toISOString().slice(0, 10); dateIn.value = iso; dateIn.min = new Date().toISOString().slice(0, 10); var mx = new Date(); mx.setDate(mx.getDate() + 125); dateIn.max = mx.toISOString().slice(0, 10); })();
+  var COMMON = ['SL', '3A', '2A', '1A', 'CC', '2S', '3E'];
+  var seatsCtx = null;
+
+  $('ckSeatsForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var out = $('ckSeatsOut');
+    var from = $('ckFrom').value.trim().toUpperCase(), to = $('ckTo').value.trim().toUpperCase(), date = dateIn.value, quota = $('ckQuota').value;
+    if (!/^[A-Z]{2,5}$/.test(from) || !/^[A-Z]{2,5}$/.test(to)) return msg(out, 'Enter the station codes, for example NDLS and HWH.', true);
+    if (from === to) return msg(out, 'Choose two different stations.', true);
+    if (!date) return msg(out, 'Pick a date.', true);
+    run('between', quota, out, { action: 'between', from: from, to: to, date: date }, function (r) {
+      var d = r.body;
+      if (r.status === 200 && d && Array.isArray(d.trains)) {
+        seatsCtx = { from: from, to: to, date: date, quota: quota }; state.klass = 0;
+        clear(out);
+        if (!d.trains.length) { out.appendChild(el('div', 'ck-msg', 'No trains found for this route on that date.')); return true; }
+        d.trains.forEach(function (t) { out.appendChild(trainCard(t, out)); });
+        appNote(out);
+        return true;
+      }
+      msg(out, r.status === 503 || (d && d.error === 'busy') ? 'Many people are checking right now. Try again in a minute.' : HICCUP, true);
+      return false;
+    });
+  });
+
+  function trainCard(t, out) {
+    var c = el('div', 'ck-train');
+    c.appendChild(el('h4', null, t.number + ' ' + t.name));
+    c.appendChild(el('p', null, (t.fromName || t.fromCode) + ' ' + (t.departure || '') + '  to  ' + (t.toName || t.toCode) + ' ' + (t.arrival || '') + (t.duration ? '  (' + (typeof t.duration === 'number' ? Math.floor(t.duration / 60) + 'h' + (t.duration % 60 ? ' ' + (t.duration % 60) + 'm' : '') : t.duration) + ')' : '')));
+    var bar = el('div', 'ck-classes'), cal = el('div');
+    (Array.isArray(t.classes) && t.classes.length ? t.classes : COMMON).forEach(function (cls) {
+      var b = el('button', null, cls); b.type = 'button'; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', function () {
+        Array.prototype.forEach.call(bar.children, function (x) { x.setAttribute('aria-pressed', 'false'); });
+        b.setAttribute('aria-pressed', 'true');
+        run('klass', seatsCtx.quota, cal, { action: 'seats', trainNo: t.number, from: seatsCtx.from, to: seatsCtx.to, date: seatsCtx.date, cls: cls, quota: seatsCtx.quota }, function (r) {
+          var d = r.body;
+          if (r.status === 200 && d && Array.isArray(d.calendar)) {
+            clear(cal); var g = el('div', 'ck-cal');
+            d.calendar.forEach(function (day) {
+              var cell = el('div'); cell.appendChild(el('b', null, day.date)); cell.appendChild(chipFor(day.status)); g.appendChild(cell);
+            });
+            cal.appendChild(g); return true;
+          }
+          var m = d && /class/i.test(String(d.error || '')) ? 'This class is not on this train for your stations.' : (r.status === 503 ? 'Many people are checking right now. Try again in a minute.' : HICCUP);
+          msg(cal, m, true); return false;
+        });
+      });
+      bar.appendChild(b);
+    });
+    c.appendChild(bar); c.appendChild(cal);
+    return c;
+  }
+
+  /* ---------- tabs ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.check-tabs [role=tab]'));
+  function pick(t) {
+    tabs.forEach(function (b) {
+      var on = b === t; b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1;
+      $(b.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { pick(t); });
+    t.addEventListener('keydown', function (e) {
+      var n = e.key === 'ArrowRight' ? (i + 1) % tabs.length : e.key === 'ArrowLeft' ? (i + tabs.length - 1) % tabs.length : -1;
+      if (n >= 0) { e.preventDefault(); pick(tabs[n]); tabs[n].focus(); }
     });
   });
 })();
