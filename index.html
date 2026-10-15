@@ -7,6 +7,13 @@
 <meta name="description" content="See your berth on a diagram, track your train live, and get alerts when your waitlist moves. ClearBerth for Indian Railways travellers.">
 <meta property="og:title" content="ClearBerth — Trains, made clear">
 <meta property="og:description" content="PNR status with a visual seat diagram, live train tracking and alerts. Built by a regular train traveller, for train travellers.">
+<link rel="canonical" href="https://clearberth.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ClearBerth">
+<meta property="og:url" content="https://clearberth.app/">
+<meta property="og:image" content="https://clearberth.app/shots/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "ClearBerth", "description": "PNR status with a visual seat diagram, live train tracking and alerts for Indian Railways travellers.", "operatingSystem": "iOS, Android", "applicationCategory": "TravelApplication", "url": "https://clearberth.app/", "image": "https://clearberth.app/shots/icon.png", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}}</script>
 <link rel="icon" type="image/png" href="shots/favicon.png">
 <link rel="apple-touch-icon" href="shots/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -388,6 +395,8 @@ footer a:hover{color:#fff}
 .ck-all summary{cursor:pointer;font:600 14px var(--font-body);color:var(--indigo);padding:6px 0}
 .ck-msg + .ck-msg{margin-top:8px}
 @media (max-width:640px){.ck-map{height:240px}}
+
+.ftrains{margin-top:34px;padding-top:26px;border-top:1px solid rgba(255,255,255,.12)}.ftrains h5{color:#fff;font:600 16px var(--font-head);margin-bottom:12px}.ftrains div{display:flex;flex-wrap:wrap;gap:8px}.ftrains a{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 12px;font-size:13px}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8595461358711655" crossorigin="anonymous"></script>
 </head>
@@ -799,6 +808,7 @@ footer a:hover{color:#fff}
         </div>
       </div>
     </div>
+    <div class="ftrains"><h5>Track a popular train</h5><div><a href="/train/12301/">12301 Howrah - New Delhi Rajdhani Express</a><a href="/train/12302/">12302 New Delhi - Howrah Rajdhani Express</a><a href="/train/12951/">12951 Mumbai Central - New Delhi Tejas Rajdhani Express</a><a href="/train/12952/">12952 New Delhi - Mumbai Central Tejas Rajdhani Express</a><a href="/train/12423/">12423 Dibrugarh - New Delhi Rajdhani Express</a><a href="/train/12424/">12424 New Delhi - Dibrugarh Rajdhani Express</a><a href="/train/12627/">12627 Karnataka Express</a><a href="/train/12841/">12841 Coromandel Express</a><a href="/train/12723/">12723 Telangana Express</a><a href="/train/12615/">12615 Grand Trunk Express</a><a href="/train/12259/">12259 Sealdah - Bikaner AC Duronto Express</a><a href="/train/22691/">22691 KSR Bengaluru - Hazrat Nizamuddin Rajdhani Express</a><a href="/train/12433/">12433 Chennai Central - Hazrat Nizamuddin Rajdhani Express</a><a href="/train/12621/">12621 Tamil Nadu Express</a><a href="/train/12009/">12009 Mumbai Central - Ahmedabad Shatabdi Express</a></div></div>
     <div class="fine"><span>© 2026 ClearBerth. All rights reserved.</span><span>Screens and alerts on this page use sample data.</span></div>
   </div>
 </footer>
@@ -1294,6 +1304,8 @@ footer a:hover{color:#fff}
     return c;
   }
 
+  /* a train page sends people here as /?train=12301 */
+  try { var q = new URLSearchParams(location.search).get('train'); if (q && /^\d{4,5}$/.test(q)) { $('ckTrain').value = q; window.__ckTrain = q; } } catch (e) {}
   /* ---------- tabs ---------- */
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.check-tabs [role=tab]'));
   function pick(t) {
@@ -1309,6 +1321,7 @@ footer a:hover{color:#fff}
       if (n >= 0) { e.preventDefault(); pick(tabs[n]); tabs[n].focus(); }
     });
   });
+  if (window.__ckTrain) { pick(tabs[1]); }
 })();
 </script>
 </body>
