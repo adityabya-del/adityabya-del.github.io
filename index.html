@@ -400,6 +400,34 @@ footer a:hover{color:#fff}
 .ftrains{margin-top:30px}.ftrains h5{color:#fff;font:600 16px var(--font-head);margin-bottom:12px}.ftrains div{display:flex;flex-wrap:wrap;gap:8px}.ftrains a{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 12px;font-size:13px}
 
 .badge{display:inline-block;line-height:0}.badge img{height:48px;width:auto;display:block}.gate-stores .badge img,.ck-badges .badge img{height:40px}.ck-badges{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---- pick your journey ---- */
+.paths{padding:84px 0 24px}
+.paths-head{text-align:center;max-width:640px;margin:0 auto 38px}
+.pt-eyebrow{display:inline-block;font:600 13px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--indigo);background:var(--indigo-tint);padding:7px 14px;border-radius:999px;margin-bottom:16px}
+.paths-head h2{font:700 clamp(32px,5vw,52px)/1.08 var(--font-head);letter-spacing:-.03em;color:var(--ink);margin-bottom:12px}
+.paths-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pt{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:560px;border-radius:32px;overflow:hidden;color:#fff;isolation:isolate;box-shadow:0 30px 60px -34px rgba(11,16,48,.55);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.pt::before{content:"";position:absolute;inset:0;z-index:-2}
+.pt::after{content:"";position:absolute;width:340px;height:340px;border-radius:50%;filter:blur(70px);opacity:.55;right:-110px;top:-110px;z-index:-1}
+.pt-pnr::before{background:linear-gradient(160deg,#4A67FF 0%,#2339C9 100%)}.pt-pnr::after{background:#7D93FF}
+.pt-trk::before{background:linear-gradient(160deg,#141A4A 0%,#0A0E2B 100%)}.pt-trk::after{background:#3654FF}
+.pt-bk::before{background:linear-gradient(160deg,#FF7A57 0%,#E5532E 100%)}.pt-bk::after{background:#FFB08F}
+.pt:hover{transform:translateY(-8px);box-shadow:0 44px 70px -34px rgba(11,16,48,.65)}
+.pt-copy{padding:30px 28px 0;position:relative;z-index:2}
+.pt-tag{display:inline-block;font:600 12.5px var(--font-body);letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.18);padding:6px 12px;border-radius:999px;margin-bottom:16px;backdrop-filter:blur(6px)}
+.pt h3{font:700 clamp(28px,2.6vw,34px)/1.08 var(--font-head);letter-spacing:-.025em;margin-bottom:10px;color:#fff}
+.pt p{font-size:16px;line-height:1.5;color:rgba(255,255,255,.86);max-width:30ch}
+.pt-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.pt-cta .badge img{height:44px;width:auto;display:block;border-radius:9px;box-shadow:0 0 0 1px rgba(255,255,255,.28)}
+.pt-cta .badge{transition:transform .2s}.pt-cta .badge:hover{transform:scale(1.04)}
+.pt-shot{position:relative;margin:26px auto 0;width:min(62%,240px);flex:none;height:250px;pointer-events:none}
+.pt-shot img{position:absolute;left:0;top:0;width:100%;height:auto;border:6px solid #0B0F26;border-bottom:0;border-radius:30px 30px 0 0;transform:rotate(-3deg) translateY(6px);transform-origin:50% 100%;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.pt-trk .pt-shot img{transform:rotate(3deg) translateY(6px)}
+.pt:hover .pt-shot img{transform:rotate(0) translateY(-12px)}
+.is-ios .pt-and,.is-android .pt-ios{display:none}
+@media(max-width:900px){.paths-grid{grid-template-columns:1fr;max-width:460px;margin-inline:auto}.pt{min-height:0}.pt-shot{height:230px}}
+@media(prefers-reduced-motion:reduce){.pt,.pt-shot img{transition:none}.pt:hover{transform:none}}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8595461358711655" crossorigin="anonymous"></script>
 </head>
@@ -450,6 +478,56 @@ footer a:hover{color:#fff}
   </div>
   <p class="sample-cap">Screens from the app. The floating alert cards are illustrations.</p>
 </header>
+
+<!-- pick your journey: one card per custom store page -->
+<section class="paths" id="paths" aria-labelledby="paths-h">
+  <div class="wrap">
+    <div class="paths-head">
+      <span class="pt-eyebrow">Pick your journey</span>
+      <h2 id="paths-h">What do you need today?</h2>
+      <p>Tap a card. It opens the app page made for exactly that.</p>
+    </div>
+    <div class="paths-grid">
+      <article class="pt pt-pnr">
+        <div class="pt-copy">
+          <span class="pt-tag">PNR status</span>
+          <h3>Check my PNR</h3>
+          <p>See if you are confirmed, and your exact berth on a diagram.</p>
+          <div class="pt-cta">
+            <a class="badge pt-ios" target="_blank" rel="noopener" href="https://apps.apple.com/in/app/clearberth/id6802574946?ppid=ad7165ba-1c27-420a-99cb-1ba2e3c80776"><img src="shots/app-store-badge.svg" alt="Download on the App Store" height="44"></a>
+            <a class="badge pt-and" target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.aditya.clearberth&listing=pnr"><img src="shots/google-play-badge.png" alt="Get it on Google Play" height="44"></a>
+          </div>
+        </div>
+        <div class="pt-shot"><img src="shots/pnr.webp" alt="ClearBerth PNR status screen with the berth highlighted on a diagram" width="720" height="1484" loading="lazy"></div>
+      </article>
+      <article class="pt pt-trk">
+        <div class="pt-copy">
+          <span class="pt-tag">Live tracking</span>
+          <h3>Track my train</h3>
+          <p>Where it is right now, how late it is, and an alert before your station.</p>
+          <div class="pt-cta">
+            <a class="badge pt-ios" target="_blank" rel="noopener" href="https://apps.apple.com/in/app/clearberth/id6802574946?ppid=f3449268-d660-4e16-ad6a-6d4030b3b2e4"><img src="shots/app-store-badge.svg" alt="Download on the App Store" height="44"></a>
+            <a class="badge pt-and" target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.aditya.clearberth&listing=tracking"><img src="shots/google-play-badge.png" alt="Get it on Google Play" height="44"></a>
+          </div>
+        </div>
+        <div class="pt-shot"><img src="shots/tracking.webp" alt="ClearBerth live train tracking screen" width="720" height="1484" loading="lazy"></div>
+      </article>
+      <article class="pt pt-bk">
+        <div class="pt-copy">
+          <span class="pt-tag">Book tickets</span>
+          <h3>Book a ticket</h3>
+          <p>Find trains and seats, then book without leaving the app.</p>
+          <div class="pt-cta">
+            <a class="badge pt-ios" target="_blank" rel="noopener" href="https://apps.apple.com/in/app/clearberth/id6802574946?ppid=c141965f-a90d-4a70-8f67-5f11c1574c1b"><img src="shots/app-store-badge.svg" alt="Download on the App Store" height="44"></a>
+            <a class="badge pt-and" target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.aditya.clearberth&listing=book"><img src="shots/google-play-badge.png" alt="Get it on Google Play" height="44"></a>
+          </div>
+        </div>
+        <div class="pt-shot"><img src="shots/book.webp" alt="ClearBerth Book tab showing trains and seat availability" width="720" height="1484" loading="lazy"></div>
+      </article>
+    </div>
+  </div>
+  <script>(function(){var u=navigator.userAgent||'',r=document.documentElement;if(/iPhone|iPad|iPod/.test(u))r.classList.add('is-ios');else if(/Android/.test(u))r.classList.add('is-android');})();</script>
+</section>
 
 <!-- try a sample PNR -->
 <section class="try" id="try" aria-labelledby="try-h">
