@@ -1,0 +1,1001 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Train Kahan Hai? Live Train Running Status | ClearBerth</title>
+<meta name="description" content="Train kahan hai abhi? Train number daalein aur dekhein live location, kitni late hai aur agla station kaun sa hai. Free live train running status by ClearBerth.">
+<meta name="google-site-verification" content="quAhsaVqKUG5eAeBGOrevh53oD0H5txnR_WUh4cJQ3Y" />
+<link rel="canonical" href="https://clearberth.app/train-kahan-hai/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="ClearBerth">
+<meta property="og:title" content="Train Kahan Hai? Live Train Running Status | ClearBerth"><meta property="og:description" content="Train kahan hai abhi? Train number daalein aur dekhein live location, kitni late hai aur agla station kaun sa hai. Free live train running status by ClearBerth.">
+<meta property="og:url" content="https://clearberth.app/train-kahan-hai/"><meta property="og:image" content="https://clearberth.app/shots/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ClearBerth", "item": "https://clearberth.app/"}, {"@type": "ListItem", "position": 2, "name": "Train kahan hai", "item": "https://clearberth.app/train-kahan-hai/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Train kahan hai ye kaise pata karein?", "acceptedAnswer": {"@type": "Answer", "text": "Is page ke upar wale box mein train number daalein, wo din chunein jab train apne pehle station se chali thi, aur Train kahan hai? dabayein. Chhote ad ke baad map aur live details dikh jaayengi."}}, {"@type": "Question", "name": "Kya live train status free hai?", "acceptedAnswer": {"@type": "Answer", "text": "Haan, free hai. Pehle ek chhota ad chalta hai, usi se ye free rehta hai. Is site par banner ads nahi hain."}}, {"@type": "Question", "name": "Mujhe kaun si date chunni chahiye?", "acceptedAnswer": {"@type": "Answer", "text": "Wo date jab train apne pehle station se chali thi. Raat ki ya agle din pahunchne wali train mein ye aapke chadhne ki date se alag ho sakti hai."}}, {"@type": "Question", "name": "Time sahi kyun nahi nikla?", "acceptedAnswer": {"@type": "Answer", "text": "Live time railway ke data se aata hai aur train ke chalne ke saath badalta rehta hai. Station ke paas pahunchne par ek baar phir dekh lein."}}, {"@type": "Question", "name": "PNR status kahan dekhein?", "acceptedAnswer": {"@type": "Answer", "text": "PNR status ke liye ClearBerth ka PNR status page dekhein. Hindi mein yahan hai."}}]}</script>
+<link rel="icon" type="image/png" href="/shots/favicon.png"><link rel="apple-touch-icon" href="/shots/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --indigo:#3654FF;
+  --indigo-deep:#2339C9;
+  --indigo-tint:#E9EDFF;
+  --coral:#FF6B4A;
+  --coral-tint:#FFE9E3;
+  --ink:#0B1030;
+  --text:#4A5170;
+  --line:#E3E7F5;
+  --mist:#F5F7FF;
+  --night:#0A0E2B;
+  --night-2:#141A4A;
+  --green:#18A957;
+  --white:#fff;
+  --radius:22px;
+  --font-head:'Poppins',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--text);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:8px}
+.wrap{width:min(1160px,100% - 40px);margin-inline:auto}
+h1,h2,h3{font-family:var(--font-head);color:var(--ink);letter-spacing:-.025em;line-height:1.08}
+h2{font-size:clamp(30px,4.4vw,48px);font-weight:700}
+h3{font-size:20px;font-weight:600;letter-spacing:-.01em}
+.lead{font-size:clamp(17px,1.6vw,20px);max-width:60ch}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;font-weight:600;font-size:14px;background:var(--indigo-tint);color:var(--indigo)}
+.chip i{width:8px;height:8px;border-radius:50%;background:currentColor}
+.chip.coral{background:var(--coral-tint);color:#D6431F}
+.chip.green{background:#E3F6EB;color:#117A3F}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 26px;border-radius:999px;font-weight:600;font-size:16px;border:0;cursor:pointer;font-family:var(--font-body);transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--indigo);color:#fff;box-shadow:0 10px 24px -8px rgba(54,84,255,.55)}
+.btn-primary:hover{background:var(--indigo-deep)}
+.btn-coral{background:var(--coral);color:#fff;box-shadow:0 10px 24px -8px rgba(255,107,74,.6)}
+.btn-coral:hover{background:#F25A38}
+.btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--indigo);color:var(--indigo)}
+.store{display:inline-flex;align-items:center;gap:12px;background:#000;color:#fff;padding:10px 20px 10px 16px;border-radius:14px;border:1px solid #333;min-width:178px;transition:transform .15s}
+.store:hover{transform:translateY(-2px)}
+.store svg{width:26px;height:26px;flex:none}
+.store small{display:block;font-size:11px;line-height:1.1;opacity:.85}
+.store b{display:block;font-size:17px;line-height:1.15;font-weight:600;font-family:var(--font-body)}
+
+/* announcement */
+.announce{background:linear-gradient(90deg,var(--indigo-deep),var(--indigo) 55%,#6A4DFF);color:#fff;text-align:center;font-size:14px;font-weight:500;padding:10px 16px}
+.announce a{font-weight:600;text-decoration:underline;text-underline-offset:3px;margin-left:8px}
+
+/* nav */
+.nav-shell{position:sticky;top:14px;z-index:50;margin-top:14px;pointer-events:none}
+.nav{pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:20px;width:min(920px,100% - 28px);margin-inline:auto;padding:10px 12px 10px 22px;background:rgba(255,255,255,.82);backdrop-filter:saturate(1.6) blur(14px);-webkit-backdrop-filter:saturate(1.6) blur(14px);border:1px solid rgba(227,231,245,.9);border-radius:999px;box-shadow:0 12px 40px -16px rgba(11,16,48,.25)}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:700;font-size:20px;color:var(--ink);letter-spacing:-.02em}
+.logo img{width:30px;height:30px;border-radius:8px;display:block}
+.nav ul{display:flex;gap:26px;list-style:none;font-weight:500;font-size:15px}
+.nav ul a{padding:6px 2px;color:var(--text);transition:color .15s}
+.nav ul a:hover{color:var(--indigo)}
+.nav .btn{padding:11px 20px;font-size:15px}
+
+/* hero */
+.hero{position:relative;text-align:center;padding:72px 0 0;background:
+  radial-gradient(900px 420px at 50% -80px,rgba(54,84,255,.16),transparent 70%),
+  radial-gradient(500px 300px at 85% 30%,rgba(255,107,74,.10),transparent 70%),#fff;margin-top:-76px;padding-top:128px}
+.hero h1{font-size:clamp(42px,6.6vw,84px);font-weight:700;letter-spacing:-.04em;line-height:1;max-width:14ch;margin:0 auto 22px}
+.hero .lead{margin:0 auto 30px;text-align:center}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-note{margin-top:18px;font-size:14px;color:#6B7295}
+
+.stage{position:relative;height:560px;margin-top:34px;-webkit-mask-image:linear-gradient(#000 82%,transparent);mask-image:linear-gradient(#000 82%,transparent)}
+.phone{position:absolute;left:50%;top:0;transform:translateX(-50%);width:300px;height:640px;background:#0B0F26;border-radius:50px;padding:11px;box-shadow:0 0 0 2px #262C55,0 50px 80px -30px rgba(11,16,48,.55);z-index:2}
+.screen{position:relative;width:100%;height:100%;background:#F7F8FF;border-radius:40px;overflow:hidden;text-align:left;display:flex;flex-direction:column}
+.notch{position:absolute;left:50%;top:9px;transform:translateX(-50%);width:92px;height:26px;border-radius:20px;background:#0B0F26;z-index:3}
+.sbar{display:flex;justify-content:space-between;padding:14px 24px 0;font-size:12px;font-weight:600;color:var(--ink)}
+.app-head{padding:20px 18px 8px}
+.app-head h4{font-family:var(--font-head);font-size:22px;color:var(--ink);letter-spacing:-.02em}
+.app-head p{font-size:12px;color:#7A819E}
+.pnr-card{margin:8px 14px;background:#fff;border-radius:18px;padding:14px;border:1px solid var(--line);box-shadow:0 8px 20px -14px rgba(11,16,48,.4)}
+.pnr-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.pnr-top b{font-size:13px;color:var(--ink)}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;background:#E3F6EB;color:#117A3F}
+.pnr-meta{display:flex;gap:16px;font-size:11px;color:#7A819E;margin-bottom:12px}
+.pnr-meta b{display:block;font-size:13px;color:var(--ink)}
+.screen .tabbar{margin-top:auto;display:flex;justify-content:space-around;padding:10px 6px 16px;background:#fff;border-top:1px solid var(--line);font-size:10px;font-weight:600;color:#8D94B0}
+.tabbar span{display:flex;flex-direction:column;align-items:center;gap:4px}
+.tabbar span::before{content:"";width:18px;height:18px;border-radius:6px;background:#D7DCF3}
+.tabbar span.on{color:var(--indigo)}
+.tabbar span.on::before{background:var(--indigo)}
+
+/* notification cards */
+.float{position:absolute;display:flex;gap:12px;align-items:center;width:300px;padding:14px 16px;background:#fff;border-radius:20px;box-shadow:0 22px 50px -22px rgba(11,16,48,.35),0 0 0 1px rgba(227,231,245,.9);text-align:left;z-index:1;animation:drift .9s cubic-bezier(.2,.8,.2,1) both}
+.float .ico{flex:none;width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-weight:700;font-size:13px;color:#fff;font-family:var(--font-head)}
+.float b{display:block;font-size:15px;color:var(--ink);line-height:1.25}
+.float span{font-size:13px;color:var(--text);line-height:1.3;display:block}
+.f1{left:calc(50% - 520px);top:70px;animation-delay:.15s}
+.f2{left:calc(50% - 470px);top:330px;animation-delay:.3s}
+.f3{right:calc(50% - 520px);top:120px;animation-delay:.45s}
+.f4{right:calc(50% - 480px);top:380px;animation-delay:.6s}
+@keyframes drift{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.sample-cap{font-size:13px;color:#7A819E;text-align:center;padding:14px 0 0}
+
+/* berth diagram */
+.bay-wrap{display:flex;gap:8px;align-items:stretch}
+.bay{display:grid;grid-template-columns:1fr 1fr 12px 1fr;grid-template-rows:repeat(3,1fr);gap:5px;flex:1}
+.b{display:grid;place-items:center;border-radius:8px;background:var(--indigo-tint);border:1.5px solid #C5CFFF;color:var(--indigo-deep);font-weight:600;font-size:12px;min-height:34px;font-family:var(--font-head)}
+.b.me{background:var(--coral);border-color:var(--coral);color:#fff;box-shadow:0 8px 18px -6px rgba(255,107,74,.7)}
+.b.side{background:#EEF0FA;border-color:#D8DCF0;color:#6D749A}
+.b.gap{background:none;border:0}
+.bay.lg .b{min-height:54px;font-size:15px;border-radius:12px}
+.bay.sm{gap:3px;grid-template-columns:1fr 1fr 5px 1fr}
+.bay.sm .b{min-height:18px;font-size:0;border-radius:4px;border-width:1px}
+.rowlabels{display:grid;grid-template-rows:repeat(3,1fr);gap:5px;font-size:12px;color:#7A819E;font-weight:500;text-align:right;align-items:center}
+.collabels{display:grid;grid-template-columns:1fr 1fr 12px 1fr;gap:5px;font-size:12px;color:#7A819E;font-weight:500;text-align:center;margin-bottom:6px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;margin-top:14px;color:var(--text)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:6px;vertical-align:-1px;background:var(--indigo-tint);border:1.5px solid #C5CFFF}
+.legend i.me{background:var(--coral);border-color:var(--coral)}
+
+/* try-it widget */
+.try{position:relative;z-index:5;margin-top:-6px;padding-bottom:30px}
+.try-card{background:#fff;border-radius:26px;border:1px solid var(--line);box-shadow:0 30px 70px -40px rgba(11,16,48,.45);overflow:hidden}
+.try-bar{background:var(--night);color:#fff;display:flex;gap:6px;padding:0 14px}
+.try-bar span{padding:15px 18px;font-weight:600;font-size:15px;color:#A9B1DD}
+.try-bar span.on{color:#fff;box-shadow:inset 0 -3px 0 var(--coral)}
+.try-body{padding:26px;background:var(--mist)}
+.try-form{display:grid;grid-template-columns:1fr auto;gap:14px}
+.field{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:10px 18px;display:flex;flex-direction:column}
+.field:focus-within{border-color:var(--indigo)}
+.field label{font-size:12px;color:#7A819E;font-weight:500}
+.field input{border:0;outline:0;font:600 20px var(--font-head);color:var(--ink);letter-spacing:.04em;background:none;width:100%}
+.try-form .btn{padding:0 34px;font-size:16px}
+.try-hint{font-size:13px;color:#7A819E;margin-top:12px}
+.result{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+.result.open{grid-template-rows:1fr}
+.result-inner{overflow:hidden;min-height:0}
+.result-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:34px;padding-top:26px}
+.res-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.res-head h3{font-size:22px}
+dl.kv{display:grid;grid-template-columns:auto 1fr;gap:10px 22px;font-size:15px}
+dl.kv dt{color:#7A819E}
+dl.kv dd{color:var(--ink);font-weight:600}
+.res-note{margin-top:16px;padding:12px 14px;border-radius:12px;background:var(--coral-tint);color:#9B3217;font-size:14px}
+.diagram-box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}
+.diagram-box h4{font-size:14px;color:var(--ink);margin-bottom:12px;font-family:var(--font-body);font-weight:600}
+
+/* dark section */
+.dark{position:relative;background:radial-gradient(900px 500px at 50% -10%,#2B2FA8 0%,transparent 65%),linear-gradient(180deg,var(--night-2),var(--night));color:#C9CFF0;padding:110px 0;margin-top:70px;overflow:hidden}
+.dark h2{color:#fff;text-align:center;max-width:16ch;margin:0 auto 14px}
+.dark .lead{text-align:center;margin:0 auto 34px;color:#B4BCE6}
+.pills{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;padding:6px;border-radius:999px;background:rgba(255,255,255,.07);width:fit-content;margin:0 auto 54px;border:1px solid rgba(255,255,255,.08)}
+.pills button{font:600 15px var(--font-body);color:#C9CFF0;background:none;border:0;padding:12px 20px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s}
+.pills button[aria-selected="true"]{background:#fff;color:var(--ink)}
+.pills .btn{padding:12px 20px;font-size:15px}
+.panel{display:none;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.panel.show{display:grid;animation:fade .35s ease both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.panel h3{color:#fff;font-size:clamp(26px,3vw,36px);margin-bottom:14px;letter-spacing:-.02em}
+.panel p{font-size:18px;color:#B4BCE6;margin-bottom:22px}
+.ticks{list-style:none;display:grid;gap:12px}
+.ticks li{display:flex;gap:12px;align-items:flex-start;font-size:17px}
+.ticks li::before{content:"";flex:none;width:22px;height:22px;margin-top:2px;border-radius:50%;background:var(--indigo) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/14px no-repeat}
+.dark .ticks li::before{background-color:var(--coral)}
+.glass{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:22px;backdrop-filter:blur(8px)}
+.notif{display:flex;gap:12px;align-items:center;padding:14px;border-radius:16px;background:#fff;color:var(--ink);margin-bottom:12px}
+.notif:last-child{margin-bottom:0}
+.notif .ico{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font:700 12px var(--font-head)}
+.notif b{display:block;font-size:15px;line-height:1.25}
+.notif span{font-size:13px;color:var(--text);display:block;line-height:1.35}
+.track{position:relative;height:10px;border-radius:99px;background:rgba(255,255,255,.14);margin:22px 0 10px}
+.track i{position:absolute;inset:0 38% 0 0;border-radius:99px;background:linear-gradient(90deg,var(--indigo),var(--coral))}
+.track em{position:absolute;left:62%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#fff;box-shadow:0 0 0 6px rgba(255,107,74,.35)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.kpis div{background:rgba(255,255,255,.07);border-radius:14px;padding:14px}
+.kpis b{display:block;font:700 24px var(--font-head);color:#fff}
+.kpis span{font-size:13px;color:#AFB7E3}
+.mini{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mini .glass{padding:18px}
+.mini h4{color:#fff;font:600 17px var(--font-head);margin:10px 0 4px}
+.mini p{font-size:14px;margin:0;color:#B4BCE6}
+
+/* feature rows */
+.feature{padding:96px 0 0}
+.row{display:grid;grid-template-columns:1fr 1.08fr;gap:64px;align-items:center}
+.row.flip .copy{order:2}
+.row .copy h2{margin:18px 0 16px}
+.row .copy p.lead{margin-bottom:24px}
+.row .ticks li{color:var(--text)}
+.visual{background:linear-gradient(160deg,var(--mist),#EDF0FF);border:1px solid var(--line);border-radius:30px;padding:30px;position:relative;overflow:hidden}
+.coach{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:thin}
+.coach .cb{flex:none;width:74px;text-align:center;font-size:11px;color:#7A819E}
+.coach .cb .bay{margin-bottom:6px}
+.coach .cb.me .bay{outline:2.5px solid var(--coral);outline-offset:3px;border-radius:6px}
+.coach .cb.me{color:var(--coral);font-weight:600}
+.vis-title{font:600 18px var(--font-head);color:var(--ink);margin-bottom:4px}
+.vis-sub{font-size:14px;color:#7A819E;margin-bottom:18px}
+.wlcard{background:#fff;border-radius:18px;padding:18px;border:1px solid var(--line);margin-top:16px}
+.steps{display:flex;align-items:center;gap:10px;font:600 17px var(--font-head);color:var(--ink)}
+.steps span{white-space:nowrap;padding:6px 12px;border-radius:10px;background:var(--indigo-tint);color:var(--indigo)}
+.steps span.end{background:#E3F6EB;color:#117A3F}
+.steps svg{width:20px;height:20px;color:#9AA2C7}
+.search-mock{background:#fff;border-radius:20px;padding:18px;border:1px solid var(--line)}
+.search-mock .fld{background:var(--mist);border:1.5px solid var(--line);border-radius:14px;padding:11px 16px;margin-bottom:10px}
+.search-mock .fld small{display:block;font-size:12px;color:#7A819E}
+.search-mock .fld b{font-size:16px;color:#98A0C4;font-weight:500}
+.search-mock .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.avail{display:grid;gap:8px;margin-top:6px}
+.avail div{display:flex;justify-content:space-between;align-items:center;background:var(--mist);border-radius:12px;padding:12px 16px;font-size:14px;color:var(--ink);font-weight:600}
+.avail em{font-style:normal;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px}
+.avail .ok{background:#E3F6EB;color:#117A3F}
+.avail .wl{background:var(--coral-tint);color:#B13A1B}
+.hi{font-family:'Noto Sans Devanagari',var(--font-body)}
+
+/* real screenshots in phone frames */
+.shotphone{position:relative;width:min(330px,100%);margin-inline:auto;background:#0B0F26;border-radius:44px;padding:9px;box-shadow:0 0 0 2px #262C55,0 40px 60px -30px rgba(11,16,48,.55)}
+.shotphone::before{content:"";position:absolute;left:50%;top:15px;transform:translateX(-50%);width:76px;height:20px;border-radius:14px;background:#0B0F26;z-index:2}
+.shotphone img{width:100%;height:auto;padding-top:30px;box-sizing:border-box;border-radius:36px;display:block;background:#F7F8FF}
+.shotcap{text-align:center;font-size:13px;color:#7A819E;margin-top:16px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.duo .shotphone{width:100%;max-width:250px;border-radius:38px;padding:8px;margin:0}
+.duo .shotphone img{border-radius:31px}
+.screen>img{width:100%;height:100%;padding-top:30px;box-sizing:border-box;object-fit:cover;object-position:top;display:block;background:#F7F8FF}
+
+/* honest pricing */
+.pricing{padding:110px 0 0}
+.pricing .head{text-align:center;margin-bottom:46px}
+.pricing .head p{margin:14px auto 0}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:900px;margin:0 auto}
+.plan{border:1.5px solid var(--line);border-radius:var(--radius);padding:32px;background:#fff}
+.plan.pro{border-color:var(--indigo);box-shadow:0 30px 60px -40px rgba(54,84,255,.6);background:linear-gradient(180deg,#fff,var(--mist))}
+.plan h3{font-size:24px;margin:12px 0 8px}
+.plan>p{margin-bottom:20px}
+.plan .ticks li{font-size:16px}
+
+/* founder */
+.founder{padding:110px 0 0}
+.note{max-width:820px;margin:0 auto;text-align:center}
+.note blockquote{font:600 clamp(24px,3.2vw,36px)/1.25 var(--font-head);letter-spacing:-.02em;color:var(--ink);margin-bottom:22px}
+.note p{font-size:18px;max-width:62ch;margin:0 auto}
+
+/* faq */
+.faq{padding:110px 0 0}
+.faq .head{text-align:center;margin-bottom:40px}
+.faq .head p{margin-top:12px}
+.qa{max-width:820px;margin:0 auto;display:grid;gap:14px}
+details{background:#fff;border:1px solid var(--line);border-radius:20px;transition:box-shadow .2s,border-color .2s}
+details[open]{border-color:#C5CFFF;box-shadow:0 20px 40px -30px rgba(54,84,255,.5)}
+summary{list-style:none;cursor:pointer;padding:22px 26px;font:600 18px var(--font-head);color:var(--ink);display:flex;justify-content:space-between;gap:16px;align-items:center;letter-spacing:-.01em}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";flex:none;width:12px;height:12px;border-right:2.5px solid #7A819E;border-bottom:2.5px solid #7A819E;transform:rotate(45deg) translateY(-3px);transition:transform .2s}
+details[open] summary::after{transform:rotate(-135deg)}
+details p{padding:0 26px 24px;font-size:16.5px;max-width:68ch}
+
+/* final cta + footer */
+.final{margin-top:110px;background:linear-gradient(120deg,var(--indigo-deep),var(--indigo));color:#fff;text-align:center;padding:84px 0}
+.final h2{color:#fff;margin-bottom:14px}
+.final p{color:#DDE3FF;font-size:19px;margin-bottom:30px}
+footer{background:var(--night);color:#AAB2DC;padding:68px 0 30px;font-size:15px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.1)}
+footer .logo{color:#fff;margin-bottom:14px}
+footer h5{color:#fff;font:600 16px var(--font-head);margin-bottom:14px}
+footer ul{list-style:none;display:grid;gap:10px}
+footer a:hover{color:#fff}
+.mailrow{font-size:14px;color:#AAB2DC;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.copybtn{font:600 12px var(--font-body);color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:4px 12px;cursor:pointer}
+.copybtn:hover{background:rgba(255,255,255,.22)}
+.stores{display:grid;gap:10px;justify-items:start}
+.fine{padding-top:26px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:#7F88B8}
+
+/* responsive */
+@media (max-width:1100px){.float{display:none}.stage{height:600px}}
+@media (max-width:860px){
+  .nav ul{display:none}
+  .row,.panel,.result-grid,.plans,.fgrid{grid-template-columns:1fr}
+  .row{gap:34px}.row.flip .copy{order:0}
+  .panel{gap:34px}
+  .try-form{grid-template-columns:1fr}.try-form .btn{padding:16px}
+  .fgrid{gap:30px}
+  .feature{padding-top:70px}
+  .pills{border-radius:26px}
+  .dark{padding:80px 0}
+}
+@media (max-width:480px){
+  .steps{font-size:15px;gap:6px}.steps span{padding:6px 9px}
+  .phone{transform:translateX(-50%) scale(.9);transform-origin:top center}
+  .stage{height:570px}
+  .visual{padding:20px}
+  .mini{grid-template-columns:1fr}
+  .kpis b{font-size:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .float,.panel.show{animation:none}
+  .result{transition:none}
+}
+
+/* ---- live checks ---- */
+.check{padding:56px 0 24px;scroll-margin-top:90px}
+.check-head{max-width:720px;margin:0 auto 26px;text-align:center}
+.check-head h2{font-family:var(--font-head);color:var(--ink);font-size:clamp(28px,4vw,42px);line-height:1.15;margin-bottom:12px}
+.check-card{max-width:880px;margin:0 auto;background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);box-shadow:0 24px 60px -30px rgba(11,16,48,.28);overflow:hidden}
+.check-tabs{display:flex;gap:6px;padding:10px;background:var(--mist);border-bottom:1.5px solid var(--line)}
+.check-tabs button{flex:1;padding:12px 10px;border:0;border-radius:14px;background:transparent;color:var(--text);font:600 15px var(--font-body);cursor:pointer}
+.check-tabs button[aria-selected="true"]{background:var(--ink);color:#fff}
+.check-panel{padding:22px}
+.ck-form{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end}
+.ck-form-seats{grid-template-columns:repeat(2,1fr)}
+.ck-form-seats .btn{grid-column:1/-1}
+.ck-form .field input,.ck-form .field select{border:0;outline:0;background:none;width:100%;padding:2px 0;font:600 18px var(--font-head);letter-spacing:0;color:var(--ink)}
+.ck-form .field input::placeholder{font-weight:500;color:#A4AAC4}
+.ck-out{margin-top:18px}
+.ck-out:empty{display:none}
+.ck-msg{padding:14px 16px;border-radius:14px;background:var(--mist);color:var(--ink);font-size:15px}
+.ck-msg.err{background:var(--coral-tint)}
+.ck-load{display:flex;align-items:center;gap:10px;color:var(--text);font-size:15px}
+.ck-load i{width:18px;height:18px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--indigo);animation:ckspin .8s linear infinite}
+@keyframes ckspin{to{transform:rotate(360deg)}}
+.ck-title{font:600 18px var(--font-head);color:var(--ink);margin-bottom:4px}
+.ck-sub{font-size:14px;margin-bottom:14px}
+.ck-pax{display:grid;gap:8px;margin:12px 0}
+.ck-pax div{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;font-size:15px;color:var(--ink)}
+.ck-pax b{font-weight:600}
+.chip{display:inline-block;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:600;background:var(--mist);color:var(--ink)}
+.chip.ok{background:#DDF5E7;color:#0E7A3E}
+.chip.warn{background:#FFF1D6;color:#8A5A00}
+.chip.bad{background:var(--coral-tint);color:#B73A1E}
+.ck-stations{max-height:360px;overflow:auto;border:1.5px solid var(--line);border-radius:14px}
+.ck-stations table{width:100%;border-collapse:collapse;font-size:14px}
+.ck-stations th,.ck-stations td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line)}
+.ck-stations th{position:sticky;top:0;background:var(--mist);color:var(--ink);font-weight:600}
+.ck-train{border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:10px}
+.ck-train h4{font:600 16px var(--font-head);color:var(--ink)}
+.ck-train p{font-size:14px;margin:2px 0 10px}
+.ck-classes{display:flex;flex-wrap:wrap;gap:8px}
+.ck-classes button{padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font:600 14px var(--font-body);cursor:pointer}
+.ck-classes button:hover,.ck-classes button[aria-pressed="true"]{border-color:var(--indigo);color:var(--indigo)}
+.ck-cal{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.ck-cal div{padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;font-size:13px}
+.ck-cal b{display:block;color:var(--ink);font-size:13px;margin-bottom:4px}
+.ck-app{margin-top:16px;padding:14px 16px;border-radius:16px;background:var(--indigo-tint);color:var(--ink);font-size:14px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between}
+.ck-app a{color:var(--indigo);font-weight:600;text-decoration:underline}
+.gate{position:fixed;inset:0;z-index:200;background:rgba(11,16,48,.6);display:flex;align-items:center;justify-content:center;padding:16px}
+.gate[hidden]{display:none}
+.gate-card{width:min(440px,100%);background:#fff;border-radius:24px;padding:26px;box-shadow:0 30px 80px -20px rgba(0,0,0,.5)}
+.gate-card h3{font:600 22px var(--font-head);color:var(--ink);margin-bottom:8px}
+.gate-app{margin:16px 0;padding:14px 16px;border-radius:16px;background:var(--indigo-tint);color:var(--ink);font-size:14px;display:grid;gap:4px}
+.gate-stores{display:flex;gap:14px;margin-top:4px}
+.gate-stores a{color:var(--indigo);font-weight:600;text-decoration:underline}
+.gate-msg{min-height:22px;font-size:14px;color:#B73A1E;margin-bottom:8px}
+.gate-actions{display:flex;flex-wrap:wrap;gap:10px}
+.gate-actions .btn{flex:1;padding:14px 18px;font-size:15px}
+@media (max-width:640px){
+  .ck-form{grid-template-columns:1fr}
+  .check-tabs button{font-size:14px;padding:11px 6px}
+  .check-panel{padding:16px}
+}
+
+.chip.big{padding:7px 14px;font-size:14px}
+.ck-map{height:280px;border-radius:16px;overflow:hidden;border:1.5px solid var(--line);margin:12px 0 6px;isolation:isolate;position:relative;z-index:0}
+.ck-tip{font:600 12px var(--font-body);color:var(--ink);border:0;box-shadow:0 4px 14px -4px rgba(0,0,0,.35)}
+.ck-line{display:flex;align-items:center;gap:10px;margin:14px 0 6px}
+.ck-end{font:600 13px var(--font-body);color:var(--ink);max-width:28%}
+.ck-track{position:relative;flex:1;height:0;border-top:3px dotted var(--indigo);margin:0 6px}
+.ck-dot{position:absolute;top:-10px;width:17px;height:17px;margin-left:-8px;border-radius:50%;background:var(--coral);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.ck-mapnote{font-size:12px;color:#7A819E;margin-bottom:12px}
+.ck-rows{border:1.5px solid var(--line);border-radius:14px;margin:10px 0}
+.ck-row{display:flex;justify-content:space-between;gap:14px;padding:11px 14px;border-bottom:1px solid var(--line);font-size:14px}
+.ck-row:last-child{border-bottom:0}
+.ck-row span{color:#7A819E}
+.ck-row b{color:var(--ink);font-weight:600;text-align:right}
+.ck-all{margin-top:10px}
+.ck-all summary{cursor:pointer;font:600 14px var(--font-body);color:var(--indigo);padding:6px 0}
+.ck-msg + .ck-msg{margin-top:8px}
+@media (max-width:640px){.ck-map{height:240px}}
+
+.ftrains{margin-top:30px}.ftrains h5{color:#fff;font:600 16px var(--font-head);margin-bottom:12px}.ftrains div{display:flex;flex-wrap:wrap;gap:8px}.ftrains a{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 12px;font-size:13px}
+
+.badge{display:inline-block;line-height:0}.badge img{height:48px;width:auto;display:block}.gate-stores .badge img,.ck-badges .badge img{height:40px}.ck-badges{display:flex;gap:10px;flex-wrap:wrap}
+</style>
+
+<style>
+.pg{padding:46px 0 10px}
+.pg .crumb{font-size:14px;color:#7A819E;margin-bottom:14px}.pg .crumb a{text-decoration:underline}
+.pg h1{font:700 clamp(32px,5.4vw,54px)/1.08 var(--font-head);color:var(--ink);letter-spacing:-.03em;max-width:18ch;margin:0 0 16px}
+.pg .lead{font-size:19px;max-width:60ch;margin:0 0 6px}
+.pgbody{padding:30px 0 0}
+.pgbody h2{font:600 26px var(--font-head);color:var(--ink);margin:46px 0 12px;letter-spacing:-.01em}
+.pgbody p{max-width:68ch;margin-bottom:12px}
+.pgbody ol{padding-left:22px;display:grid;gap:10px;max-width:68ch;margin-bottom:16px}
+.codes{width:100%;border-collapse:collapse;margin:14px 0;font-size:15.5px;border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
+.codes th,.codes td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.codes th{background:var(--mist);color:var(--ink);font-weight:600;white-space:nowrap}
+.codes td b{color:var(--ink)}
+.codes tr:last-child th,.codes tr:last-child td{border-bottom:0}
+.pgfaq{display:grid;gap:12px;margin-top:6px}
+.pgapp{margin-top:46px;padding:26px;border-radius:24px;background:var(--indigo-tint);color:var(--ink)}
+.pgapp h2{margin-top:0}
+.pgapp .stores{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
+.pglinks{display:flex;flex-wrap:wrap;gap:10px}.pglinks a{border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;font-size:14px;color:var(--ink)}.pglinks a:hover{border-color:var(--indigo);color:var(--indigo)}
+.check{padding-top:28px}
+@media(max-width:640px){.codes,.codes tbody,.codes tr,.codes th,.codes td{display:block;width:100%}.codes th{padding:12px 14px 0;border-bottom:0;background:none;white-space:normal}.codes td{padding:2px 14px 12px}.codes tr{border-bottom:1px solid var(--line)}.codes tr:last-child{border-bottom:0}}
+.nav-shell{margin-bottom:6px}
+</style>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8595461358711655" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="nav-shell"><nav class="nav" aria-label="Main">
+  <a class="logo" href="/" aria-label="ClearBerth home"><img src="/shots/icon.png" alt="" width="30" height="30">ClearBerth</a>
+  <ul><li><a href="#check">Abhi check karein</a></li><li><a href="/">Home</a></li></ul>
+  <a class="btn btn-primary" href="/#get-app">App lein</a>
+</nav></div>
+<main>
+<div class="wrap pg">
+  <p class="crumb"><a href="/">ClearBerth</a> / Train kahan hai</p>
+  <h1>Train kahan hai? Live status dekhein</h1>
+  <p class="lead">Train number daalein. Dekhein ki train abhi kahan hai, kitni late chal rahi hai aur agla station kaun sa hai.</p>
+</div>
+<section class="check" id="check" aria-labelledby="check-h">
+  <div class="wrap">
+    <div class="check-head">
+      <h2 id="check-h">Train abhi kahan hai?</h2>
+      <p>Free hai. Pehle ek chhota ad chalta hai. Is site par banner ads nahi hain. App mein dekhna aur aasaan hai.</p>
+    </div>
+    <div class="check-card">
+      <div class="check-tabs" role="tablist" aria-label="What to check">
+        <button role="tab" id="ck-t-pnr" aria-selected="true" aria-controls="ck-pnr" data-tab="pnr">PNR status</button>
+        <button role="tab" id="ck-t-live" aria-selected="false" aria-controls="ck-live" data-tab="live" tabindex="-1">Track a train</button>
+        <button role="tab" id="ck-t-seats" aria-selected="false" aria-controls="ck-seats" data-tab="seats" tabindex="-1">Seats</button>
+      </div>
+
+      <div class="check-panel" id="ck-pnr" role="tabpanel" aria-labelledby="ck-t-pnr">
+        <form class="ck-form" id="ckPnrForm" novalidate>
+          <div class="field"><label for="ckPnr">10-digit PNR</label>
+            <input id="ckPnr" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="e.g. 1234567890"></div>
+          <button class="btn btn-coral" type="submit">Check PNR</button>
+        </form>
+        <div class="ck-out" id="ckPnrOut" aria-live="polite"></div>
+      </div>
+
+      <div class="check-panel" id="ck-live" role="tabpanel" aria-labelledby="ck-t-live" hidden>
+        <form class="ck-form" id="ckLiveForm" novalidate>
+          <div class="field"><label for="ckTrain">Train number</label>
+            <input id="ckTrain" inputmode="numeric" autocomplete="off" maxlength="5" placeholder="e.g. 12301"></div>
+          <div class="field"><label for="ckStart">Train left its first station</label>
+            <select id="ckStart"><option value="0">Today</option><option value="1">Yesterday</option><option value="2">2 days ago</option></select></div>
+          <button class="btn btn-coral" type="submit">Train kahan hai?</button>
+        </form>
+        <div class="ck-out" id="ckLiveOut" aria-live="polite"></div>
+      </div>
+
+      <div class="check-panel" id="ck-seats" role="tabpanel" aria-labelledby="ck-t-seats" hidden>
+        <form class="ck-form ck-form-seats" id="ckSeatsForm" novalidate>
+          <div class="field"><label for="ckFrom">From (station code)</label>
+            <input id="ckFrom" list="ckStations" autocomplete="off" maxlength="5" placeholder="e.g. NDLS" style="text-transform:uppercase"></div>
+          <div class="field"><label for="ckTo">To (station code)</label>
+            <input id="ckTo" list="ckStations" autocomplete="off" maxlength="5" placeholder="e.g. HWH" style="text-transform:uppercase"></div>
+          <div class="field"><label for="ckDate">Date</label>
+            <input id="ckDate" type="date"></div>
+          <div class="field"><label for="ckQuota">Quota</label>
+            <select id="ckQuota"><option value="GN">General</option><option value="TQ">Tatkal</option><option value="PT">Premium Tatkal</option><option value="LD">Ladies</option><option value="SS">Senior citizen</option></select></div>
+          <button class="btn btn-coral" type="submit">Find trains</button>
+        </form>
+        <datalist id="ckStations">
+          <option value="NDLS">New Delhi</option><option value="DLI">Old Delhi</option><option value="NZM">Hazrat Nizamuddin</option>
+          <option value="CSMT">Mumbai CSMT</option><option value="BCT">Mumbai Central</option><option value="LTT">Lokmanya Tilak T</option><option value="BDTS">Bandra Terminus</option>
+          <option value="HWH">Howrah</option><option value="SDAH">Sealdah</option><option value="KOAA">Kolkata</option>
+          <option value="MAS">Chennai Central</option><option value="SBC">KSR Bengaluru</option><option value="YPR">Yesvantpur</option>
+          <option value="SC">Secunderabad</option><option value="HYB">Hyderabad Deccan</option><option value="PUNE">Pune</option>
+          <option value="ADI">Ahmedabad</option><option value="JP">Jaipur</option><option value="LKO">Lucknow</option><option value="CNB">Kanpur Central</option>
+          <option value="PNBE">Patna</option><option value="GKP">Gorakhpur</option><option value="BSB">Varanasi</option><option value="NJP">New Jalpaiguri</option>
+          <option value="GHY">Guwahati</option><option value="DBRG">Dibrugarh</option><option value="BBS">Bhubaneswar</option><option value="PURI">Puri</option>
+          <option value="TVC">Thiruvananthapuram</option><option value="ERS">Ernakulam</option><option value="CBE">Coimbatore</option>
+          <option value="BPL">Bhopal</option><option value="NGP">Nagpur</option><option value="ASR">Amritsar</option><option value="CDG">Chandigarh</option>
+          <option value="DDN">Dehradun</option><option value="JAT">Jammu Tawi</option><option value="RNC">Ranchi</option><option value="MAO">Madgaon</option>
+        </datalist>
+        <div class="ck-out" id="ckSeatsOut" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="wrap pgbody">
+
+<h2>Train ka live status kaise dekhein</h2>
+<ol>
+<li><b>Train number daalein.</b> Ye 5 ankon ka number hota hai, jaise 12301. Ye aapke ticket par train ke naam ke saath likha hota hai.</li>
+<li><b>Din chunein.</b> Wo din chunein jab train apne <b>pehle station</b> se chali thi. Ye ticket par likhi start date hoti hai, aapke chadhne ki date nahi.</li>
+<li><b>Train kahan hai? dabayein.</b> Ek chhota ad chalega, phir aapko route ka map dikhega.</li>
+<li><b>Status padhein.</b> Aapko dikhega ki train abhi kahan hai, kitni late hai, agla station kaun sa hai aur wahan kab pahunchegi.</li>
+</ol>
+<p>Dot (bindi) sirf andaaza dikhati hai ki train safar mein kitni aage hai. Asli jaankari neeche likhi hui details mein hoti hai.</p>
+
+<h2>Train late kyun chalti hai?</h2>
+<p>Kohre aur kharab mausam, track ka kaam, aur aage chal rahi train ke peeche rukna sabse aam wajah hain. Live status mein dikhne wala time railway ke data par chalta hai aur badal sakta hai, isliye platform par pahunchne se pehle ek baar aur dekh lein.</p>
+
+<h2>Kuch popular trains</h2>
+<div class="pglinks"><a href="/train/12301/">12301 Howrah - New Delhi Rajdhani</a><a href="/train/12302/">12302 New Delhi - Howrah Rajdhani</a><a href="/train/12951/">12951 Mumbai Central - New Delhi Rajdhani</a><a href="/train/12627/">12627 Karnataka Express</a><a href="/train/12423/">12423 Dibrugarh Rajdhani</a></div>
+
+<h2>Aksar puchhe jaane wale sawal</h2>
+<div class="pgfaq"><details open><summary>Train kahan hai ye kaise pata karein?</summary><p>Is page ke upar wale box mein train number daalein, wo din chunein jab train apne pehle station se chali thi, aur Train kahan hai? dabayein. Chhote ad ke baad map aur live details dikh jaayengi.</p></details><details><summary>Kya live train status free hai?</summary><p>Haan, free hai. Pehle ek chhota ad chalta hai, usi se ye free rehta hai. Is site par banner ads nahi hain.</p></details><details><summary>Mujhe kaun si date chunni chahiye?</summary><p>Wo date jab train apne pehle station se chali thi. Raat ki ya agle din pahunchne wali train mein ye aapke chadhne ki date se alag ho sakti hai.</p></details><details><summary>Time sahi kyun nahi nikla?</summary><p>Live time railway ke data se aata hai aur train ke chalne ke saath badalta rehta hai. Station ke paas pahunchne par ek baar phir dekh lein.</p></details><details><summary>PNR status kahan dekhein?</summary><p>PNR status ke liye <a href="/pnr-status/">ClearBerth ka PNR status page</a> dekhein. Hindi mein <a href="/hi/pnr-status/">yahan</a> hai.</p></details></div>
+<div class="pgapp"><h2>App mein aur aasaan</h2><p>ClearBerth app mein train ka live status, aapki berth ka diagram aur waitlist badalte hi alert, sab ek jagah milta hai. Shuru karna free hai.</p><div class="stores"><a class="badge" target="_blank" rel="noopener" href="https://apps.apple.com/in/app/clearberth/id6802574946"><img src="/shots/app-store-badge.svg" alt="Download on the App Store" height="48"></a><a class="badge" target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.aditya.clearberth"><img src="/shots/google-play-badge.png" alt="Get it on Google Play" height="48"></a></div></div>
+<h2>ClearBerth par aur</h2>
+<div class="pglinks"><a href="/pnr-status/">PNR status check karein</a><a href="/hi/pnr-status/">हिंदी में PNR स्टेटस</a><a href="/#check">Seats check karein</a></div>
+</div>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="logo" href="/"><img src="/shots/icon.png" alt="" width="30" height="30">ClearBerth</a>
+        <p>Trains, made clear. An independent app for Indian Railways travellers.</p>
+      </div>
+      <div>
+        <h5>App</h5>
+        <ul><li><a href="/#features">Features</a></li><li><a href="/#book">Book</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#faq">FAQ</a></li><li><a href="/pnr-status/">PNR status</a></li><li><a href="/train-kahan-hai/">Train kahan hai?</a></li><li><a href="/hi/pnr-status/">हिंदी में PNR</a></li></ul>
+      </div>
+      <div>
+        <h5>Support</h5>
+        <ul><li><a href="mailto:clearberth.support@gmail.com?subject=ClearBerth%20support">Contact support</a></li>
+          <li class="mailrow"><span id="mailText">clearberth.support@gmail.com</span> <button type="button" id="copyMail" class="copybtn">Copy</button></li><li><a href="https://clearberth.app/clearberth/privacy.htm" target="_blank" rel="noopener">Privacy policy</a></li></ul>
+      </div>
+      <div>
+        <h5>Download</h5>
+        <div class="stores">
+          <a class="badge" target="_blank" rel="noopener" href="https://apps.apple.com/in/app/clearberth/id6802574946"><img src="/shots/app-store-badge.svg" alt="Download on the App Store" height="48"></a>
+          <a class="badge" target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.aditya.clearberth"><img src="/shots/google-play-badge.png" alt="Get it on Google Play" height="48"></a>
+        </div>
+      </div>
+    </div>
+    <div class="ftrains"><h5>Track a popular train</h5><div><a href="/train/12301/">12301 Howrah - New Delhi Rajdhani Express</a><a href="/train/12302/">12302 New Delhi - Howrah Rajdhani Express</a><a href="/train/12951/">12951 Mumbai Central - New Delhi Tejas Rajdhani Express</a><a href="/train/12952/">12952 New Delhi - Mumbai Central Tejas Rajdhani Express</a><a href="/train/12423/">12423 Dibrugarh - New Delhi Rajdhani Express</a><a href="/train/12424/">12424 New Delhi - Dibrugarh Rajdhani Express</a><a href="/train/12627/">12627 Karnataka Express</a><a href="/train/12841/">12841 Coromandel Express</a><a href="/train/12723/">12723 Telangana Express</a><a href="/train/12615/">12615 Grand Trunk Express</a><a href="/train/12259/">12259 Sealdah - Bikaner AC Duronto Express</a><a href="/train/22691/">22691 KSR Bengaluru - Hazrat Nizamuddin Rajdhani Express</a><a href="/train/12433/">12433 Chennai Central - Hazrat Nizamuddin Rajdhani Express</a><a href="/train/12621/">12621 Tamil Nadu Express</a><a href="/train/12009/">12009 Mumbai Central - Ahmedabad Shatabdi Express</a></div></div>
+    <div class="fine"><span>© 2026 ClearBerth. All rights reserved.</span></div>
+  </div>
+</footer>
+<!-- rewarded-ad gate + "easier in the app" pop-up -->
+<div class="gate" id="adGate" hidden>
+  <div class="gate-card" role="dialog" aria-modal="true" aria-labelledby="gateH" aria-describedby="gateP">
+    <h3 id="gateH">Watch a short ad to see your result</h3>
+    <p id="gateP">ClearBerth's checks are free. A short ad pays for them. The result appears right after.</p>
+    <div class="gate-app">
+      <b>It is easier to see in the app.</b>
+      <span>Live alerts, your berth on a diagram, and everything in one place.</span>
+      <div class="gate-stores"><a class="badge" target="_blank" rel="noopener" href="https://apps.apple.com/in/app/clearberth/id6802574946"><img src="/shots/app-store-badge.svg" alt="Download on the App Store" height="40"></a><a class="badge" target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.aditya.clearberth"><img src="/shots/google-play-badge.png" alt="Get it on Google Play" height="40"></a></div>
+    </div>
+    <div class="gate-msg" id="gateMsg" role="status" aria-live="polite"></div>
+    <div class="gate-actions">
+      <button class="btn btn-coral" type="button" id="gateGo">Watch ad and see result</button>
+      <button class="btn btn-ghost" type="button" id="gateNo">Not now</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* ---- live checks: PNR / tracking / seats, with a rewarded-ad gate ----
+   Rules mirror the app: an ad before each PNR and live check; seats: 2 free
+   searches then an ad then 2 free, and per search 2 free class taps then an ad;
+   Tatkal never shows an ad; a failed check keeps the ad credit (retry is
+   free); if no ad is ready within 4 seconds the check goes ahead. No banners.
+   Web ads cannot be verified by a server, so the server also limits each
+   visitor per day (see the web-check function). */
+(function () {
+  var CFG = {
+    API: 'https://cmjdywcobehvrnicgiwn.supabase.co/functions/v1/web-check',
+    // Google's public TEST rewarded unit. Replace with your own once Ad Manager is approved:
+    // '/<your network code>/<your rewarded ad unit>'
+    AD_UNIT: '/22639388115/rewarded_web_example',
+    AD_WAIT_MS: 4000
+  };
+  var STORES = { ios: 'https://apps.apple.com/in/app/clearberth/id6802574946', android: 'https://play.google.com/store/apps/details?id=com.aditya.clearberth' };
+  var state = { credit: null, between: 0, klass: 0 }; // credit = the kind of check an ad was watched for
+  var $ = function (id) { return document.getElementById(id); };
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
+  function msg(out, text, err) { clear(out); out.appendChild(el('div', 'ck-msg' + (err ? ' err' : ''), text)); }
+  function loading(out, text) {
+    clear(out);
+    var d = el('div', 'ck-load'); d.appendChild(el('i')); d.appendChild(el('span', null, text)); out.appendChild(d);
+  }
+  function appNote(out) {
+    var d = el('div', 'ck-app');
+    d.appendChild(el('span', null, 'Easier to see in the app, with live alerts and your berth on a diagram.'));
+    var s = el('span', 'ck-badges');
+    [[STORES.ios, '/shots/app-store-badge.svg', 'Download on the App Store'], [STORES.android, '/shots/google-play-badge.png', 'Get it on Google Play']].forEach(function (x) {
+      var l = el('a', 'badge'); l.href = x[0]; l.target = '_blank'; l.rel = 'noopener';
+      var im = el('img'); im.src = x[1]; im.alt = x[2]; im.height = 40; l.appendChild(im); s.appendChild(l);
+    });
+    d.appendChild(s); out.appendChild(d);
+  }
+  function chipFor(status) {
+    var t = String(status || '').toUpperCase();
+    var cls = /^(CNF|AVAILABLE|AVL)/.test(t) ? 'ok' : /^(RAC|GNWL|RLWL|PQWL|WL|CKWL)/.test(t) ? 'warn' : /(REGRET|NOT AVAIL|CAN|NA)/.test(t) ? 'bad' : '';
+    return el('span', 'chip ' + cls, status || '-');
+  }
+
+  /* ---------- rewarded ad (Google Publisher Tag, out-of-page rewarded) ---------- */
+  var gptPromise = null;
+  function loadGpt() {
+    if (gptPromise) return gptPromise;
+    gptPromise = new Promise(function (res, rej) {
+      window.googletag = window.googletag || { cmd: [] };
+      if (window.googletag.apiReady) return res();
+      var s = document.createElement('script');
+      s.async = true; s.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
+      s.onload = function () { res(); }; s.onerror = function () { gptPromise = null; rej(new Error('gpt')); };
+      document.head.appendChild(s);
+    });
+    return gptPromise;
+  }
+  // Resolves 'granted' | 'closed' (closed before the reward) | 'failopen' (no ad within 4 s).
+  function playRewarded() {
+    return new Promise(function (resolve) {
+      var done = false, shown = false, granted = false, slot = null, timer = null;
+      function finish(r) { if (done) return; done = true; clearTimeout(timer); resolve(r); }
+      timer = setTimeout(function () {
+        if (!shown) {
+          try { if (slot) window.googletag.destroySlots([slot]); } catch (e) {}
+          finish('failopen');
+        }
+      }, CFG.AD_WAIT_MS);
+      loadGpt().then(function () {
+        window.googletag.cmd.push(function () {
+          try {
+            var g = window.googletag;
+            slot = g.defineOutOfPageSlot(CFG.AD_UNIT, g.enums.OutOfPageFormat.REWARDED);
+            if (!slot) return finish('failopen');
+            slot.addService(g.pubads());
+            g.pubads().addEventListener('rewardedSlotReady', function (e) {
+              if (e.slot !== slot || done) return;
+              shown = true; clearTimeout(timer); e.makeRewardedVisible();
+            });
+            g.pubads().addEventListener('rewardedSlotGranted', function (e) { if (e.slot === slot) granted = true; });
+            g.pubads().addEventListener('rewardedSlotClosed', function (e) {
+              if (e.slot !== slot) return;
+              try { g.destroySlots([slot]); } catch (x) {}
+              finish(granted ? 'granted' : 'closed');
+            });
+            g.enableServices(); g.display(slot);
+          } catch (err) { finish('failopen'); }
+        });
+      }, function () { finish('failopen'); });
+    });
+  }
+
+  // The pop-up: opt in to the ad, and a nudge that the app is easier.
+  var gate = $('adGate'), gateGo = $('gateGo'), gateNo = $('gateNo'), gateMsg = $('gateMsg');
+  var lastFocus = null;
+  function askAd() {
+    return new Promise(function (resolve) {
+      lastFocus = document.activeElement;
+      gateMsg.textContent = ''; gateGo.disabled = false; gateGo.textContent = 'Watch ad and see result';
+      gate.hidden = false; gateGo.focus();
+      function close(v) { gate.hidden = true; gateGo.onclick = gateNo.onclick = null; document.removeEventListener('keydown', onKey); if (lastFocus && lastFocus.focus) lastFocus.focus(); resolve(v); }
+      function onKey(e) { if (e.key === 'Escape') close(false); }
+      document.addEventListener('keydown', onKey);
+      gateNo.onclick = function () { close(false); };
+      gateGo.onclick = function () {
+        gateGo.disabled = true; gateGo.textContent = 'Loading ad...'; gateMsg.textContent = '';
+        playRewarded().then(function (r) {
+          if (r === 'granted' || r === 'failopen') return close(true);
+          gateGo.disabled = false; gateGo.textContent = 'Watch ad and see result';
+          gateMsg.textContent = 'The ad closed early. Watch it to the end to see your result.';
+        });
+      };
+    });
+  }
+
+  /* ---------- calling the server ---------- */
+  function call(payload) {
+    return fetch(CFG.API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, body: j }; }); });
+  }
+  function limitText(r) {
+    if (r.status === 429) return 'You have used today\'s checks on the website. The app has no daily limit like this. Get it below.';
+    return null;
+  }
+
+  // The ad rule for each kind of check.
+  function needsAd(kind, quota) {
+    if (quota === 'TQ' || quota === 'PT') return false;        // Tatkal: never an ad
+    if (kind === 'between') return state.between >= 2;
+    if (kind === 'klass') return state.klass >= 2;
+    return true;                                                // pnr, live
+  }
+  function bump(kind, usedCredit, quota) {
+    if (quota === 'TQ' || quota === 'PT') return;
+    if (kind === 'pnr' || kind === 'live') return;
+    if (usedCredit) state[kind] = 0; else state[kind]++;
+  }
+
+  // gate -> request -> render. A failed request keeps the credit (retry is free).
+  function run(kind, quota, out, payload, render) {
+    var need = state.credit !== kind && needsAd(kind, quota);
+    var pre = need ? askAd().then(function (ok) { if (ok) state.credit = kind; return ok; }) : Promise.resolve(true);
+    return pre.then(function (ok) {
+      if (!ok) return;
+      loading(out, 'Checking...');
+      return call(payload).then(function (r) {
+        var lim = limitText(r);
+        if (lim) { msg(out, lim, true); appNote(out); return; }
+        var res = render(r);
+        if (res === true) { bump(kind, state.credit === kind, quota); state.credit = null; }
+      }, function () { msg(out, 'Could not reach the server. Check your internet and tap the button again.', true); });
+    });
+  }
+  var HICCUP = 'Our server had a hiccup. Please tap the button again.';
+
+  /* ---------- PNR ---------- */
+  $('ckPnrForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var out = $('ckPnrOut'), pnr = $('ckPnr').value.replace(/\D/g, '');
+    if (!/^\d{10}$/.test(pnr)) return msg(out, 'Enter your 10-digit PNR.', true);
+    run('pnr', 'GN', out, { action: 'pnr', pnr: pnr }, function (r) {
+      var d = r.body;
+      if (r.status === 200 && d && d.code === 200 && d.response) {
+        var x = d.response; clear(out);
+        out.appendChild(el('div', 'ck-title', (x.train_no || '') + ' ' + (x.train_name || '')));
+        out.appendChild(el('div', 'ck-sub', (x.boarding_station || x.boarding_station_code || '') + ' to ' + (x.reservation_upto || x.reservation_upto_code || '') + (x.doj ? ' - ' + x.doj : '') + (x.class ? ' - ' + x.class : '')));
+        var box = el('div', 'ck-pax');
+        (x.passenger_details || []).forEach(function (p, i) {
+          var row = el('div'); row.appendChild(el('b', null, 'Passenger ' + (p.number || i + 1)));
+          var right = el('span'); right.appendChild(chipFor(p.current_status));
+          if (p.coach || p.berth) right.appendChild(el('span', null, '  ' + [p.coach, p.berth].filter(Boolean).join(' / ')));
+          row.appendChild(right); box.appendChild(row);
+        });
+        out.appendChild(box);
+        if (x.chart_status) out.appendChild(el('div', 'ck-sub', 'Chart: ' + x.chart_status));
+        appNote(out);
+        return true;
+      }
+      if (d && (d.code === 422 || /invalid|flushed/i.test(String(d.message || '')))) { msg(out, 'This PNR was not found, or it is too old. Check the number.', true); return false; }
+      msg(out, HICCUP, true); return false;
+    });
+  });
+
+  /* ---------- live train: route map + the same details as the app ---------- */
+  // Approximate station positions (map only). Any other station is looked up by
+  // name on OpenStreetMap; if that fails too the map falls back to a plain line.
+  var STN = { NDLS: [28.6425, 77.2194], DLI: [28.659, 77.228], NZM: [28.588, 77.253], CSMT: [18.9398, 72.8355], BCT: [18.969, 72.8196], LTT: [19.069, 72.889], BDTS: [19.0617, 72.8408],
+    HWH: [22.5835, 88.3425], SDAH: [22.567, 88.37], KOAA: [22.625, 88.382], MAS: [13.0827, 80.2757], SBC: [12.978, 77.57], YPR: [13.0228, 77.55], SC: [17.434, 78.501], HYB: [17.393, 78.472],
+    PUNE: [18.529, 73.874], ADI: [23.026, 72.601], JP: [26.9196, 75.7878], LKO: [26.831, 80.923], CNB: [26.454, 80.35], PNBE: [25.602, 85.138], GKP: [26.75, 83.379], BSB: [25.321, 82.987],
+    NJP: [26.683, 88.436], GHY: [26.181, 91.751], DBRG: [27.483, 94.911], BBS: [20.267, 85.843], PURI: [19.807, 85.826], TVC: [8.488, 76.952], ERS: [9.969, 76.291], CBE: [10.998, 76.967],
+    BPL: [23.265, 77.412], NGP: [21.152, 79.088], ASR: [31.634, 74.872], CDG: [30.704, 76.801], DDN: [30.317, 78.033], JAT: [32.708, 74.873], RNC: [23.341, 85.333], MAO: [15.399, 73.957] };
+  function titleCase(s) { return String(s || '').toLowerCase().replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); }); }
+  function geocode(code, name) {
+    if (STN[code]) return Promise.resolve(STN[code]);
+    var key = 'cb_geo_' + code;
+    try { var c = JSON.parse(localStorage.getItem(key) || 'null'); if (c) return Promise.resolve(c); } catch (e) {}
+    return fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=in&q=' + encodeURIComponent(titleCase(name) + ' railway station'))
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j[0]) return null;
+        var p = [parseFloat(j[0].lat), parseFloat(j[0].lon)];
+        try { localStorage.setItem(key, JSON.stringify(p)); } catch (e) {}
+        return p;
+      }).catch(function () { return null; });
+  }
+  var leafletP = null;
+  function loadLeaflet() {
+    if (window.L && window.L.map) return Promise.resolve();
+    if (leafletP) return leafletP;
+    leafletP = new Promise(function (res, rej) {
+      var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'; document.head.appendChild(l);
+      var s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+      s.onload = function () { res(); }; s.onerror = function () { leafletP = null; rej(new Error('leaflet')); };
+      document.head.appendChild(s);
+    });
+    return leafletP;
+  }
+  function nm(s) { return String(s || '').toUpperCase().replace(/\s+/g, ' ').trim(); }
+  function findStation(list, name) {
+    var n = nm(name); if (!n) return -1;
+    for (var i = 0; i < list.length; i++) if (nm(list[i].station_name) === n) return i;
+    for (var j = 0; j < list.length; j++) { var m = nm(list[j].station_name); if (m && (m.indexOf(n) === 0 || n.indexOf(m) === 0)) return j; }
+    return -1;
+  }
+  // Where is the train? Everything is read from the live report text and the station list.
+  function analyse(x) {
+    var st = x.stations || [], last = x.last_update || '';
+    var o = { st: st, first: st[0], end: st[st.length - 1], cancelled: !!x.cancelled };
+    o.notStarted = /yet to start/i.test(last) || !st.length;
+    o.terminated = /reached its destination/i.test(last);
+    var m = last.match(/^(Departed from|Arrived at|Crossed)\s+(.+?)\s+at\s+(\d{2}-[A-Za-z]{3}-\d{4}\s+\d{2}:\d{2})/i);
+    if (m) { o.kind = m[1].toLowerCase(); o.where = m[2]; o.when = m[3]; }
+    var nx = last.match(/(?:Next stoppage station is|Upcoming station is|Next station is)\s+([^.]+)\./i);
+    o.nextName = nx ? nx[1].trim() : '';
+    var total = st.length ? Number(st[st.length - 1].distance) || 0 : 0;
+    var f = null;
+    if (o.notStarted) f = 0;
+    else if (o.terminated) f = 1;
+    else if (total > 0) {
+      var i = findStation(st, o.where);
+      if (i >= 0) f = (Number(st[i].distance) || 0) / total;
+      else { var k = findStation(st, o.nextName); if (k > 0) f = (((Number(st[k - 1].distance) || 0) + (Number(st[k].distance) || 0)) / 2) / total; }
+    }
+    o.frac = f == null ? null : Math.max(0, Math.min(1, f));
+    o.total = total;
+    o.nextIdx = findStation(st, o.nextName);
+    return o;
+  }
+  function delayBadge(x, a) {
+    var dm = typeof x.delay_minutes === 'number' ? x.delay_minutes : null;
+    var hm = function (m) { return m >= 60 ? Math.floor(m / 60) + 'h ' + (m % 60) + 'm' : m + ' min'; };
+    if (a.cancelled) return { t: 'Cancelled', c: 'bad' };
+    if (a.notStarted) return { t: 'Yet to start', c: '' };
+    if (dm == null) return null;
+    if (a.terminated) return dm > 4 ? { t: 'Journey ended · arrived ' + hm(dm) + ' late', c: dm > 30 ? 'bad' : 'warn' } : { t: 'Journey ended · on time', c: 'ok' };
+    return dm > 4 ? { t: 'Running ' + hm(dm) + ' late', c: dm > 30 ? 'bad' : 'warn' } : { t: dm <= 0 ? 'On time' : 'Running on time', c: 'ok' };
+  }
+  function row(box, label, value) { if (!value) return; var r = el('div', 'ck-row'); r.appendChild(el('span', null, label)); r.appendChild(el('b', null, value)); box.appendChild(r); }
+
+  function drawMap(holder, a) {
+    var f = a.frac == null ? 0.5 : a.frac;
+    var A = a.first, B = a.end;
+    var pct = Math.round(f * 100);
+    // Plain line (always shown first, and kept if the real map cannot load).
+    var plain = el('div', 'ck-line');
+    var left = el('span', 'ck-end', titleCase(A.station_name)), right = el('span', 'ck-end', titleCase(B.station_name));
+    var track = el('div', 'ck-track'), dot = el('i', 'ck-dot'); dot.style.left = pct + '%'; track.appendChild(dot);
+    plain.appendChild(left); plain.appendChild(track); plain.appendChild(right);
+    holder.appendChild(plain);
+    var note = el('div', 'ck-mapnote', 'The dot shows roughly how far along the journey the train is. The details below are the real data.');
+    holder.appendChild(note);
+    Promise.all([geocode(A.station_code, A.station_name), geocode(B.station_code, B.station_name), loadLeaflet()]).then(function (v) {
+      var p1 = v[0], p2 = v[1]; if (!p1 || !p2 || !window.L) return;
+      var box = el('div', 'ck-map'); holder.insertBefore(box, plain); plain.style.display = 'none';
+      var L = window.L, map = L.map(box, { scrollWheelZoom: false, attributionControl: true, zoomControl: true });
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 12, attribution: '&copy; OpenStreetMap' }).addTo(map);
+      L.polyline([p1, p2], { color: '#3654FF', weight: 4, dashArray: '2 8', lineCap: 'round' }).addTo(map);
+      var at = [p1[0] + (p2[0] - p1[0]) * f, p1[1] + (p2[1] - p1[1]) * f];
+      L.circleMarker(p1, { radius: 7, color: '#fff', weight: 3, fillColor: '#0B1030', fillOpacity: 1 }).bindTooltip(titleCase(A.station_name), { permanent: true, direction: 'top', className: 'ck-tip' }).addTo(map);
+      L.circleMarker(p2, { radius: 7, color: '#fff', weight: 3, fillColor: '#0B1030', fillOpacity: 1 }).bindTooltip(titleCase(B.station_name), { permanent: true, direction: 'top', className: 'ck-tip' }).addTo(map);
+      L.circleMarker(at, { radius: 10, color: '#fff', weight: 3, fillColor: '#FF6B4A', fillOpacity: 1 }).addTo(map);
+      map.fitBounds(L.latLngBounds([p1, p2]), { padding: [40, 40] });
+      setTimeout(function () { map.invalidateSize(); }, 50);
+    }).catch(function () {});
+  }
+
+  function renderLive(out, x, no) {
+    clear(out);
+    var a = analyse(x);
+    out.appendChild(el('div', 'ck-title', (x.train_number || no) + ' ' + titleCase(x.train_name)));
+    var b = delayBadge(x, a);
+    if (b) { var bw = el('div', 'ck-sub'); bw.appendChild(el('span', 'chip big ' + b.c, b.t)); out.appendChild(bw); }
+    if (x.cancelled) out.appendChild(el('div', 'ck-msg err', x.cancelled.message || 'This train is cancelled for this date.'));
+    if (x.diversion && x.diversion.message) out.appendChild(el('div', 'ck-msg err', x.diversion.message));
+    if (x.partialCancel && x.partialCancel.message) out.appendChild(el('div', 'ck-msg', x.partialCancel.message));
+    if (x.rescheduled && x.rescheduled.message) out.appendChild(el('div', 'ck-msg', x.rescheduled.message));
+    if (a.first && a.end && !x.cancelled) { var mh = el('div', 'ck-maphold'); out.appendChild(mh); drawMap(mh, a); }
+
+    var rows = el('div', 'ck-rows');
+    var now = a.notStarted ? 'Yet to start' : (a.where ? (a.kind === 'arrived at' ? 'At ' : a.kind === 'departed from' ? 'Left ' : 'Passed ') + titleCase(a.where) : '');
+    if (a.terminated && a.end) now = 'Reached ' + titleCase(a.end.station_name);
+    row(rows, 'Now', now);
+    if (!a.terminated && a.nextName) row(rows, 'Next stop', titleCase(a.nextName) + (a.nextIdx >= 0 && a.st[a.nextIdx].platform ? ' (platform ' + a.st[a.nextIdx].platform + ')' : ''));
+    if (!a.terminated && a.nextIdx >= 0) row(rows, 'Expected there', a.st[a.nextIdx].est_arrival_time || a.st[a.nextIdx].arrival_time);
+    if (a.end && !a.terminated) row(rows, 'Arrives ' + titleCase(a.end.station_name), a.end.est_arrival_time || a.end.arrival_time);
+    if (a.total > 0 && a.frac != null && !a.notStarted) { var km = Math.round(a.frac * a.total); row(rows, 'Distance', 'about ' + km + ' of ' + Math.round(a.total) + ' km'); }
+    row(rows, 'Last updated', a.when || (x.last_update || ''));
+    out.appendChild(rows);
+
+    if (a.st.length) {
+      var det = el('details', 'ck-all'); det.appendChild(el('summary', null, 'All stations'));
+      var wrap = el('div', 'ck-stations'), t = el('table'), h = el('tr');
+      ['Station', 'Arrives', 'Departs', 'Plat.'].forEach(function (s) { h.appendChild(el('th', null, s)); });
+      var thead = el('thead'); thead.appendChild(h); t.appendChild(thead);
+      var tb = el('tbody');
+      a.st.forEach(function (s) {
+        var tr = el('tr');
+        [s.station_name || s.station_code, s.est_arrival_time || s.arrival_time, s.est_departure_time || s.departure_time, s.platform].forEach(function (v) { tr.appendChild(el('td', null, v || '-')); });
+        tb.appendChild(tr);
+      });
+      t.appendChild(tb); wrap.appendChild(t); det.appendChild(wrap); out.appendChild(det);
+    }
+  }
+
+  /* ---------- live train ---------- */
+  function ddmmyyyy(offsetDays) {
+    var d = new Date(); d.setDate(d.getDate() - offsetDays);
+    return String(d.getDate()).padStart(2, '0') + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + d.getFullYear();
+  }
+  $('ckLiveForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var out = $('ckLiveOut'), no = $('ckTrain').value.replace(/\D/g, '');
+    if (!/^\d{4,5}$/.test(no)) return msg(out, 'Enter a 5-digit train number.', true);
+    run('live', 'GN', out, { action: 'live', trainNo: no, doj: ddmmyyyy(parseInt($('ckStart').value, 10) || 0) }, function (r) {
+      var d = r.body;
+      if (r.status === 200 && d && d.code === 200 && d.response) {
+        renderLive(out, d.response, no);
+        appNote(out);
+        return true;
+      }
+      if (d && (d.code === 404 || /invalid train/i.test(String(d.message || '')))) { msg(out, 'Train number not found. Check the number.', true); return false; }
+      msg(out, HICCUP, true); return false;
+    });
+  });
+
+  /* ---------- seats ---------- */
+  var dateIn = $('ckDate');
+  (function () { var d = new Date(); d.setDate(d.getDate() + 1); var iso = d.toISOString().slice(0, 10); dateIn.value = iso; dateIn.min = new Date().toISOString().slice(0, 10); var mx = new Date(); mx.setDate(mx.getDate() + 125); dateIn.max = mx.toISOString().slice(0, 10); })();
+  var COMMON = ['SL', '3A', '2A', '1A', 'CC', '2S', '3E'];
+  var seatsCtx = null;
+
+  $('ckSeatsForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var out = $('ckSeatsOut');
+    var from = $('ckFrom').value.trim().toUpperCase(), to = $('ckTo').value.trim().toUpperCase(), date = dateIn.value, quota = $('ckQuota').value;
+    if (!/^[A-Z]{2,5}$/.test(from) || !/^[A-Z]{2,5}$/.test(to)) return msg(out, 'Enter the station codes, for example NDLS and HWH.', true);
+    if (from === to) return msg(out, 'Choose two different stations.', true);
+    if (!date) return msg(out, 'Pick a date.', true);
+    run('between', quota, out, { action: 'between', from: from, to: to, date: date }, function (r) {
+      var d = r.body;
+      if (r.status === 200 && d && Array.isArray(d.trains)) {
+        seatsCtx = { from: from, to: to, date: date, quota: quota }; state.klass = 0;
+        clear(out);
+        if (!d.trains.length) { out.appendChild(el('div', 'ck-msg', 'No trains found for this route on that date.')); return true; }
+        d.trains.forEach(function (t) { out.appendChild(trainCard(t, out)); });
+        appNote(out);
+        return true;
+      }
+      msg(out, r.status === 503 || (d && d.error === 'busy') ? 'Many people are checking right now. Try again in a minute.' : HICCUP, true);
+      return false;
+    });
+  });
+
+  function trainCard(t, out) {
+    var c = el('div', 'ck-train');
+    c.appendChild(el('h4', null, t.number + ' ' + t.name));
+    c.appendChild(el('p', null, (t.fromName || t.fromCode) + ' ' + (t.departure || '') + '  to  ' + (t.toName || t.toCode) + ' ' + (t.arrival || '') + (t.duration ? '  (' + (typeof t.duration === 'number' ? Math.floor(t.duration / 60) + 'h' + (t.duration % 60 ? ' ' + (t.duration % 60) + 'm' : '') : t.duration) + ')' : '')));
+    var bar = el('div', 'ck-classes'), cal = el('div');
+    (Array.isArray(t.classes) && t.classes.length ? t.classes : COMMON).forEach(function (cls) {
+      var b = el('button', null, cls); b.type = 'button'; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', function () {
+        Array.prototype.forEach.call(bar.children, function (x) { x.setAttribute('aria-pressed', 'false'); });
+        b.setAttribute('aria-pressed', 'true');
+        run('klass', seatsCtx.quota, cal, { action: 'seats', trainNo: t.number, from: seatsCtx.from, to: seatsCtx.to, date: seatsCtx.date, cls: cls, quota: seatsCtx.quota }, function (r) {
+          var d = r.body;
+          if (r.status === 200 && d && Array.isArray(d.calendar)) {
+            clear(cal); var g = el('div', 'ck-cal');
+            d.calendar.forEach(function (day) {
+              var cell = el('div'); cell.appendChild(el('b', null, day.date)); cell.appendChild(chipFor(day.status)); g.appendChild(cell);
+            });
+            cal.appendChild(g); return true;
+          }
+          var m = d && /class/i.test(String(d.error || '')) ? 'This class is not on this train for your stations.' : (r.status === 503 ? 'Many people are checking right now. Try again in a minute.' : HICCUP);
+          msg(cal, m, true); return false;
+        });
+      });
+      bar.appendChild(b);
+    });
+    c.appendChild(bar); c.appendChild(cal);
+    return c;
+  }
+
+  /* a train page sends people here as /?train=12301 */
+  try { var q = new URLSearchParams(location.search).get('train'); if (q && /^\d{4,5}$/.test(q)) { $('ckTrain').value = q; window.__ckTrain = q; } } catch (e) {}
+  /* ---------- tabs ---------- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.check-tabs [role=tab]'));
+  function pick(t) {
+    tabs.forEach(function (b) {
+      var on = b === t; b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1;
+      $(b.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { pick(t); });
+    t.addEventListener('keydown', function (e) {
+      var n = e.key === 'ArrowRight' ? (i + 1) % tabs.length : e.key === 'ArrowLeft' ? (i + tabs.length - 1) % tabs.length : -1;
+      if (n >= 0) { e.preventDefault(); pick(tabs[n]); tabs[n].focus(); }
+    });
+  });
+  if (window.__ckTrain) { pick(tabs[1]); }
+})();
+</script>
+<script>try{document.getElementById('ck-t-live').click()}catch(e){}</script>
+</body></html>
