@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://clearberth.app/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12301/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12302/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12951/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12952/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12423/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12424/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12627/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12841/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12723/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12615/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12259/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/22691/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12433/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12621/</loc><lastmod>2026-10-15</lastmod></url>
-  <url><loc>https://clearberth.app/train/12009/</loc><lastmod>2026-10-15</lastmod></url>
+  <url><loc>https://clearberth.app/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://clearberth.app/pnr-status/</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://clearberth.app/hi/pnr-status/</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://clearberth.app/train-kahan-hai/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12301/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12302/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12951/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12952/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12423/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12424/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12627/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12841/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12723/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12615/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12259/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/22691/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12433/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12621/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12009/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12313/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12314/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12303/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12304/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12309/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12431/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12437/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12953/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12954/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12625/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12626/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12903/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12904/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12137/</loc><lastmod>2026-10-16</lastmod></url>
+  <url><loc>https://clearberth.app/train/12138/</loc><lastmod>2026-10-16</lastmod></url>
 </urlset>
