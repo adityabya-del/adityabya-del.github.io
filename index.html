@@ -425,6 +425,9 @@ footer a:hover{color:#fff}
 .pt-shot img{position:absolute;left:0;top:0;width:100%;height:auto;border:6px solid #0B0F26;border-bottom:0;border-radius:30px 30px 0 0;transform:rotate(-3deg) translateY(6px);transform-origin:50% 100%;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
 .pt-trk .pt-shot img{transform:rotate(3deg) translateY(6px)}
 .pt:hover .pt-shot img{transform:rotate(0) translateY(-12px)}
+.pt-open{display:none;margin-top:14px;font-size:14.5px;color:rgba(255,255,255,.88);text-decoration:none;border-bottom:1px dashed rgba(255,255,255,.5);padding-bottom:2px;width:max-content;max-width:100%}
+.pt-open b{color:#fff;font-weight:600}
+.is-ios .pt-open,.is-android .pt-open{display:inline-block}
 .is-ios .pt-and,.is-android .pt-ios{display:none}
 @media(max-width:900px){.paths-grid{grid-template-columns:1fr;max-width:460px;margin-inline:auto}.pt{min-height:0}.pt-shot{height:230px}}
 @media(prefers-reduced-motion:reduce){.pt,.pt-shot img{transition:none}.pt:hover{transform:none}}
@@ -497,6 +500,7 @@ footer a:hover{color:#fff}
             <a class="badge pt-ios" target="_blank" rel="noopener" href="https://apps.apple.com/in/app/clearberth/id6802574946?ppid=ad7165ba-1c27-420a-99cb-1ba2e3c80776"><img src="shots/app-store-badge.svg" alt="Download on the App Store" height="44"></a>
             <a class="badge pt-and" target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.aditya.clearberth&listing=pnr"><img src="shots/google-play-badge.png" alt="Get it on Google Play" height="44"></a>
           </div>
+          <a class="pt-open" href="irctcavailability://pnr" data-tab="pnr">Already have the app? <b>Open it</b></a>
         </div>
         <div class="pt-shot"><img src="shots/pnr.webp" alt="ClearBerth PNR status screen with the berth highlighted on a diagram" width="720" height="1484" loading="lazy"></div>
       </article>
@@ -509,6 +513,7 @@ footer a:hover{color:#fff}
             <a class="badge pt-ios" target="_blank" rel="noopener" href="https://apps.apple.com/in/app/clearberth/id6802574946?ppid=f3449268-d660-4e16-ad6a-6d4030b3b2e4"><img src="shots/app-store-badge.svg" alt="Download on the App Store" height="44"></a>
             <a class="badge pt-and" target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.aditya.clearberth&listing=tracking"><img src="shots/google-play-badge.png" alt="Get it on Google Play" height="44"></a>
           </div>
+          <a class="pt-open" href="irctcavailability://tracking" data-tab="tracking">Already have the app? <b>Open it</b></a>
         </div>
         <div class="pt-shot"><img src="shots/tracking.webp" alt="ClearBerth live train tracking screen" width="720" height="1484" loading="lazy"></div>
       </article>
@@ -521,12 +526,22 @@ footer a:hover{color:#fff}
             <a class="badge pt-ios" target="_blank" rel="noopener" href="https://apps.apple.com/in/app/clearberth/id6802574946?ppid=c141965f-a90d-4a70-8f67-5f11c1574c1b"><img src="shots/app-store-badge.svg" alt="Download on the App Store" height="44"></a>
             <a class="badge pt-and" target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.aditya.clearberth&listing=book"><img src="shots/google-play-badge.png" alt="Get it on Google Play" height="44"></a>
           </div>
+          <a class="pt-open" href="irctcavailability://book" data-tab="book">Already have the app? <b>Open it</b></a>
         </div>
         <div class="pt-shot"><img src="shots/book.webp" alt="ClearBerth Book tab showing trains and seat availability" width="720" height="1484" loading="lazy"></div>
       </article>
     </div>
   </div>
-  <script>(function(){var u=navigator.userAgent||'',r=document.documentElement;if(/iPhone|iPad|iPod/.test(u))r.classList.add('is-ios');else if(/Android/.test(u))r.classList.add('is-android');})();</script>
+  <script>(function(){var u=navigator.userAgent||'',r=document.documentElement;if(/iPhone|iPad|iPod/.test(u))r.classList.add('is-ios');else if(/Android/.test(u))r.classList.add('is-android');
+  var PLAY='https://play.google.com/store/apps/details?id=com.aditya.clearberth&listing=',APPLE='https://apps.apple.com/in/app/clearberth/id6802574946?ppid=';
+  var PP={pnr:'ad7165ba-1c27-420a-99cb-1ba2e3c80776',tracking:'f3449268-d660-4e16-ad6a-6d4030b3b2e4',book:'c141965f-a90d-4a70-8f67-5f11c1574c1b'};
+  Array.prototype.forEach.call(document.querySelectorAll('.pt-open'),function(a){a.addEventListener('click',function(e){
+    e.preventDefault();var tab=a.getAttribute('data-tab'),android=r.classList.contains('is-android'),store=android?PLAY+tab:APPLE+PP[tab];
+    if(android){location.href='intent://'+tab+'#Intent;scheme=irctcavailability;package=com.aditya.clearberth;S.browser_fallback_url='+encodeURIComponent(store)+';end';return;}
+    var t=Date.now();location.href='irctcavailability://'+tab;
+    setTimeout(function(){if(!document.hidden&&Date.now()-t<2600)location.href=store;},1500);
+  });});
+})();</script>
 </section>
 
 <!-- try a sample PNR -->
