@@ -879,7 +879,31 @@ footer a:hover{color:#fff}
   }
   function row(box, label, value) { if (!value) return; var r = el('div', 'ck-row'); r.appendChild(el('span', null, label)); r.appendChild(el('b', null, value)); box.appendChild(r); }
 
-  function drawMap(holder, a) {
+  // Route line + station coordinates from the web-check function (kept in the
+  // browser for 30 days; a train's route does not change).
+  function fetchRoute(no) {
+    var k = 'cb_route_' + no;
+    try { var c = JSON.parse(localStorage.getItem(k) || 'null'); if (c && c.r && c.t > Date.now() - 30 * 864e5) return Promise.resolve(c.r); } catch (e) {}
+    return fetch(CFG.API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'route', trainNo: no }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j.route || !j.route.line || !j.route.stops) return null;
+        try { localStorage.setItem(k, JSON.stringify({ t: Date.now(), r: j.route })); } catch (e) {}
+        return j.route;
+      }).catch(function () { return null; });
+  }
+  // The station the train was last reported at. The marker goes ON that
+  // station, never at a point between two stations.
+  function lastStation(a) {
+    if (a.notStarted) return a.first ? { st: a.first, label: 'Yet to start at' } : null;
+    if (a.terminated) return a.end ? { st: a.end, label: 'Reached' } : null;
+    var i = findStation(a.st, a.where);
+    if (i < 0 && a.nextIdx > 0) i = a.nextIdx - 1;
+    if (i < 0) return null;
+    return { st: a.st[i], label: a.kind === 'arrived at' ? 'At' : a.kind === 'departed from' ? 'Left' : 'Passed' };
+  }
+
+  function drawMap(holder, a, no) {
     var f = a.frac == null ? 0.5 : a.frac;
     var A = a.first, B = a.end;
     var pct = Math.round(f * 100);
@@ -891,17 +915,37 @@ footer a:hover{color:#fff}
     holder.appendChild(plain);
     var note = el('div', 'ck-mapnote', 'The dot shows roughly how far along the journey the train is. The details below are the real data.');
     holder.appendChild(note);
-    Promise.all([geocode(A.station_code, A.station_name), geocode(B.station_code, B.station_name), loadLeaflet()]).then(function (v) {
-      var p1 = v[0], p2 = v[1]; if (!p1 || !p2 || !window.L) return;
+    var ls = lastStation(a);
+    var lsCode = ls ? String(ls.st.station_code || '').toUpperCase() : '';
+    Promise.all([fetchRoute(no), loadLeaflet()]).then(function (v) {
+      var route = v[0]; if (!window.L) return null;
+      if (route) {
+        var s0 = route.stops[0], s1 = route.stops[route.stops.length - 1], hit = null;
+        route.stops.forEach(function (s) { if (s.code === lsCode) hit = s; });
+        var pAt = hit ? Promise.resolve([hit.lat, hit.lng]) : (ls ? geocode(lsCode, ls.st.station_name) : Promise.resolve(null));
+        return pAt.then(function (at) { return { line: route.line, p1: [s0.lat, s0.lng], p2: [s1.lat, s1.lng], at: at, real: true }; });
+      }
+      // No route available: old behaviour (straight line between the end stations).
+      return Promise.all([geocode(A.station_code, A.station_name), geocode(B.station_code, B.station_name), ls ? geocode(lsCode, ls.st.station_name) : Promise.resolve(null)]).then(function (g) {
+        if (!g[0] || !g[1]) return null;
+        return { line: [g[0], g[1]], p1: g[0], p2: g[1], at: g[2], real: false };
+      });
+    }).then(function (m) {
+      if (!m || !window.L) return;
       var box = el('div', 'ck-map'); holder.insertBefore(box, plain); plain.style.display = 'none';
       var L = window.L, map = L.map(box, { scrollWheelZoom: false, attributionControl: true, zoomControl: true });
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 12, attribution: '&copy; OpenStreetMap' }).addTo(map);
-      L.polyline([p1, p2], { color: '#3654FF', weight: 4, dashArray: '2 8', lineCap: 'round' }).addTo(map);
-      var at = [p1[0] + (p2[0] - p1[0]) * f, p1[1] + (p2[1] - p1[1]) * f];
-      L.circleMarker(p1, { radius: 7, color: '#fff', weight: 3, fillColor: '#0B1030', fillOpacity: 1 }).bindTooltip(titleCase(A.station_name), { permanent: true, direction: 'top', className: 'ck-tip' }).addTo(map);
-      L.circleMarker(p2, { radius: 7, color: '#fff', weight: 3, fillColor: '#0B1030', fillOpacity: 1 }).bindTooltip(titleCase(B.station_name), { permanent: true, direction: 'top', className: 'ck-tip' }).addTo(map);
-      L.circleMarker(at, { radius: 10, color: '#fff', weight: 3, fillColor: '#FF6B4A', fillOpacity: 1 }).addTo(map);
-      map.fitBounds(L.latLngBounds([p1, p2]), { padding: [40, 40] });
+      if (m.real) L.polyline(m.line, { color: '#3654FF', weight: 4, lineCap: 'round', lineJoin: 'round' }).addTo(map);
+      else L.polyline(m.line, { color: '#3654FF', weight: 4, dashArray: '2 8', lineCap: 'round' }).addTo(map);
+      L.circleMarker(m.p1, { radius: 7, color: '#fff', weight: 3, fillColor: '#0B1030', fillOpacity: 1 }).bindTooltip(titleCase(A.station_name), { permanent: true, direction: 'top', className: 'ck-tip' }).addTo(map);
+      L.circleMarker(m.p2, { radius: 7, color: '#fff', weight: 3, fillColor: '#0B1030', fillOpacity: 1 }).bindTooltip(titleCase(B.station_name), { permanent: true, direction: 'top', className: 'ck-tip' }).addTo(map);
+      if (m.at && ls) {
+        L.circleMarker(m.at, { radius: 10, color: '#fff', weight: 3, fillColor: '#FF6B4A', fillOpacity: 1 }).bindTooltip(ls.label + ' ' + titleCase(ls.st.station_name), { permanent: true, direction: 'bottom', className: 'ck-tip' }).addTo(map);
+        note.textContent = 'The orange dot is the station the train was last reported at. The details below are the real data.';
+      } else {
+        note.textContent = 'The details below are the real data.';
+      }
+      map.fitBounds(L.latLngBounds(m.line), { padding: [40, 40] });
       setTimeout(function () { map.invalidateSize(); }, 50);
     }).catch(function () {});
   }
@@ -916,7 +960,7 @@ footer a:hover{color:#fff}
     if (x.diversion && x.diversion.message) out.appendChild(el('div', 'ck-msg err', x.diversion.message));
     if (x.partialCancel && x.partialCancel.message) out.appendChild(el('div', 'ck-msg', x.partialCancel.message));
     if (x.rescheduled && x.rescheduled.message) out.appendChild(el('div', 'ck-msg', x.rescheduled.message));
-    if (a.first && a.end && !x.cancelled) { var mh = el('div', 'ck-maphold'); out.appendChild(mh); drawMap(mh, a); }
+    if (a.first && a.end && !x.cancelled) { var mh = el('div', 'ck-maphold'); out.appendChild(mh); drawMap(mh, a, x.train_number || no); }
 
     var rows = el('div', 'ck-rows');
     var now = a.notStarted ? 'Yet to start' : (a.where ? (a.kind === 'arrived at' ? 'At ' : a.kind === 'departed from' ? 'Left ' : 'Passed ') + titleCase(a.where) : '');
