@@ -1493,5 +1493,23 @@ body.ck-noscroll{overflow:hidden}
   if (window.__ckTrain) { pick(tabs[1]); }
 })();
 </script>
+<script>
+/* Opening or refreshing the home page lands on the live "Check it right now" box
+   (browsers otherwise restore the old scroll spot, e.g. down at Pricing). A link
+   with its own #section still goes where it points. */
+(function(){
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+  if (location.hash) return;
+  function go(){
+    var el = document.getElementById('check'); if (!el) return;
+    var h = document.documentElement; var prev = h.style.scrollBehavior;
+    h.style.scrollBehavior = 'auto';
+    window.scrollTo(0, el.getBoundingClientRect().top + window.pageYOffset - 90);
+    h.style.scrollBehavior = prev;
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+  window.addEventListener('load', function(){ go(); setTimeout(go, 250); });
+})();
+</script>
 </body>
 </html>
