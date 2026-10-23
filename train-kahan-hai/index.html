@@ -1095,4 +1095,69 @@ body.ck-noscroll{overflow:hidden}
 })();
 </script>
 <script>try{document.getElementById('ck-t-live').click()}catch(e){}</script>
+<style>
+.alp{position:fixed;inset:0;z-index:2147483100;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(11,16,48,.62)}
+.alp.on{display:flex}
+.alp-box{position:relative;max-width:440px;width:100%;background:#fff;border-radius:24px;padding:28px 24px 22px;box-shadow:0 40px 90px -20px rgba(11,16,48,.7);text-align:center;border-top:6px solid #FF6B4A}
+.alp-tag{display:inline-block;padding:6px 12px;border-radius:999px;background:#FFE9E3;color:#D6431F;font:700 11px Inter,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.alp-box h3{font:700 25px/1.15 Poppins,Inter,system-ui,sans-serif;color:#0B1030;letter-spacing:-.02em;margin:0 0 10px}
+.alp-box p{font:400 15px/1.5 Inter,system-ui,sans-serif;color:#3B4166;margin:0 0 18px}
+.alp-go{display:block;width:100%;padding:15px 18px;border-radius:999px;background:#FF6B4A;color:#fff;font:700 16px Inter,system-ui,sans-serif;text-decoration:none;box-shadow:0 10px 24px -8px rgba(255,107,74,.7)}
+.alp-skip{display:block;width:100%;margin-top:10px;padding:12px;border:0;background:none;color:#3B4166;font:600 14px Inter,system-ui,sans-serif;cursor:pointer;text-decoration:underline}
+</style>
+<div class="alp" id="alp" role="dialog" aria-modal="true" aria-labelledby="alpH">
+  <div class="alp-box">
+    <span class="alp-tag" id="alpT"></span>
+    <h3 id="alpH"></h3>
+    <p id="alpP"></p>
+    <a class="alp-go" id="alpGo" target="_blank" rel="noopener"></a>
+    <button class="alp-skip" id="alpSkip" type="button"></button>
+  </div>
+</div>
+<script>
+/* Before the first check in a visit, offer the alerts (shown once per visit). */
+(function(){
+  var hi = (document.documentElement.lang || '').indexOf('hi') === 0;
+  var L = hi ? {
+    t: 'एक सफ़र के लिए सिर्फ़ ₹29', h: 'बार-बार चेक करना बंद करें। ट्रेन खुद आपको बताएगी।',
+    p: 'ऐप में ₹29 एक बार दें: PNR बदलते ही या ट्रेन लेट होते ही फ़ोन पर सूचना आएगी। iPhone पर यह लॉक स्क्रीन पर दिखता है। कोई सब्सक्रिप्शन नहीं।',
+    go: 'ऐप में अलर्ट चालू करें', skip: 'छोड़ें, नतीजा दिखाएँ'
+  } : {
+    t: 'Alerts · ₹29 per journey', h: 'Stop refreshing. Let your train find you.',
+    p: 'Pay ₹29 once in the app and your phone is alerted when your PNR status changes or your train runs late. On iPhone it sits on your lock screen. No subscription.',
+    go: 'Get alerts in the app', skip: 'Skip, show my result'
+  };
+  var $ = function (id) { return document.getElementById(id); };
+  var box = $('alp'); if (!box) return;
+  $('alpT').textContent = L.t; $('alpH').textContent = L.h; $('alpP').textContent = L.p;
+  $('alpGo').textContent = L.go; $('alpSkip').textContent = L.skip;
+  var ios = /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent);
+  var a = document.querySelector(ios ? 'a[href*="apps.apple.com"]' : 'a[href*="play.google.com"]') || document.querySelector('a[href*="apps.apple.com"]');
+  if (a) $('alpGo').href = a.href;
+  var seen = false; try { seen = sessionStorage.getItem('cb_alp') === '1'; } catch (e) {}
+  var pending = null;
+  function v(id){ var el = $(id); return el ? el.value.trim() : ''; }
+  function ready(form){
+    if (form.id === 'ckPnrForm') return /^\d{10}$/.test(v('ckPnr').replace(/\D/g, ''));
+    if (form.id === 'ckLiveForm') return /^\d{5}$/.test(v('ckTrain').replace(/\D/g, ''));
+    return !!(v('ckFrom') && v('ckTo'));
+  }
+  function close(){
+    box.classList.remove('on');
+    var f = pending; pending = null;
+    if (f) { seen = true; try { f.requestSubmit ? f.requestSubmit() : f.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true })); } catch (e) {} }
+  }
+  document.addEventListener('submit', function (e) {
+    var f = e.target;
+    if (seen || !f || !/^ck(Pnr|Live|Seats)Form$/.test(f.id) || !ready(f)) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    try { sessionStorage.setItem('cb_alp', '1'); } catch (x) {}
+    pending = f; box.classList.add('on'); $('alpGo').focus();
+  }, true);
+  $('alpSkip').addEventListener('click', close);
+  $('alpGo').addEventListener('click', function () { setTimeout(close, 50); });
+  box.addEventListener('click', function (e) { if (e.target === box) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('on')) close(); });
+})();
+</script>
 </body></html>
