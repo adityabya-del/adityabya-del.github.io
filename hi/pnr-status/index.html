@@ -1150,8 +1150,8 @@ body.ck-noscroll{overflow:hidden}
   var ios = /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent);
   var a = document.querySelector(ios ? 'a[href*="apps.apple.com"]' : 'a[href*="play.google.com"]') || document.querySelector('a[href*="apps.apple.com"]');
   if (a) $('alpGo').href = a.href;
-  var seen = false; try { seen = sessionStorage.getItem('cb_alp') === '1'; } catch (e) {}
-  var pending = null;
+  var seen = false; // shown before every check (a skip lets that one check through)
+  var pending = null, go = false;
   function v(id){ var el = $(id); return el ? el.value.trim() : ''; }
   function ready(form){
     if (form.id === 'ckPnrForm') return /^\d{10}$/.test(v('ckPnr').replace(/\D/g, ''));
@@ -1161,13 +1161,12 @@ body.ck-noscroll{overflow:hidden}
   function close(){
     box.classList.remove('on');
     var f = pending; pending = null;
-    if (f) { seen = true; try { f.requestSubmit ? f.requestSubmit() : f.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true })); } catch (e) {} }
+    if (f) { go = true; try { f.requestSubmit ? f.requestSubmit() : f.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true })); } catch (e) {} go = false; }
   }
   document.addEventListener('submit', function (e) {
     var f = e.target;
-    if (seen || !f || !/^ck(Pnr|Live|Seats)Form$/.test(f.id) || !ready(f)) return;
+    if (go || !f || !/^ck(Pnr|Live|Seats)Form$/.test(f.id) || !ready(f)) return;
     e.preventDefault(); e.stopImmediatePropagation();
-    try { sessionStorage.setItem('cb_alp', '1'); } catch (x) {}
     pending = f; box.classList.add('on'); $('alpGo').focus();
   }, true);
   $('alpSkip').addEventListener('click', close);
