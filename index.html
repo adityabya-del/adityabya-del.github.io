@@ -331,6 +331,26 @@ footer a:hover{color:#fff}
 .ck-form-seats .btn{grid-column:1/-1}
 .ck-form .field input,.ck-form .field select{border:0;outline:0;background:none;width:100%;padding:2px 0;font:600 18px var(--font-head);letter-spacing:0;color:var(--ink)}
 .ck-form .field input::placeholder{font-weight:500;color:#A4AAC4}
+
+/* Check-it-now: make the interactive section unmistakable (23 Oct 2026) */
+.check{background:radial-gradient(900px 340px at 50% 0,rgba(255,107,74,.16),transparent 70%)}
+.check-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:var(--ink);color:#fff;font:700 12px var(--font-body);letter-spacing:.09em;text-transform:uppercase;margin-bottom:14px}
+.check-badge i{width:9px;height:9px;border-radius:50%;background:#34D27B;box-shadow:0 0 0 0 rgba(52,210,123,.7);animation:ckpulse 1.6s infinite}
+@keyframes ckpulse{70%{box-shadow:0 0 0 9px rgba(52,210,123,0)}100%{box-shadow:0 0 0 0 rgba(52,210,123,0)}}
+.check-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto 12px;font:700 15px var(--font-head);color:#D6431F}
+.check-hint b{display:inline-block;animation:ckbounce 1.2s ease-in-out infinite}
+@keyframes ckbounce{50%{transform:translateY(5px)}}
+.check-card{border:2.5px solid var(--coral);box-shadow:0 0 0 7px rgba(255,107,74,.16),0 34px 70px -24px rgba(11,16,48,.5)}
+.check-tabs{background:var(--ink);border-bottom:0;padding:12px}
+.check-tabs button{color:#C9CFF5}
+.check-tabs button:hover{background:rgba(255,255,255,.08);color:#fff}
+.check-tabs button[aria-selected="true"]{background:var(--coral);color:#fff;box-shadow:0 8px 20px -8px rgba(255,107,74,.8)}
+.check-panel{padding:26px 22px}
+.ck-form .field{border:2px solid var(--indigo);box-shadow:0 0 0 4px var(--indigo-tint)}
+.ck-form .field:focus-within{border-color:var(--coral);box-shadow:0 0 0 4px rgba(255,107,74,.22)}
+.ck-form .btn-coral{animation:ckglow 2.4s ease-in-out infinite}
+@keyframes ckglow{50%{box-shadow:0 10px 30px -4px rgba(255,107,74,.95)}}
+@media (prefers-reduced-motion:reduce){.check-badge i,.check-hint b,.ck-form .btn-coral{animation:none}}
 .ck-out{margin-top:18px}
 .ck-out:empty{display:none}
 .ck-msg{padding:14px 16px;border-radius:14px;background:var(--mist);color:var(--ink);font-size:15px}
@@ -596,9 +616,11 @@ body.ck-noscroll{overflow:hidden}
 <section class="check" id="check" aria-labelledby="check-h">
   <div class="wrap">
     <div class="check-head">
+      <span class="check-badge"><i></i>Live · try it now</span>
       <h2 id="check-h">Check it right now.</h2>
       <p>PNR status, where your train is, and seats on any train. Free. A short ad plays first, and there are no banner ads. It is easier to see in the app.</p>
     </div>
+    <p class="check-hint"><b aria-hidden="true">&#8595;</b> Type your PNR or train number below and get the live answer <b aria-hidden="true">&#8595;</b></p>
     <div class="check-card">
       <div class="check-tabs" role="tablist" aria-label="What to check">
         <button role="tab" id="ck-t-pnr" aria-selected="true" aria-controls="ck-pnr" data-tab="pnr">PNR status</button>
