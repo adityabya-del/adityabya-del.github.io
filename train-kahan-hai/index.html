@@ -369,6 +369,18 @@ footer a:hover{color:#fff}
 .gate-msg{min-height:22px;font-size:14px;color:#B73A1E;margin-bottom:8px}
 .gate-actions{display:flex;flex-wrap:wrap;gap:10px}
 .gate-actions .btn{flex:1;padding:14px 18px;font-size:15px}
+.gate-tag{display:inline-block;padding:6px 12px;border-radius:999px;background:var(--coral-tint);color:#D6431F;font:700 11px var(--font-body);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.gate-card{text-align:center;border-top:6px solid var(--coral)}
+.gate-card h3{font:700 25px/1.15 var(--font-head);letter-spacing:-.02em;margin-bottom:6px}
+.gate-price{margin:2px 0 12px;font:700 68px/1 var(--font-head);color:var(--coral);letter-spacing:-.03em}
+.gate-price small{display:block;margin-top:6px;font:600 14px var(--font-body);color:var(--text);letter-spacing:0}
+.gate-card p{font-size:15px;line-height:1.5;color:var(--text);margin:0 0 16px}
+.gate-app-btn{display:block;padding:15px 18px;border-radius:999px;background:var(--coral);color:#fff;font:700 16px var(--font-body);text-decoration:none;box-shadow:0 10px 24px -8px rgba(255,107,74,.7)}
+.gate-show{display:block;width:100%;margin-top:10px;padding:13px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font:600 15px var(--font-body);cursor:pointer}
+.gate-show:disabled{opacity:.6;cursor:default}
+.gate-no{display:block;width:100%;margin-top:4px;padding:10px;border:0;background:none;color:var(--text);font:600 14px var(--font-body);cursor:pointer;text-decoration:underline}
+.gate-card .gate-fine{margin:10px 0 0;font-size:12px;line-height:1.4;color:#6B7194}
+
 @media (max-width:640px){
   .ck-form{grid-template-columns:1fr}
   .check-tabs button{font-size:14px;padding:11px 6px}
@@ -590,18 +602,15 @@ body.ck-noscroll{overflow:hidden}
 <!-- rewarded-ad gate + "easier in the app" pop-up -->
 <div class="gate" id="adGate" hidden>
   <div class="gate-card" role="dialog" aria-modal="true" aria-labelledby="gateH" aria-describedby="gateP">
-    <h3 id="gateH">Watch a short ad to see your result</h3>
-    <p id="gateP">ClearBerth's checks are free. A short ad pays for them. The result appears right after.</p>
-    <div class="gate-app">
-      <b>It is easier to see in the app.</b>
-      <span>Live alerts, your berth on a diagram, and everything in one place.</span>
-      <div class="gate-stores"><a class="badge" target="_blank" rel="noopener" href="https://apps.apple.com/in/app/clearberth/id6802574946"><img src="/shots/app-store-badge.svg" alt="Download on the App Store" height="40"></a><a class="badge" target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.aditya.clearberth"><img src="/shots/google-play-badge.png" alt="Get it on Google Play" height="40"></a></div>
-    </div>
+    <span class="gate-tag" id="gateT"></span>
+    <h3 id="gateH"></h3>
+    <div class="gate-price">₹29<small id="gateS"></small></div>
+    <p id="gateP"></p>
+    <a class="gate-app-btn" id="gateApp" target="_blank" rel="noopener"></a>
     <div class="gate-msg" id="gateMsg" role="status" aria-live="polite"></div>
-    <div class="gate-actions">
-      <button class="btn btn-coral" type="button" id="gateGo">Watch ad and see result</button>
-      <button class="btn btn-ghost" type="button" id="gateNo">Not now</button>
-    </div>
+    <button class="gate-show" type="button" id="gateGo"></button>
+    <button class="gate-no" type="button" id="gateNo"></button>
+    <p class="gate-fine" id="gateF"></p>
   </div>
 </div>
 
@@ -705,22 +714,42 @@ body.ck-noscroll{overflow:hidden}
 
   // The pop-up: opt in to the ad, and a nudge that the app is easier.
   var gate = $('adGate'), gateGo = $('gateGo'), gateNo = $('gateNo'), gateMsg = $('gateMsg');
+  var GT = (document.documentElement.lang || '').indexOf('hi') === 0 ? {
+    t: 'एक सफ़र के लिए सिर्फ़ ₹29', h: 'बार-बार चेक करना बंद करें। ट्रेन खुद आपको बताएगी।', s: 'एक सफ़र के लिए, एक बार',
+    p: 'ऐप में ₹29 एक बार दें: PNR बदलते ही या ट्रेन लेट होते ही फ़ोन पर सूचना आएगी। iPhone पर यह लॉक स्क्रीन पर दिखता है। कोई सब्सक्रिप्शन नहीं।',
+    app: 'ऐप में अलर्ट चालू करें', go: 'नतीजा दिखाएँ', no: 'अभी नहीं', load: 'विज्ञापन लोड हो रहा है...',
+    early: 'विज्ञापन बीच में बंद हो गया। नतीजा देखने के लिए उसे पूरा देखें।',
+    fine: 'नतीजे से पहले आपको एक छोटा विज्ञापन दिख सकता है। यही मुफ़्त जाँच का खर्च उठाता है।'
+  } : {
+    t: 'Alerts · ₹29 per journey', h: 'Stop refreshing. Let your train find you.', s: 'per journey, pay once',
+    p: 'Pay ₹29 once in the app and your phone is alerted when your PNR status changes or your train runs late. On iPhone it sits on your lock screen. No subscription.',
+    app: 'Get alerts in the app', go: 'Show my result', no: 'Not now', load: 'Loading ad...',
+    early: 'The ad closed early. Watch it to the end to see your result.',
+    fine: 'You may see a small ad before your result. It pays for the free checks.'
+  };
+  $('gateT').textContent = GT.t; $('gateH').textContent = GT.h; $('gateS').textContent = GT.s; $('gateP').textContent = GT.p;
+  $('gateApp').textContent = GT.app; gateGo.textContent = GT.go; gateNo.textContent = GT.no; $('gateF').textContent = GT.fine;
+  (function () {
+    var ios = /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent);
+    var a = document.querySelector(ios ? 'a[href*="apps.apple.com"]' : 'a[href*="play.google.com"]') || document.querySelector('a[href*="apps.apple.com"]');
+    if (a) $('gateApp').href = a.href;
+  })();
   var lastFocus = null;
   function askAd() {
     return new Promise(function (resolve) {
       lastFocus = document.activeElement;
-      gateMsg.textContent = ''; gateGo.disabled = false; gateGo.textContent = 'Watch ad and see result';
+      gateMsg.textContent = ''; gateGo.disabled = false; gateGo.textContent = GT.go;
       gate.hidden = false; gateGo.focus();
       function close(v) { gate.hidden = true; gateGo.onclick = gateNo.onclick = null; document.removeEventListener('keydown', onKey); if (lastFocus && lastFocus.focus) lastFocus.focus(); resolve(v); }
       function onKey(e) { if (e.key === 'Escape') close(false); }
       document.addEventListener('keydown', onKey);
       gateNo.onclick = function () { close(false); };
       gateGo.onclick = function () {
-        gateGo.disabled = true; gateGo.textContent = 'Loading ad...'; gateMsg.textContent = '';
+        gateGo.disabled = true; gateGo.textContent = GT.load; gateMsg.textContent = '';
         playRewarded().then(function (r) {
           if (r === 'granted' || r === 'failopen') return close(true);
-          gateGo.disabled = false; gateGo.textContent = 'Watch ad and see result';
-          gateMsg.textContent = 'The ad closed early. Watch it to the end to see your result.';
+          gateGo.disabled = false; gateGo.textContent = GT.go;
+          gateMsg.textContent = GT.early;
         });
       };
     });
@@ -1095,71 +1124,4 @@ body.ck-noscroll{overflow:hidden}
 })();
 </script>
 <script>try{document.getElementById('ck-t-live').click()}catch(e){}</script>
-<style>
-.alp{position:fixed;inset:0;z-index:2147483100;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(11,16,48,.62)}
-.alp.on{display:flex}
-.alp-box{position:relative;max-width:440px;width:100%;background:#fff;border-radius:24px;padding:28px 24px 22px;box-shadow:0 40px 90px -20px rgba(11,16,48,.7);text-align:center;border-top:6px solid #FF6B4A}
-.alp-tag{display:inline-block;padding:6px 12px;border-radius:999px;background:#FFE9E3;color:#D6431F;font:700 11px Inter,system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
-.alp-box h3{font:700 25px/1.15 Poppins,Inter,system-ui,sans-serif;color:#0B1030;letter-spacing:-.02em;margin:0 0 10px}
-.alp-price{margin:2px 0 14px;font:700 68px/1 Poppins,Inter,system-ui,sans-serif;color:#FF6B4A;letter-spacing:-.03em}
-.alp-price small{display:block;margin-top:6px;font:600 14px Inter,system-ui,sans-serif;color:#3B4166;letter-spacing:0}
-.alp-box p{font:400 15px/1.5 Inter,system-ui,sans-serif;color:#3B4166;margin:0 0 18px}
-.alp-go{display:block;width:100%;padding:15px 18px;border-radius:999px;background:#FF6B4A;color:#fff;font:700 16px Inter,system-ui,sans-serif;text-decoration:none;box-shadow:0 10px 24px -8px rgba(255,107,74,.7)}
-.alp-skip{display:block;width:100%;margin-top:10px;padding:12px;border:0;background:none;color:#3B4166;font:600 14px Inter,system-ui,sans-serif;cursor:pointer;text-decoration:underline}
-</style>
-<div class="alp" id="alp" role="dialog" aria-modal="true" aria-labelledby="alpH">
-  <div class="alp-box">
-    <span class="alp-tag" id="alpT"></span>
-    <h3 id="alpH"></h3>
-    <div class="alp-price">₹29<small id="alpS"></small></div>
-    <p id="alpP"></p>
-    <a class="alp-go" id="alpGo" target="_blank" rel="noopener"></a>
-    <button class="alp-skip" id="alpSkip" type="button"></button>
-  </div>
-</div>
-<script>
-/* Before the first check in a visit, offer the alerts (shown once per visit). */
-(function(){
-  var hi = (document.documentElement.lang || '').indexOf('hi') === 0;
-  var L = hi ? {
-    t: 'एक सफ़र के लिए सिर्फ़ ₹29', h: 'बार-बार चेक करना बंद करें। ट्रेन खुद आपको बताएगी।',
-    p: 'ऐप में ₹29 एक बार दें: PNR बदलते ही या ट्रेन लेट होते ही फ़ोन पर सूचना आएगी। iPhone पर यह लॉक स्क्रीन पर दिखता है। कोई सब्सक्रिप्शन नहीं।',
-    go: 'ऐप में अलर्ट चालू करें', per: 'एक सफ़र के लिए, एक बार', skip: 'छोड़ें, नतीजा दिखाएँ'
-  } : {
-    t: 'Alerts · ₹29 per journey', h: 'Stop refreshing. Let your train find you.',
-    p: 'Pay ₹29 once in the app and your phone is alerted when your PNR status changes or your train runs late. On iPhone it sits on your lock screen. No subscription.',
-    go: 'Get alerts in the app', per: 'per journey, pay once', skip: 'Skip, show my result'
-  };
-  var $ = function (id) { return document.getElementById(id); };
-  var box = $('alp'); if (!box) return;
-  $('alpT').textContent = L.t; $('alpH').textContent = L.h; $('alpP').textContent = L.p;
-  $('alpS').textContent = L.per; $('alpGo').textContent = L.go; $('alpSkip').textContent = L.skip;
-  var ios = /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent);
-  var a = document.querySelector(ios ? 'a[href*="apps.apple.com"]' : 'a[href*="play.google.com"]') || document.querySelector('a[href*="apps.apple.com"]');
-  if (a) $('alpGo').href = a.href;
-  var seen = false; // shown before every check (a skip lets that one check through)
-  var pending = null, go = false;
-  function v(id){ var el = $(id); return el ? el.value.trim() : ''; }
-  function ready(form){
-    if (form.id === 'ckPnrForm') return /^\d{10}$/.test(v('ckPnr').replace(/\D/g, ''));
-    if (form.id === 'ckLiveForm') return /^\d{5}$/.test(v('ckTrain').replace(/\D/g, ''));
-    return !!(v('ckFrom') && v('ckTo'));
-  }
-  function close(){
-    box.classList.remove('on');
-    var f = pending; pending = null;
-    if (f) { go = true; try { f.requestSubmit ? f.requestSubmit() : f.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true })); } catch (e) {} go = false; }
-  }
-  document.addEventListener('submit', function (e) {
-    var f = e.target;
-    if (go || !f || !/^ck(Pnr|Live|Seats)Form$/.test(f.id) || !ready(f)) return;
-    e.preventDefault(); e.stopImmediatePropagation();
-    pending = f; box.classList.add('on'); $('alpGo').focus();
-  }, true);
-  $('alpSkip').addEventListener('click', close);
-  $('alpGo').addEventListener('click', function () { setTimeout(close, 50); });
-  box.addEventListener('click', function (e) { if (e.target === box) close(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('on')) close(); });
-})();
-</script>
 </body></html>
