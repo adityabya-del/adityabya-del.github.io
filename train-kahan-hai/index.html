@@ -930,7 +930,21 @@ body.ck-noscroll{overflow:hidden}
     return { st: a.st[i], label: a.kind === 'arrived at' ? 'At' : a.kind === 'departed from' ? 'Left' : 'Passed' };
   }
 
-  function drawMap(holder, a, no) {
+  // RailRadar's real-time GPS position of the train. Only used when RailRadar says
+  // real-time tracking is live, the report is under 20 minutes old and the point is
+  // inside India; otherwise null and the map shows the last reported station.
+  function livePoint(x) {
+    var p = x && x.position;
+    if (!p || p.is_live !== true) return null;
+    var lat = Number(p.lat), lng = Number(p.lng);
+    if (p.lat == null || p.lng == null || !isFinite(lat) || !isFinite(lng) || lat < 6 || lat > 37 || lng < 67 || lng > 98) return null;
+    var t = x.report_fresh_at ? new Date(x.report_fresh_at).getTime() : NaN;
+    if (!isFinite(t) || Date.now() - t > 20 * 60000 || t - Date.now() > 60000) return null;
+    var hhmm = new Date(t).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
+    return { at: [lat, lng], time: hhmm };
+  }
+
+  function drawMap(holder, a, no, x) {
     var f = a.frac == null ? 0.5 : a.frac;
     var A = a.first, B = a.end;
     var pct = Math.round(f * 100);
@@ -943,6 +957,7 @@ body.ck-noscroll{overflow:hidden}
     var note = el('div', 'ck-mapnote', 'The dot shows roughly how far along the journey the train is. The details below are the real data.');
     holder.appendChild(note);
     var ls = lastStation(a);
+    var live = livePoint(x);
     var lsCode = ls ? String(ls.st.station_code || '').toUpperCase() : '';
     Promise.all([fetchRoute(no), loadLeaflet()]).then(function (v) {
       var route = v[0]; if (!window.L) return null;
@@ -966,13 +981,17 @@ body.ck-noscroll{overflow:hidden}
       else L.polyline(m.line, { color: '#3654FF', weight: 4, dashArray: '2 8', lineCap: 'round' }).addTo(map);
       L.circleMarker(m.p1, { radius: 7, color: '#fff', weight: 3, fillColor: '#0B1030', fillOpacity: 1 }).bindTooltip(titleCase(A.station_name), { permanent: true, direction: 'top', className: 'ck-tip' }).addTo(map);
       L.circleMarker(m.p2, { radius: 7, color: '#fff', weight: 3, fillColor: '#0B1030', fillOpacity: 1 }).bindTooltip(titleCase(B.station_name), { permanent: true, direction: 'top', className: 'ck-tip' }).addTo(map);
-      if (m.at && ls) {
+      if (live) {
+        L.circleMarker(live.at, { radius: 10, color: '#fff', weight: 3, fillColor: '#FF6B4A', fillOpacity: 1 }).bindTooltip('Live position', { permanent: true, direction: 'bottom', className: 'ck-tip' }).addTo(map);
+        note.textContent = "The orange dot is the train's live GPS position, reported at " + live.time + ". The details below are the real data.";
+      } else if (m.at && ls) {
         L.circleMarker(m.at, { radius: 10, color: '#fff', weight: 3, fillColor: '#FF6B4A', fillOpacity: 1 }).bindTooltip(ls.label + ' ' + titleCase(ls.st.station_name), { permanent: true, direction: 'bottom', className: 'ck-tip' }).addTo(map);
         note.textContent = 'The orange dot is the station the train was last reported at. The details below are the real data.';
       } else {
         note.textContent = 'The details below are the real data.';
       }
       var bounds = L.latLngBounds(m.line), full = false, fsBtn = null;
+      if (live) bounds.extend(live.at);
       map.setView(m.p1, 5);
       function refit() { map.invalidateSize(); map.fitBounds(bounds, { padding: [40, 40], animate: false }); }
       // Full-screen map: the map covers the whole window; "Close" or Esc brings it back.
@@ -1004,7 +1023,7 @@ body.ck-noscroll{overflow:hidden}
     if (x.diversion && x.diversion.message) out.appendChild(el('div', 'ck-msg err', x.diversion.message));
     if (x.partialCancel && x.partialCancel.message) out.appendChild(el('div', 'ck-msg', x.partialCancel.message));
     if (x.rescheduled && x.rescheduled.message) out.appendChild(el('div', 'ck-msg', x.rescheduled.message));
-    if (a.first && a.end && !x.cancelled) { var mh = el('div', 'ck-maphold'); out.appendChild(mh); drawMap(mh, a, x.train_number || no); }
+    if (a.first && a.end && !x.cancelled) { var mh = el('div', 'ck-maphold'); out.appendChild(mh); drawMap(mh, a, x.train_number || no, x); }
 
     var rows = el('div', 'ck-rows');
     var now = a.notStarted ? 'Yet to start' : (a.where ? (a.kind === 'arrived at' ? 'At ' : a.kind === 'departed from' ? 'Left ' : 'Passed ') + titleCase(a.where) : '');
