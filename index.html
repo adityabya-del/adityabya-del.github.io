@@ -1445,8 +1445,8 @@ body.ck-noscroll{overflow:hidden}
       L.circleMarker(m.p2, { radius: 7, color: '#fff', weight: 3, fillColor: '#0B1030', fillOpacity: 1 }).bindTooltip(titleCase(B.station_name), { permanent: true, direction: 'top', className: 'ck-tip' }).addTo(map);
       var est = (!live && m.real) ? estimatePoint(x, m.route) : null;
       if (live) {
-        L.circleMarker(live.at, { radius: 10, color: '#fff', weight: 3, fillColor: '#FF6B4A', fillOpacity: 1 }).bindTooltip('Live position', { permanent: true, direction: 'bottom', className: 'ck-tip' }).addTo(map);
-        note.textContent = "The orange dot is the train's live GPS position, reported at " + live.time + ". The details below are the real data.";
+        L.circleMarker(live.at, { radius: 10, color: '#fff', weight: 3, fillColor: '#FF6B4A', fillOpacity: 1 }).bindTooltip('Train position', { permanent: true, direction: 'bottom', className: 'ck-tip' }).addTo(map);
+        note.textContent = "The orange dot is the train's position as reported at " + live.time + ", placed along the track. The details below are the real data.";
       } else if (est) {
         L.circleMarker(est.at, { radius: 10, color: '#fff', weight: 3, fillColor: '#FF6B4A', fillOpacity: 1 }).bindTooltip('Approximate position', { permanent: true, direction: 'bottom', className: 'ck-tip' }).addTo(map);
         note.textContent = "The orange dot is the train's approximate position on the track, worked out from the distance it has covered as reported at " + est.time + ". The details below are the real data.";
