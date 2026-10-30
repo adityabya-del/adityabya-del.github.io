@@ -1335,7 +1335,7 @@ body.ck-noscroll{overflow:hidden}
     return { st: a.st[i], label: a.kind === 'arrived at' ? 'At' : a.kind === 'departed from' ? 'Left' : 'Passed' };
   }
 
-  // RailRadar's real-time GPS position of the train. Only used when RailRadar says
+  // The train's reported real-time position. Only used when the data says
   // real-time tracking is live, the report is under 20 minutes old and the point is
   // inside India; otherwise null and the map shows the last reported station.
   function livePoint(x) {
@@ -1349,8 +1349,8 @@ body.ck-noscroll{overflow:hidden}
     return { at: [lat, lng], time: hhmm };
   }
 
-  // Estimated position ON the track line (used when RailRadar gives no GPS point).
-  // Uses RailRadar's real distance from the origin (position.km): finds the two
+  // Estimated position ON the track line (used when no position point is given).
+  // Uses the real distance from the origin (position.km): finds the two
   // halts either side of it, snaps both onto the route line, and walks along the
   // line between them in proportion to the distance. The result is always a
   // point of the line itself. Returns null whenever anything looks wrong.
