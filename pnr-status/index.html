@@ -922,7 +922,8 @@ body.ck-noscroll{overflow:hidden}
   // Route line + station coordinates from the web-check function (kept in the
   // browser for 30 days; a train's route does not change).
   function fetchRoute(no) {
-    var k = 'cb_route_' + no;
+    var k = 'cb_route2_' + no; // v2: full-detail line (v1 was thinned to ~600 points)
+    try { localStorage.removeItem('cb_route_' + no); } catch (e) {}
     try { var c = JSON.parse(localStorage.getItem(k) || 'null'); if (c && c.r && c.t > Date.now() - 30 * 864e5) return Promise.resolve(c.r); } catch (e) {}
     return fetch(CFG.API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'route', trainNo: no }) })
       .then(function (r) { return r.json(); })
