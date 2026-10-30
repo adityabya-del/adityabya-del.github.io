@@ -1348,6 +1348,64 @@ body.ck-noscroll{overflow:hidden}
     return { at: [lat, lng], time: hhmm };
   }
 
+  // Estimated position ON the track line (used when RailRadar gives no GPS point).
+  // Uses RailRadar's real distance from the origin (position.km): finds the two
+  // halts either side of it, snaps both onto the route line, and walks along the
+  // line between them in proportion to the distance. The result is always a
+  // point of the line itself. Returns null whenever anything looks wrong.
+  function estimatePoint(x, route) {
+    try {
+      var p = x && x.position;
+      if (!p || p.is_live !== true || !route || !route.line || !route.stops) return null;
+      var km = Number(p.km);
+      if (p.km == null || !isFinite(km) || km < 0) return null;
+      var t = x.report_fresh_at ? new Date(x.report_fresh_at).getTime() : NaN;
+      if (!isFinite(t) || Date.now() - t > 20 * 60000 || t - Date.now() > 60000) return null;
+      var line = route.line, n = line.length;
+      if (n < 2) return null;
+      var byCode = {};
+      route.stops.forEach(function (s) { byCode[s.code] = s; });
+      // only halts whose position is known on the route can anchor the estimate
+      var st = (x.stations || []).filter(function (s) { return s && isFinite(Number(s.distance)) && byCode[String(s.station_code || '').toUpperCase()]; });
+      if (st.length < 2) return null;
+      var rad = Math.PI / 180;
+      function hav(a, b) {
+        var dLat = (b[0] - a[0]) * rad, dLng = (b[1] - a[1]) * rad;
+        var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a[0] * rad) * Math.cos(b[0] * rad) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        return 6371 * 2 * Math.asin(Math.min(1, Math.sqrt(h)));
+      }
+      var cum = [0], i;
+      for (i = 1; i < n; i++) cum.push(cum[i - 1] + hav(line[i - 1], line[i]));
+      // previous halt = last halt at or before km; next halt = first halt after km
+      var pi = -1;
+      for (i = 0; i < st.length; i++) { if (Number(st[i].distance) <= km) pi = i; else break; }
+      if (pi < 0 || pi >= st.length - 1) return null;
+      var P = st[pi], N = st[pi + 1];
+      var sp = byCode[String(P.station_code || '').toUpperCase()], sn = byCode[String(N.station_code || '').toUpperCase()];
+      if (!sp || !sn) return null;
+      function snap(pt, from) {
+        var best = -1, bd = 1e9;
+        for (var j = from; j < n; j++) { var d = hav(pt, line[j]); if (d < bd) { bd = d; best = j; } }
+        return bd <= 5 ? best : -1;
+      }
+      var ip = snap([sp.lat, sp.lng], 0);
+      if (ip < 0) return null;
+      var inx = snap([sn.lat, sn.lng], ip + 1);
+      if (inx <= ip) return null;
+      var dP = Number(P.distance), dN = Number(N.distance);
+      if (!(dN > dP)) return null;
+      var arc = cum[inx] - cum[ip], rail = dN - dP;
+      if (arc <= 0 || arc / rail < 0.6 || arc / rail > 1.6) return null; // line and railway km disagree: do not guess
+      var f = Math.max(0, Math.min(1, (km - dP) / rail));
+      var target = cum[ip] + f * arc, k = ip;
+      while (k < inx - 1 && cum[k + 1] < target) k++;
+      var seg = cum[k + 1] - cum[k], g = seg > 0 ? Math.max(0, Math.min(1, (target - cum[k]) / seg)) : 0;
+      var at = [line[k][0] + (line[k + 1][0] - line[k][0]) * g, line[k][1] + (line[k + 1][1] - line[k][1]) * g];
+      var hhmm = new Date(t).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
+      return { at: at, time: hhmm };
+    } catch (e) { return null; }
+  }
+
   function drawMap(holder, a, no, x) {
     var f = a.frac == null ? 0.5 : a.frac;
     var A = a.first, B = a.end;
@@ -1369,7 +1427,7 @@ body.ck-noscroll{overflow:hidden}
         var s0 = route.stops[0], s1 = route.stops[route.stops.length - 1], hit = null;
         route.stops.forEach(function (s) { if (s.code === lsCode) hit = s; });
         var pAt = hit ? Promise.resolve([hit.lat, hit.lng]) : (ls ? geocode(lsCode, ls.st.station_name) : Promise.resolve(null));
-        return pAt.then(function (at) { return { line: route.line, p1: [s0.lat, s0.lng], p2: [s1.lat, s1.lng], at: at, real: true }; });
+        return pAt.then(function (at) { return { line: route.line, p1: [s0.lat, s0.lng], p2: [s1.lat, s1.lng], at: at, real: true, route: route }; });
       }
       // No route available: old behaviour (straight line between the end stations).
       return Promise.all([geocode(A.station_code, A.station_name), geocode(B.station_code, B.station_name), ls ? geocode(lsCode, ls.st.station_name) : Promise.resolve(null)]).then(function (g) {
@@ -1385,9 +1443,13 @@ body.ck-noscroll{overflow:hidden}
       else L.polyline(m.line, { color: '#3654FF', weight: 4, dashArray: '2 8', lineCap: 'round' }).addTo(map);
       L.circleMarker(m.p1, { radius: 7, color: '#fff', weight: 3, fillColor: '#0B1030', fillOpacity: 1 }).bindTooltip(titleCase(A.station_name), { permanent: true, direction: 'top', className: 'ck-tip' }).addTo(map);
       L.circleMarker(m.p2, { radius: 7, color: '#fff', weight: 3, fillColor: '#0B1030', fillOpacity: 1 }).bindTooltip(titleCase(B.station_name), { permanent: true, direction: 'top', className: 'ck-tip' }).addTo(map);
+      var est = (!live && m.real) ? estimatePoint(x, m.route) : null;
       if (live) {
         L.circleMarker(live.at, { radius: 10, color: '#fff', weight: 3, fillColor: '#FF6B4A', fillOpacity: 1 }).bindTooltip('Live position', { permanent: true, direction: 'bottom', className: 'ck-tip' }).addTo(map);
         note.textContent = "The orange dot is the train's live GPS position, reported at " + live.time + ". The details below are the real data.";
+      } else if (est) {
+        L.circleMarker(est.at, { radius: 10, color: '#fff', weight: 3, fillColor: '#FF6B4A', fillOpacity: 1 }).bindTooltip('Approximate position', { permanent: true, direction: 'bottom', className: 'ck-tip' }).addTo(map);
+        note.textContent = "The orange dot is the train's approximate position on the track, worked out from the distance it has covered as reported at " + est.time + ". The details below are the real data.";
       } else if (m.at && ls) {
         L.circleMarker(m.at, { radius: 10, color: '#fff', weight: 3, fillColor: '#FF6B4A', fillOpacity: 1 }).bindTooltip(ls.label + ' ' + titleCase(ls.st.station_name), { permanent: true, direction: 'bottom', className: 'ck-tip' }).addTo(map);
         note.textContent = 'The orange dot is the station the train was last reported at. The details below are the real data.';
@@ -1396,6 +1458,7 @@ body.ck-noscroll{overflow:hidden}
       }
       var bounds = L.latLngBounds(m.line), full = false, fsBtn = null;
       if (live) bounds.extend(live.at);
+      if (est) bounds.extend(est.at);
       map.setView(m.p1, 5);
       function refit() { map.invalidateSize(); map.fitBounds(bounds, { padding: [40, 40], animate: false }); }
       // Full-screen map: the map covers the whole window; "Close" or Esc brings it back.
