@@ -834,6 +834,7 @@ body.ck-noscroll{overflow:hidden}
           row.appendChild(right); box.appendChild(row);
         });
         out.appendChild(box);
+        if ((x.passenger_details || []).some(function (p) { return /^[A-Za-z]$/.test(String(p.coach || '').trim()); })) out.appendChild(el('div', 'ck-sub', 'Check Coach number after chart is prepared and check station board for position of H1 or H2'));
         if (x.chart_status) out.appendChild(el('div', 'ck-sub', 'Chart: ' + x.chart_status));
         appNote(out);
         return true;
