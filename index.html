@@ -372,6 +372,27 @@ footer a:hover{color:#fff}
 .ck-pax{display:grid;gap:8px;margin:12px 0}
 .ck-pax div{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;font-size:15px;color:var(--ink)}
 .ck-pax b{font-weight:600}
+/* class banner on the PNR result: gold for 1A/EC, silver for 2A, indigo for 3A/CC, nothing for the rest */
+.ck-tier{position:relative;overflow:hidden;border-radius:18px;padding:16px 18px;margin:0 0 12px}
+.ck-tier .k{display:block;font:600 11px var(--font-head);letter-spacing:.22em;text-transform:uppercase}
+.ck-tier .h{display:block;font:600 17px var(--font-head);margin-top:6px;letter-spacing:-.01em}
+.ck-tier p{font-size:14px;margin:8px 0 0;line-height:1.5}
+.ck-tier .more{margin-top:12px;padding-top:12px;border-top:1px solid currentColor;border-top-color:rgba(226,193,110,.38)}
+.ck-tier .more b{font-weight:600}
+.ck-tier.t1{color:#EFE3C2;background:linear-gradient(135deg,#0A0E2B 0%,#1B2260 62%,#2A2F73 100%);border:1.5px solid #C9A24B;box-shadow:0 18px 40px -18px rgba(201,162,75,.6),inset 0 0 0 1px rgba(255,255,255,.07)}
+.ck-tier.t1::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,236,170,.14) 50%,transparent 65%);pointer-events:none}
+.ck-tier.t1 .k{color:#E2C16E}
+.ck-tier.t1 .k::before,.ck-tier.t1 .k::after{content:"\2726";margin:0 .6em;font-size:9px;letter-spacing:0;vertical-align:1px}
+.ck-tier.t1 .h{color:#fff;font-size:19px}
+.ck-tier.t1 .more b{color:#E2C16E}
+.ck-tier.t2{color:var(--text);background:linear-gradient(135deg,#F9FAFD,#E8EBF5);border:1.5px solid #B9C0D6;box-shadow:0 10px 26px -16px rgba(11,16,48,.35)}
+.ck-tier.t2 .k{color:#6B7391}
+.ck-tier.t2 .h{color:var(--ink)}
+.ck-tier.t3{color:var(--text);background:var(--mist);border:1.5px solid var(--line);border-left:4px solid var(--indigo)}
+.ck-tier.t3 .k{color:var(--indigo)}
+.ck-tier.t3 .h{color:var(--ink);font-size:16px}
+.ck-pax.t1 div{border-color:#E3CE96;background:linear-gradient(180deg,#FFFEF9,#FBF4E1)}
+.ck-pax.t2 div{border-color:#C9CFE2;background:linear-gradient(180deg,#fff,#F6F7FB)}
 .chip{display:inline-block;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:600;background:var(--mist);color:var(--ink)}
 .chip.ok{background:#DDF5E7;color:#0E7A3E}
 .chip.warn{background:#FFF1D6;color:#8A5A00}
@@ -1217,11 +1238,33 @@ body.ck-noscroll{overflow:hidden}
         var x = d.response; clear(out);
         out.appendChild(el('div', 'ck-title', (x.train_no || '') + ' ' + (x.train_name || '')));
         out.appendChild(el('div', 'ck-sub', (x.boarding_station || x.boarding_station_code || '') + ' to ' + (x.reservation_upto || x.reservation_upto_code || '') + (x.doj ? ' - ' + x.doj : '') + (x.class ? ' - ' + x.class : '')));
-        var box = el('div', 'ck-pax');
+        var kl = String(x['class'] || '').toUpperCase().trim();
+        var tier = (kl === '1A' || kl === 'EC') ? 't1' : kl === '2A' ? 't2' : (kl === '3A' || kl === 'CC') ? 't3' : '';
+        var TIER = { '1A': ['First AC', 'First AC (1A)'], 'EC': ['Executive Chair Car', 'Executive Chair Car (EC)'], '2A': ['AC 2 Tier', 'AC 2 Tier (2A)'], '3A': ['AC 3 Tier', 'AC 3 Tier (3A)'], 'CC': ['AC Chair Car', 'AC Chair Car (CC)'] };
+        if (tier) {
+          var tb = el('div', 'ck-tier ' + tier);
+          tb.appendChild(el('span', 'k', TIER[kl][0]));
+          tb.appendChild(el('span', 'h', 'Good choice. You are travelling ' + TIER[kl][1] + '.'));
+          if (kl === '1A') {
+            tb.appendChild(el('p', null, 'Lockable cabins, each with its own door.'));
+            var cabs = {}, ncab = 0;
+            (x.passenger_details || []).forEach(function (p) { var c = String(p.coach || '').trim().toUpperCase(); if (/^[A-Z]$/.test(c) && !cabs[c]) { cabs[c] = 1; ncab++; } });
+            if (ncab > 1) {
+              var more = el('div', 'more');
+              more.appendChild(el('p', null, 'But we see that your seats have not been allocated together.'));
+              more.appendChild(el('p', null, 'Next time, send a written request 24 hours in advance to the DRM Office / Chief Supervisor of your source station.'));
+              var src = el('p'); src.appendChild(el('b', null, 'Source station: ')); src.appendChild(document.createTextNode('the station where your journey starts, where you board the train.'));
+              more.appendChild(src);
+              tb.appendChild(more);
+            }
+          }
+          out.appendChild(tb);
+        }
+        var box = el('div', 'ck-pax' + (tier === 't1' || tier === 't2' ? ' ' + tier : ''));
         (x.passenger_details || []).forEach(function (p, i) {
           var row = el('div'); row.appendChild(el('b', null, 'Passenger ' + (p.number || i + 1)));
           var right = el('span'); right.appendChild(chipFor(p.current_status));
-          if (p.coach || p.berth) right.appendChild(el('span', null, '  ' + [p.coach, p.berth].filter(Boolean).join(' / ')));
+          if (p.coach || p.berth) right.appendChild(el('span', null, '  ' + (/^[A-Za-z]$/.test(String(p.coach || '').trim()) && p.berth ? 'Cabin ' + String(p.coach).trim().toUpperCase() + ', Berth ' + p.berth : [p.coach, p.berth].filter(Boolean).join(' / '))));
           row.appendChild(right); box.appendChild(row);
         });
         out.appendChild(box);
