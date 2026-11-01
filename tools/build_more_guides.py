@@ -50,7 +50,7 @@ R = '&#8377;'
 
 cancel = '''
 <h2>Can you cancel an e-ticket online?</h2>
-<p>IRCTC says a confirmed e-ticket can be cancelled online until the chart is prepared. How much you lose depends on how long before departure you cancel. Once the chart is prepared, a normal user cannot cancel online and must file a TDR (Ticket Deposit Receipt) online instead.</p>
+<p>IRCTC says an e-ticket can be cancelled online until the chart is prepared; cancellations are not allowed at railway counters. A cancelled ticket's refund goes back to the account used for booking. How much you lose depends on how long before departure you cancel. Once the chart is prepared, a normal user cannot cancel online and must file a TDR (Ticket Deposit Receipt) online instead.</p>
 <h2>Charges for a confirmed ticket</h2>
 <p>IRCTC's cancellation page lists these charges per passenger.</p>
 <div class="tt"><table><thead><tr><th>When you cancel</th><th>Charge</th></tr></thead><tbody>
@@ -58,7 +58,7 @@ cancel = '''
 <tr><td>Within 48 hours and up to 12 hours before departure</td><td>25%% of the fare, subject to the flat minimum above</td></tr>
 <tr><td>Less than 12 hours and up to 4 hours before departure (or until chart preparation, if earlier)</td><td>50%% of the fare, subject to minimum charges</td></tr>
 </tbody></table></div>
-<p style="margin-top:10px;font-size:14px">For trains that depart before noon, the chart is usually prepared the previous night.</p>
+<p style="margin-top:10px;font-size:14px">For trains starting up to 12 noon, IRCTC says the chart is usually prepared the previous night.</p>
 <h2>After the chart is prepared</h2>
 %(after)s
 <h2>Party and family tickets</h2>
@@ -111,9 +111,9 @@ vikalp = '''
                          'No extra charge and no refund of any fare difference; a confirmed berth is not guaranteed.')}
 
 GUIDES = [
-    ('/guides/cancel-irctc-e-ticket/', 'How to cancel an IRCTC e-ticket: charges, TDR and refund timing',
+    ('/guides/cancel-irctc-e-ticket/', 'How to cancel an IRCTC e-ticket: charges, TDR and deadlines',
      "Cancellation charges by time before departure, what a TDR is, and the rules for RAC, party, Tatkal and cancelled trains, from IRCTC's cancellation page.",
-     'Cancel an e-ticket', 'How to cancel an IRCTC e-ticket: charges, TDR and refund timing',
+     'Cancel an e-ticket', 'How to cancel an IRCTC e-ticket: charges, TDR and deadlines',
      'What it costs to cancel an e-ticket on IRCTC, how the charge changes as departure gets closer, and what to do once the chart is prepared.',
      'Charges by time before departure, and the rules after the chart.', cancel,
      [("IRCTC: E-ticket cancellation", "https://contents.irctc.co.in/en/eticketCancel.html")]),
