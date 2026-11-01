@@ -93,7 +93,7 @@ vikalp = '''
 <h2>Charges</h2>
 <p>IRCTC says no extra charge applies, and there is no refund for any fare difference, Tatkal charges included. Cancellation charges follow the berth and train status on the alternate train. A passenger who cancels after allotment is treated as confirmed, so the standard cancellation rules apply (see <a @@A@@ href="/guides/cancel-irctc-e-ticket/">how IRCTC e-ticket cancellation works</a>). If you do not travel on the alternate train, you can claim a refund by filing a TDR.</p>
 <h2>Check your PNR twice</h2>
-<p>IRCTC advises checking PNR status after charting, and again after the alternate train's chart is prepared, because last-minute changes can happen. Once a train list is selected it can be updated only once, and the scheme cannot be changed after you opt in. What happens to a ticket that stays waitlisted is in our <a @@A@@ href="/guides/waitlisted-e-ticket-after-chart/">waitlist guide</a>.</p>
+<p>IRCTC advises checking PNR status after charting, and again after the alternate train's chart is prepared, because, in rare cases, a last-minute change in the alternate train's composition can mean an allotted passenger is dropped or re-allotted. Once a train list is selected it can be updated only once, and the scheme cannot be changed after you opt in. What happens to a ticket that stays waitlisted is in our <a @@A@@ href="/guides/waitlisted-e-ticket-after-chart/">waitlist guide</a>.</p>
 <h2>In short</h2>
 %(short)s
 <div class="note">The IRCTC VIKALP document shows no date. Check IRCTC for the current terms before you opt in.</div>
@@ -105,7 +105,9 @@ vikalp = '''
                         'Boarding or destination stations may shift to nearby cluster stations.',
                         'Transferred passengers appear on a separate list, not the original waitlist charts.',
                         'If you are allotted an alternate berth, you cannot board the original train.',
-                        'Journey changes are not allowed after allotment. You would need to cancel and rebook.'),
+                        'Journey changes are not allowed after allotment. You would need to cancel and rebook.',
+                        'You can travel in the alternate train on the original ERS/SMS.',
+                        'Once allotted, you are treated as a normal passenger in the alternate train and are eligible for upgradation.'),
        'short': UL % li('Up to seven alternate trains, departing 30 minutes to 72 hours after the original.',
                          'The whole PNR moves together, in the same class, or not at all.',
                          'No extra charge and no refund of any fare difference; a confirmed berth is not guaranteed.')}
