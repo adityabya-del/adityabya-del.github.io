@@ -1483,6 +1483,7 @@ body.ck-noscroll{overflow:hidden}
       if (!m || !window.L) return;
       var box = el('div', 'ck-map'); holder.insertBefore(box, plain); plain.style.display = 'none';
       var L = window.L, map = L.map(box, { scrollWheelZoom: false, attributionControl: true, zoomControl: true });
+      L.control.scale({ position: 'bottomright', metric: true, imperial: false, maxWidth: 110 }).addTo(map);
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 17, attribution: '&copy; OpenStreetMap' }).addTo(map);
       if (m.real) L.polyline(m.line, { color: '#3654FF', weight: 4, lineCap: 'round', lineJoin: 'round' }).addTo(map);
       else L.polyline(m.line, { color: '#3654FF', weight: 4, dashArray: '2 8', lineCap: 'round' }).addTo(map);
