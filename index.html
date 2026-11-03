@@ -1680,7 +1680,7 @@ body.ck-noscroll{overflow:hidden}
   window.addEventListener('load', function(){ go(); setTimeout(go, 250); });
 })();
 </script>
-<!-- Visit counter (start page only): total visits since analytics started. Hidden until the number loads. -->
+<!-- Counter (start page only): total page views since analytics started. Hidden until the number loads. -->
 <div id="visitCounter" hidden style="position:fixed;right:12px;bottom:12px;z-index:50;background:rgba(20,24,43,.82);color:#fff;font:600 12px/1 Inter,system-ui,sans-serif;padding:7px 11px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.25);pointer-events:none"></div>
 <script>
 (function(){
@@ -1689,7 +1689,7 @@ body.ck-noscroll{overflow:hidden}
     .then(function(r){return r.json();})
     .then(function(d){
       if(!d || typeof d.visits!=='number' || d.visits<=0) return;
-      el.textContent='\u{1F441} '+d.visits.toLocaleString('en-IN')+' visits';
+      el.textContent='\u{1F441} '+d.visits.toLocaleString('en-IN')+' page views';
       el.hidden=false;
     }).catch(function(){});
 })();
