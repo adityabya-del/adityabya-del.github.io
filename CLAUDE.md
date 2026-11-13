@@ -31,6 +31,6 @@ It skips what is already there, so running it twice is safe.
 
 ## Train page banners: re-run after ANY rebuild of the train pages
 
-On 13 Nov 2026 `tools/add_train_banners.py` put a banner image (made by the site owner, saved as /shots/train-banner-1.jpg to 6.jpg) under the first paragraph of every /train/<number>/ page, rotating 1,2,3,4,5,6,1,2... in train-number order. Hindi /hi/train/ pages and the /train/ list page have no banner. The generators were NOT changed, so a rebuild removes the banners. After any rebuild run:
+On 13 Nov 2026 `tools/add_train_banners.py` put a banner image (made by the site owner, saved as /shots/train-banner-1.jpg to 6.jpg) under the first paragraph of every /train/<number>/ page, rotating 1,2,3,4,5,6,1,2... in train-number order. The same banners are on the Hindi /hi/train/<number>/ pages (same banner as the English page) and on the /train/ list page (banner 1). The generators were NOT changed, so a rebuild removes the banners. After any rebuild run:
    `python3 tools/add_train_banners.py --write`
 It skips pages that already have one.
