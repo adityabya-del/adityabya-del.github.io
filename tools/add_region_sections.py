@@ -137,9 +137,9 @@ REGIONS = [
     dict(k=1.2, slug="arunachal-pradesh", name="Arunachal Pradesh", sub="North East India", state="Arunanchal Pradesh", st="arunachal-pradesh",
          box=(44, 94, 721, 942),
          alt="Tawang Monastery on a hillside with snow peaks and prayer flags",
-         text="Tawang Monastery is reached by road; the nearest railheads are in Assam. "
-              "Check live running status for the train that brings you to the Northeast.",
-         links=[("/station/ghy/", "Guwahati")]),
+         text="Naharlagun, near Itanagar, is a railway station in Arunachal Pradesh. "
+              "Tawang Monastery is reached by road, and the nearest railheads are in Assam.",
+         links=[("/station/nhln/", "Naharlagun"), ("/station/ghy/", "Guwahati")]),
     dict(k=1.2, slug="manipur", name="Manipur", sub="North East India", state="Manipur", st="manipur",
          box=(24, 25, 735, 1008),
          alt="The moat and brick wall of Kangla Fort in Imphal, Manipur",
