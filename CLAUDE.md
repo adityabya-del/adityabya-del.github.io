@@ -28,3 +28,9 @@ If the pages are rebuilt, make sure the generator includes these three trains (a
 On 13 Nov 2026 `tools/add_internal_links.py` added internal links so Google can find unindexed pages: guide links on train, Hindi train, route, station and hub pages and between guides; station links in every train timetable; links to routes that no train page linked to; English <-> Hindi links between the two versions of a train page. The page generators were NOT changed, so a rebuild removes these links. After any rebuild run:
    `python3 tools/add_internal_links.py --write`
 It skips what is already there, so running it twice is safe.
+
+## Train page banners: re-run after ANY rebuild of the train pages
+
+On 13 Nov 2026 `tools/add_train_banners.py` put a banner image (made by the site owner, saved as /shots/train-banner-1.jpg to 6.jpg) under the first paragraph of every /train/<number>/ page, rotating 1,2,3,4,5,6,1,2... in train-number order. Hindi /hi/train/ pages and the /train/ list page have no banner. The generators were NOT changed, so a rebuild removes the banners. After any rebuild run:
+   `python3 tools/add_train_banners.py --write`
+It skips pages that already have one.
