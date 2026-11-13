@@ -34,3 +34,9 @@ It skips what is already there, so running it twice is safe.
 On 13 Nov 2026 `tools/add_train_banners.py` put a banner image (made by the site owner, saved as /shots/train-banner-1.jpg to 6.jpg) under the first paragraph of every /train/<number>/ page, rotating 1,2,3,4,5,6,1,2... in train-number order. The same banners are on the Hindi /hi/train/<number>/ pages (same banner as the English page) and on the /train/ list page (banner 1). The generators were NOT changed, so a rebuild removes the banners. After any rebuild run:
    `python3 tools/add_train_banners.py --write`
 It skips pages that already have one.
+
+## Regional sections on station pages: re-run after ANY rebuild of the station pages
+
+On 13 Nov 2026 `tools/add_region_sections.py` added a regional section (the owner's photo with a white box, an India map with the state highlighted, short text, in the style of Amtrak's regional pages) to 488 station pages in Rajasthan, Uttar Pradesh, Odisha, West Bengal, Chhattisgarh and Kerala, just before "Track your train live". Station-to-state list: `tools/_station_states.json`. Map: `/shots/india-map.svg`. Photos: `/shots/region-*.jpg`. The generators were NOT changed, so a rebuild removes them. After any rebuild run:
+   `python3 tools/add_region_sections.py --write`
+Safe to run twice (it replaces its own block). Station pages only, on the owner's instruction.

@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+"""Add a regional section (photo + white box in the style of Amtrak's regional pages,
+India map with the state highlighted, short text) to every STATION page whose station
+is in Rajasthan, Uttar Pradesh, Odisha, West Bengal, Chhattisgarh or Kerala.
+It goes just before the "Track your train live" heading.
+
+Station -> state: tools/_station_states.json (made by point-in-polygon of datameet
+station coordinates against datameet state outlines, plus a few by-hand overrides).
+Map: /shots/india-map.svg (state outlines, ids st-<state>, group in-all).
+
+Photos: /shots/region-<slug>.jpg (desktop, white box baked in) and
+/shots/region-<slug>-m.jpg (square crop for phones, box cropped out).
+Map data: tools/_india_paths.svgfrag (Survey of India based state outlines, simplified).
+
+Run:  python3 tools/add_region_sections.py --write      (--test = dry run)
+Idempotent: it replaces the block between the two region markers if it exists.
+"""
+import re, sys, pathlib
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+import json
+STATES = json.loads((ROOT / "tools" / "_station_states.json").read_text())
+
+# box = white rectangle baked into the 1920x1080 photo: x0, y0, x1, y1
+REGIONS = [
+    dict(slug="west-india", name="West India", state="Rajasthan", st="rajasthan",
+         box=(103, 253, 796, 726),
+         alt="A hill fort above a city in Rajasthan",
+         text="Trains link Rajasthan&rsquo;s forts, palaces and desert cities with Delhi, Mumbai and Gujarat. "
+              "Jaipur Jn lies on the main line between Delhi and Ahmedabad, and many long-distance trains stop there. "
+              "Check a train&rsquo;s live status and its station-by-station timetable before you travel.",
+         links=[("/station/jp/", "Trains at Jaipur Jn")]),
+    dict(slug="north-india", name="North India", state="Uttar Pradesh", st="uttar-pradesh",
+         box=(116, 272, 808, 737),
+         alt="Temple town on the river bank at sunrise in Uttar Pradesh",
+         text="Uttar Pradesh lies between Delhi and eastern India, so many long-distance trains pass through it. "
+              "Ayodhya Dham Jn is the main station for the temple town of Ayodhya, and Ayodhya Cantt is a nearby station. "
+              "Open a station to see every train that stops there.",
+         links=[("/station/ay/", "Trains at Ayodhya Dham Jn"), ("/station/ayc/", "Trains at Ayodhya Cantt")]),
+    dict(slug="east-india", name="East India", state="Odisha", st="odisha",
+         box=(112, 279, 815, 729),
+         alt="Sun Temple at Konark in Odisha",
+         text="Odisha&rsquo;s coastal rail line connects Bhubaneswar and Puri with Kolkata, Chennai and Delhi. "
+              "The Sun Temple at Konark, a UNESCO World Heritage Site, has no station of its own; "
+              "Puri, roughly 35 km away, is the nearest railhead.",
+         links=[("/station/bbs/", "Trains at Bhubaneswar"), ("/station/puri/", "Trains at Puri")]),
+    dict(slug="north-east-india", name="North East India gateway", state="West Bengal", st="west-bengal",
+         box=(100, 265, 799, 735),
+         alt="Darjeeling Himalayan Railway steam train above tea gardens, with snow peaks behind",
+         text="New Jalpaiguri, near Siliguri in West Bengal, is the main railhead for the Darjeeling hills, Sikkim and the North East. "
+              "The narrow-gauge Darjeeling Himalayan Railway, a UNESCO World Heritage Site, runs from New Jalpaiguri up to Darjeeling.",
+         links=[("/station/njp/", "Trains at New Jalpaiguri")]),
+    dict(slug="central-india", name="Central India", state="Chhattisgarh", st="chhattisgarh",
+         box=(100, 298, 739, 728),
+         alt="A wide waterfall surrounded by forest in Chhattisgarh",
+         text="Chhattisgarh sits on the Mumbai&ndash;Howrah main line, so trains between western and eastern India pass through Raipur Jn and Bilaspur Jn. "
+              "Bilaspur is also the headquarters of South East Central Railway.",
+         links=[("/station/r/", "Trains at Raipur Jn"), ("/station/bsp/", "Trains at Bilaspur Jn")]),
+    dict(slug="south-india", name="South India", state="Kerala", st="kerala",
+         box=(115, 279, 798, 742),
+         alt="A temple tower and coconut palms in Kerala",
+         text="Kerala&rsquo;s main rail line runs north to south through the state, from Thiruvananthapuram Central in the south "
+              "through Ernakulam Jn in Kochi. Open a station to see its trains.",
+         links=[("/station/tvc/", "Thiruvananthapuram Central"), ("/station/ers/", "Ernakulam Jn")]),
+]
+
+CSS = """<style id="rg-css">
+.rg-all{width:min(1200px,100vw - 40px);position:relative;left:50%;transform:translateX(-50%);display:grid;gap:22px;margin:34px 0 0}
+.rg{container-type:inline-size;position:relative;border-radius:14px;overflow:hidden;background:#fff;border:1.5px solid var(--line)}
+.rg picture,.rg img{display:block;width:100%;height:auto}
+.rg-card{padding:18px 18px 20px;background:#fff}
+.rg-card h2{font:600 20px var(--font-head);color:var(--ink);line-height:1.2;margin:0}
+.rg-card .st{font-size:13px;color:#7A819E;margin:2px 0 10px}
+.rg-body{display:flex;gap:16px;align-items:flex-start}
+.rg-body svg{flex:0 0 112px;width:112px;height:auto}
+.rg-body p{font-size:15px;line-height:1.55;color:var(--text)}
+.rg-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.rg-links a{border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--ink)}
+.rg-links a:hover{border-color:var(--indigo);color:var(--indigo)}
+@media(min-width:1140px){
+.rg-card{position:absolute;left:var(--l);top:var(--t);width:var(--w);height:var(--h);padding:1.3cqw 1.6cqw;overflow:hidden;display:flex;flex-direction:column}
+.rg-card h2{font-size:1.75cqw}
+.rg-card .st{font-size:1.05cqw;margin:.15cqw 0 .7cqw}
+.rg-body{gap:1.2cqw}
+.rg-body svg{flex:0 0 12cqw;width:12cqw}
+.rg-body p{font-size:1.1cqw;line-height:1.45}
+.rg-links{gap:.5cqw;margin-top:.8cqw}
+.rg-links a{padding:.35cqw .9cqw;font-size:1.0cqw;border-width:1px}
+}
+</style>"""
+
+
+def section(r):
+    x0, y0, x1, y1 = r["box"]
+    # cover the baked box by 1px on every side so no edge shows
+    l, t = (x0 - 1) / 1920 * 100, (y0 - 1) / 1080 * 100
+    w, h = (x1 - x0 + 3) / 1920 * 100, (y1 - y0 + 3) / 1080 * 100
+    style = f"--l:{l:.3f}%;--t:{t:.3f}%;--w:{w:.3f}%;--h:{h:.3f}%"
+    links = "".join(f'<a href="{u}">{t_}</a>' for u, t_ in r["links"])
+    s = r["slug"]
+    return (
+        f'<section class="rg" id="rg-{s}" aria-labelledby="rg-{s}-h">'
+        f'<picture><source media="(max-width:1139px)" srcset="/shots/region-{s}-m.jpg" width="800" height="800">'
+        f'<img src="/shots/region-{s}.jpg" alt="{r["alt"]}" width="1600" height="900" loading="lazy" decoding="async"></picture>'
+        f'<div class="rg-card" style="{style}">'
+        f'<h2 id="rg-{s}-h">{r["name"]} train routes</h2><p class="st">{r["state"]}</p>'
+        f'<div class="rg-body"><svg viewBox="0 0 1000 1118" role="img" aria-label="Map of India with {r["state"]} highlighted">'
+        f'<use href="/shots/india-map.svg#in-all" fill="#DDE3F6" stroke="#fff" stroke-width="3"/>'
+        f'<use href="/shots/india-map.svg#st-{r["st"]}" fill="#3654FF" stroke="#2339C9" stroke-width="6"/></svg>'
+        f'<p>{r["text"]}</p></div>'
+        f'<div class="rg-links">{links}</div></div></section>'
+    )
+
+
+def section_for(r, code):
+    r = dict(r)
+    r["links"] = [l for l in r["links"] if l[0] != f"/station/{code}/"]
+    html = section(r)
+    if not r["links"]:
+        html = html.replace('<div class="rg-links"></div>', "")
+    return html
+
+
+STATE_TO_REGION = {r["state"]: r for r in REGIONS}
+CSS_ONE = CSS.replace('<style id="rg-css">', '<style id="rg-css">')
+
+
+def main():
+    write = "--write" in sys.argv
+    n = skipped = 0
+    for code, state in sorted(STATES.items()):
+        r = STATE_TO_REGION.get(state)
+        page = ROOT / "station" / code / "index.html"
+        if not r or not page.exists():
+            continue
+        html = page.read_text()
+        new = "<!--rg-start-->" + CSS_ONE + '<div class="rg-all">' + section_for(r, code) + "</div><!--rg-end-->"
+        if "<!--rg-start-->" in html:
+            out = re.sub(r"<!--rg-start-->.*?<!--rg-end-->", lambda m: new, html, flags=re.S)
+        else:
+            anchor = "<h2>Track your train live</h2>"
+            if anchor not in html:
+                skipped += 1
+                continue
+            out = html.replace(anchor, new + anchor, 1)
+        n += 1
+        if write:
+            page.write_text(out)
+    print(("written" if write else "dry run"), n, "pages; anchor missing on", skipped)
+
+
+if __name__ == "__main__":
+    main()
