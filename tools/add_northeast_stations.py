@@ -21,7 +21,8 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import build_station_pages as bsp  # noqa: E402
 
-WANT = ['RMR', 'SHKV', 'JRBM', 'VNGP', 'KGBP', 'RGBP', 'TGBP', 'NHLN', 'GMTO', 'BHNG']
+WANT = ['RMR', 'SKHV', 'JRBM', 'VNGP', 'KGBP', 'RGBP', 'TGBP', 'NHLN', 'GMTO', 'BHNG']
+NAME_OVERRIDE = {'SKHV': 'Shokhuvi'}   # the timetable data spells it Sukhovi
 TEMPLATE = 'aadr'   # an existing small station page used for the head / footer
 
 
@@ -69,7 +70,7 @@ def main():
         if not t:
             print('no train page lists', code, '- no page made')
             continue
-        sname = t[0]['_nm']
+        sname = NAME_OVERRIDE.get(code, t[0]['_nm'])
         page = tpl.replace(tpl_name, sname).replace(TEMPLATE.upper(), code).replace('/station/%s/' % TEMPLATE, '/station/%s/' % code.lower())
         page = re.sub(r'<!--rg-start-->.*?<!--rg-end-->', '', page, flags=re.S)
         n = len(t)
