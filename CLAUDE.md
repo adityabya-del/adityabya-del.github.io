@@ -22,3 +22,9 @@ On 11 Nov 2026 three trains that start at Jammu Tawi were missing (their pages g
 
 Added: /train/<no>/ and /hi/train/<no>/ pages, rows on 61 station pages and 93 route pages along their routes, links on /train/, and sitemap entries.
 If the pages are rebuilt, make sure the generator includes these three trains (add them to its train list), or they will disappear again and give 404s.
+
+## Internal links: re-run after ANY rebuild of train / route / station / guide pages
+
+On 13 Nov 2026 `tools/add_internal_links.py` added internal links so Google can find unindexed pages: guide links on train, Hindi train, route, station and hub pages and between guides; station links in every train timetable; links to routes that no train page linked to; English <-> Hindi links between the two versions of a train page. The page generators were NOT changed, so a rebuild removes these links. After any rebuild run:
+   `python3 tools/add_internal_links.py --write`
+It skips what is already there, so running it twice is safe.
