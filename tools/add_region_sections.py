@@ -128,6 +128,41 @@ REGIONS = [
          alt="A lake and forested hills at sunset seen from a viewpoint in Jharkhand",
          text="Ranchi is the state capital and main hub. Patratu Valley is a short drive away.",
          links=[("/station/rnc/", "Ranchi"), ("/station/tata/", "Tatanagar Jn")]),
+    dict(k=1.2, slug="himachal-pradesh", name="Himachal Pradesh", sub="North India", state="Himachal Pradesh", st="himachal-pradesh",
+         box=(39, 74, 743, 968),
+         alt="Rock-cut temples carved into a cliff above a river valley in Himachal Pradesh",
+         text="Una Himachal and Amb Andaura are broad-gauge stations in the state. Further into the hills, the narrow-gauge Kangra Valley Railway "
+              "runs from Pathankot to Joginder Nagar, and the Masroor rock-cut temples stand in Kangra district.",
+         links=[("/station/uhl/", "Una Himachal"), ("/station/ptk/", "Pathankot")]),
+    dict(k=1.2, slug="arunachal-pradesh", name="Arunachal Pradesh", sub="North East India", state="Arunanchal Pradesh", st="arunachal-pradesh",
+         box=(44, 94, 721, 942),
+         alt="Tawang Monastery on a hillside with snow peaks and prayer flags",
+         text="Tawang Monastery is reached by road; the nearest railheads are in Assam. "
+              "Check live running status for the train that brings you to the Northeast.",
+         links=[("/station/ghy/", "Guwahati")]),
+    dict(k=1.2, slug="manipur", name="Manipur", sub="North East India", state="Manipur", st="manipur",
+         box=(24, 25, 735, 1008),
+         alt="The moat and brick wall of Kangla Fort in Imphal, Manipur",
+         text="Kangla Fort stands in Imphal, the capital of Manipur. "
+              "Trains into the Northeast arrive at Guwahati and other stations in Assam.",
+         links=[("/station/ghy/", "Guwahati")]),
+    dict(k=1.2, slug="nagaland", name="Nagaland", sub="North East India", state="Nagaland", st="nagaland",
+         box=(58, 101, 754, 930),
+         alt="A green valley with a stream and wildflowers in the hills of Nagaland",
+         text="Dimapur is the railway station for Nagaland. Kohima and the Dzukou Valley are reached by road from there.",
+         links=[("/station/dmv/", "Dimapur")]),
+    dict(k=1.4, slug="uttarakhand", name="Uttarakhand", sub="North India", state="Uttarakhand", st="uttarakhand",
+         box=(32, 107, 846, 933), mw=788,
+         alt="A tiger and elephants by a river in the forest of Jim Corbett National Park",
+         text="Ramnagar is the nearest railway station to Jim Corbett National Park. "
+              "Kathgodam, Haridwar Jn and Dehradun are other major stations in Uttarakhand.",
+         links=[("/station/kgm/", "Kathgodam"), ("/station/hw/", "Haridwar Jn"), ("/station/ddn/", "Dehradun")]),
+    dict(k=1.2, slug="assam", name="Assam", sub="North East India", state="Assam", st="assam",
+         box=(40, 96, 759, 959),
+         alt="Rang Ghar, an oval brick pavilion beside a pond in Assam",
+         text="Guwahati is the main hub in Assam, and Dibrugarh and Simaluguri Jn serve upper Assam, "
+              "where the Ahom-era Rang Ghar stands near Sivasagar.",
+         links=[("/station/ghy/", "Guwahati"), ("/station/dbrg/", "Dibrugarh"), ("/station/slgr/", "Simaluguri Jn")]),
 ]
 
 CSS = """<style id="rg-css">
