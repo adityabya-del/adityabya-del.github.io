@@ -2,7 +2,7 @@
 """Add a regional section (photo + white box in the style of Amtrak's regional pages,
 India map with the state highlighted, short text) to every STATION page whose station
 is in Rajasthan, Uttar Pradesh, Odisha, West Bengal, Chhattisgarh or Kerala.
-It goes just before the "Track your train live" heading.
+It goes at the very top, right under the breadcrumb, so the photo is visible when the page opens.
 
 Station -> state: tools/_station_states.json (made by point-in-polygon of datameet
 station coordinates against datameet state outlines, plus a few by-hand overrides).
@@ -65,7 +65,7 @@ REGIONS = [
 ]
 
 CSS = """<style id="rg-css">
-.rg-all{width:min(1200px,100vw - 40px);position:relative;left:50%;transform:translateX(-50%);display:grid;gap:22px;margin:34px 0 0}
+.rg-all{width:min(1200px,100vw - 40px);position:relative;left:50%;transform:translateX(-50%);display:grid;gap:22px;margin:14px 0 6px}
 .rg{container-type:inline-size;position:relative;border-radius:14px;overflow:hidden;background:#fff;border:1.5px solid var(--line)}
 .rg picture,.rg img{display:block;width:100%;height:auto}
 .rg-card{padding:18px 18px 20px;background:#fff}
@@ -135,14 +135,12 @@ def main():
             continue
         html = page.read_text()
         new = "<!--rg-start-->" + CSS_ONE + '<div class="rg-all">' + section_for(r, code) + "</div><!--rg-end-->"
-        if "<!--rg-start-->" in html:
-            out = re.sub(r"<!--rg-start-->.*?<!--rg-end-->", lambda m: new, html, flags=re.S)
-        else:
-            anchor = "<h2>Track your train live</h2>"
-            if anchor not in html:
-                skipped += 1
-                continue
-            out = html.replace(anchor, new + anchor, 1)
+        html = re.sub(r"<!--rg-start-->.*?<!--rg-end-->", "", html, flags=re.S)
+        m = re.search(r'<p class="crumb">.*?</p>', html, flags=re.S)
+        if not m:
+            skipped += 1
+            continue
+        out = html[:m.end()] + new + html[m.end():]
         n += 1
         if write:
             page.write_text(out)
