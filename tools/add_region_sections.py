@@ -98,6 +98,36 @@ REGIONS = [
          text="Bengaluru is served by KSR Bengaluru City, Yesvantpur Jn and SMVT Bengaluru, among other stations. "
               "Mysuru Jn and Hubballi Jn are other major stations, and Hosapete Jn is the nearest railhead for Hampi.",
          links=[("/station/sbc/", "KSR Bengaluru"), ("/station/mys/", "Mysore Jn"), ("/station/hpt/", "Hosapete Jn")]),
+    dict(k=0.9, m=8.5, slug="madhya-pradesh", name="Madhya Pradesh", sub="Central India", state="Madhya Pradesh", st="madhya-pradesh",
+         box=(48, 306, 723, 687),
+         alt="The Great Stupa and its carved stone gateway at Sanchi",
+         text="Bhopal Jn is the main station for the state capital. Sanchi Stupa, a UNESCO World Heritage Site, is served by Sanchi station on the Bhopal&ndash;Bina line.",
+         links=[("/station/bpl/", "Bhopal Jn"), ("/station/sci/", "Sanchi")]),
+    dict(k=0.9, m=8.5, slug="punjab", name="Punjab", sub="North India", state="Punjab", st="punjab",
+         box=(56, 316, 730, 725),
+         alt="The Golden Temple in Amritsar lit up at dusk and reflected in the sarovar",
+         text="Amritsar is the main station for the Golden Temple (Harmandir Sahib). Ludhiana Jn and Jalandhar City lie on the Delhi&ndash;Amritsar line.",
+         links=[("/station/asr/", "Amritsar"), ("/station/ldh/", "Ludhiana Jn")]),
+    dict(k=0.9, m=8.5, slug="gujarat", name="Gujarat", sub="West India", state="Gujarat", st="gujarat",
+         box=(46, 337, 743, 712),
+         alt="Camels walking across the white salt flats of the Rann of Kutch at sunset",
+         text="Bhuj is the main railhead for Kutch and the Great Rann of Kutch. Ahmedabad Jn, Vadodara Jn and Surat are on the Mumbai&ndash;Ahmedabad main line.",
+         links=[("/station/bhuj/", "Bhuj"), ("/station/adi/", "Ahmedabad Jn")]),
+    dict(k=0.9, m=8.5, slug="haryana", name="Haryana", sub="North India", state="Haryana", st="haryana",
+         box=(70, 353, 686, 705),
+         alt="A calm lake with forested hills in the Morni Hills area of Haryana",
+         text="Ambala Cantt Jn is a major junction towards Delhi, Punjab and the hills. Kalka, near the Morni Hills and Tikkar Taal, is where the narrow-gauge Kalka&ndash;Shimla Railway begins.",
+         links=[("/station/umb/", "Ambala Cantt Jn"), ("/station/klk/", "Kalka")]),
+    dict(k=0.9, m=8.5, slug="bihar", name="Bihar", sub="East India", state="Bihar", st="bihar",
+         box=(33, 288, 745, 672),
+         alt="The Mahabodhi Temple at Bodh Gaya in Bihar",
+         text="Gaya Jn is the nearest main station for Bodh Gaya and the Mahabodhi Temple, a UNESCO World Heritage Site. Patna Jn serves the state capital.",
+         links=[("/station/gaya/", "Gaya Jn"), ("/station/pnbe/", "Patna Jn")]),
+    dict(k=0.74, m=6.5, slug="jharkhand", name="Jharkhand", sub="East India", state="Jharkhand", st="jharkhand",
+         box=(48, 390, 591, 647),
+         alt="A lake and forested hills at sunset seen from a viewpoint in Jharkhand",
+         text="Ranchi is the state capital and main hub. Patratu Valley is a short drive away.",
+         links=[("/station/rnc/", "Ranchi"), ("/station/tata/", "Tatanagar Jn")]),
 ]
 
 CSS = """<style id="rg-css">
@@ -118,7 +148,7 @@ CSS = """<style id="rg-css">
 .rg-card h2{font-size:calc(var(--k,1)*1.75cqw)}
 .rg-card .st{font-size:calc(var(--k,1)*1.05cqw);margin:calc(var(--k,1)*.15cqw) 0 calc(var(--k,1)*.7cqw)}
 .rg-body{gap:calc(var(--k,1)*1.2cqw)}
-.rg-body svg{flex:0 0 calc(var(--k,1)*12cqw);width:calc(var(--k,1)*12cqw)}
+.rg-body svg{flex:0 0 calc(var(--k,1)*var(--m,12)*1cqw);width:calc(var(--k,1)*var(--m,12)*1cqw)}
 .rg-body p{font-size:calc(var(--k,1)*1.1cqw);line-height:1.45}
 .rg-links{gap:calc(var(--k,1)*.5cqw);margin-top:calc(var(--k,1)*.8cqw)}
 .rg-links a{padding:calc(var(--k,1)*.35cqw) calc(var(--k,1)*.9cqw);font-size:calc(var(--k,1)*1cqw);border-width:1px}
@@ -131,7 +161,7 @@ def section(r):
     # cover the baked box by 1px on every side so no edge shows
     l, t = (x0 - 1) / 1920 * 100, (y0 - 1) / 1080 * 100
     w, h = (x1 - x0 + 3) / 1920 * 100, (y1 - y0 + 3) / 1080 * 100
-    style = f"--l:{l:.3f}%;--t:{t:.3f}%;--w:{w:.3f}%;--h:{h:.3f}%;--k:{r.get('k',1)}"
+    style = f"--l:{l:.3f}%;--t:{t:.3f}%;--w:{w:.3f}%;--h:{h:.3f}%;--k:{r.get('k',1)};--m:{r.get('m',12)}"
     links = "".join(f'<a href="{u}">{t_}</a>' for u, t_ in r["links"])
     s = r["slug"]
     return (

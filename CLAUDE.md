@@ -37,6 +37,6 @@ It skips pages that already have one.
 
 ## Regional sections on station pages: re-run after ANY rebuild of the station pages
 
-On 13 Nov 2026 `tools/add_region_sections.py` added a regional section (the owner's photo with a white box, an India map with the state highlighted, short text, in the style of Amtrak's regional pages) to 488 station pages in Rajasthan, Uttar Pradesh, Odisha, West Bengal, Chhattisgarh, Kerala, Maharashtra, Telangana, Tamil Nadu, Andhra Pradesh, Jammu & Kashmir and Karnataka, right under the breadcrumb at the top. Station-to-state list: `tools/_station_states.json`. Map: `/shots/india-map.svg`. Photos: `/shots/region-*.jpg`. The generators were NOT changed, so a rebuild removes them. After any rebuild run:
+On 13 Nov 2026 `tools/add_region_sections.py` added a regional section (the owner's photo with a white box, an India map with the state highlighted, short text, in the style of Amtrak's regional pages) to 488 station pages in Rajasthan, Uttar Pradesh, Odisha, West Bengal, Chhattisgarh, Kerala, Maharashtra, Telangana, Tamil Nadu, Andhra Pradesh, Jammu & Kashmir, Karnataka, Madhya Pradesh, Punjab, Gujarat, Haryana, Bihar and Jharkhand, right under the breadcrumb at the top. Station-to-state list: `tools/_station_states.json`. Map: `/shots/india-map.svg`. Photos: `/shots/region-*.jpg`. The generators were NOT changed, so a rebuild removes them. After any rebuild run:
    `python3 tools/add_region_sections.py --write`
 Safe to run twice (it replaces its own block). Station pages only, on the owner's instruction.
