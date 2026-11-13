@@ -62,6 +62,42 @@ REGIONS = [
          text="Kerala&rsquo;s main rail line runs north to south through the state, from Thiruvananthapuram Central in the south "
               "through Ernakulam Jn in Kochi. Open a station to see its trains.",
          links=[("/station/tvc/", "Thiruvananthapuram Central"), ("/station/ers/", "Ernakulam Jn")]),
+    dict(k=1.25, slug="maharashtra", name="Maharashtra", sub="West India", state="Maharashtra", st="maharashtra",
+         box=(57, 161, 939, 891), mw=719, mh=800,
+         alt="Gateway of India arch on the Mumbai waterfront",
+         text="Mumbai is served by several terminals, including Mumbai CSMT, Mumbai Central, Dadar, Lokmanya Tilak Terminus and Bandra Terminus, "
+              "and each handles different long-distance trains. Pune Jn and Nagpur Jn are other major stations in the state.",
+         links=[("/station/csmt/", "Mumbai CSMT"), ("/station/pune/", "Pune Jn"), ("/station/ngp/", "Nagpur Jn")]),
+    dict(k=1.55, slug="telangana", name="Telangana", sub="South India", state="Telangana", st="telangana",
+         box=(42, 102, 905, 942), mw=744, mh=800,
+         alt="Charminar, the four-minaret monument in Hyderabad",
+         text="Hyderabad is served by three main stations: Secunderabad Jn, Hyderabad Deccan (Nampally) and Kacheguda. "
+              "Open a station to see which trains stop there, and check live running status before you travel.",
+         links=[("/station/sc/", "Secunderabad Jn"), ("/station/hyb/", "Hyderabad Deccan"), ("/station/kcg/", "Kacheguda")]),
+    dict(k=1.25, slug="tamil-nadu", name="Tamil Nadu", sub="South India", state="Tamil Nadu", st="tamil-nadu",
+         box=(36, 155, 833, 877), mw=798, mh=800,
+         alt="A rock memorial on the sea at sunset on the Tamil Nadu coast",
+         text="Chennai has two main long-distance stations, MGR Chennai Central and Chennai Egmore. "
+              "Trains run on from there to the far south of Tamil Nadu and to Kanniyakumari, the southern tip of the mainland.",
+         links=[("/station/mas/", "MGR Chennai Central"), ("/station/ms/", "Chennai Egmore")]),
+    dict(k=1.45, slug="andhra-pradesh", name="Andhra Pradesh", sub="South India", state="Andhra Pradesh", st="andhra-pradesh",
+         box=(31, 84, 828, 958), mw=800, mh=800,
+         alt="A large carved stone bull statue with bells among boulders",
+         text="Vijayawada Jn is a major junction where main lines between Howrah, Chennai and Hyderabad meet. "
+              "Visakhapatnam is the main station on the east coast line, and Tirupati serves the temple town.",
+         links=[("/station/bza/", "Vijayawada Jn"), ("/station/vskp/", "Visakhapatnam"), ("/station/tpty/", "Tirupati")]),
+    dict(k=1.55, slug="kashmir", name="Kashmir", sub="North India", state="Jammu & Kashmir", st="jammu-and-kashmir",
+         box=(45, 93, 890, 944), mw=756, mh=800,
+         alt="Shikara boats and wooden houseboats on a lake in Kashmir, with snow mountains behind",
+         text="Jammu Tawi is a main railhead for the Jammu region, and Shri Mata Vaishno Devi Katra is the station for the Vaishno Devi pilgrimage. "
+              "Further north, Srinagar and Baramulla stations serve the Kashmir Valley.",
+         links=[("/station/jat/", "Jammu Tawi"), ("/station/svdk/", "Katra")]),
+    dict(k=1.25, slug="karnataka", name="Karnataka", sub="South India", state="Karnataka", st="karnataka",
+         box=(62, 105, 835, 942), mw=796, mh=800,
+         alt="A temple tower and ruins beside a river among boulders in Karnataka",
+         text="Bengaluru is served by KSR Bengaluru City, Yesvantpur Jn and SMVT Bengaluru, among other stations. "
+              "Mysuru Jn and Hubballi Jn are other major stations, and Hosapete Jn is the nearest railhead for Hampi.",
+         links=[("/station/sbc/", "KSR Bengaluru"), ("/station/mys/", "Mysore Jn"), ("/station/hpt/", "Hosapete Jn")]),
 ]
 
 CSS = """<style id="rg-css">
@@ -78,14 +114,14 @@ CSS = """<style id="rg-css">
 .rg-links a{border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--ink)}
 .rg-links a:hover{border-color:var(--indigo);color:var(--indigo)}
 @media(min-width:1140px){
-.rg-card{position:absolute;left:var(--l);top:var(--t);width:var(--w);height:var(--h);padding:1.3cqw 1.6cqw;overflow:hidden;display:flex;flex-direction:column}
-.rg-card h2{font-size:1.75cqw}
-.rg-card .st{font-size:1.05cqw;margin:.15cqw 0 .7cqw}
-.rg-body{gap:1.2cqw}
-.rg-body svg{flex:0 0 12cqw;width:12cqw}
-.rg-body p{font-size:1.1cqw;line-height:1.45}
-.rg-links{gap:.5cqw;margin-top:.8cqw}
-.rg-links a{padding:.35cqw .9cqw;font-size:1.0cqw;border-width:1px}
+.rg-card{position:absolute;left:var(--l);top:var(--t);width:var(--w);height:var(--h);padding:calc(var(--k,1)*1.3cqw) calc(var(--k,1)*1.6cqw);overflow:hidden;display:flex;flex-direction:column}
+.rg-card h2{font-size:calc(var(--k,1)*1.75cqw)}
+.rg-card .st{font-size:calc(var(--k,1)*1.05cqw);margin:calc(var(--k,1)*.15cqw) 0 calc(var(--k,1)*.7cqw)}
+.rg-body{gap:calc(var(--k,1)*1.2cqw)}
+.rg-body svg{flex:0 0 calc(var(--k,1)*12cqw);width:calc(var(--k,1)*12cqw)}
+.rg-body p{font-size:calc(var(--k,1)*1.1cqw);line-height:1.45}
+.rg-links{gap:calc(var(--k,1)*.5cqw);margin-top:calc(var(--k,1)*.8cqw)}
+.rg-links a{padding:calc(var(--k,1)*.35cqw) calc(var(--k,1)*.9cqw);font-size:calc(var(--k,1)*1cqw);border-width:1px}
 }
 </style>"""
 
@@ -95,15 +131,15 @@ def section(r):
     # cover the baked box by 1px on every side so no edge shows
     l, t = (x0 - 1) / 1920 * 100, (y0 - 1) / 1080 * 100
     w, h = (x1 - x0 + 3) / 1920 * 100, (y1 - y0 + 3) / 1080 * 100
-    style = f"--l:{l:.3f}%;--t:{t:.3f}%;--w:{w:.3f}%;--h:{h:.3f}%"
+    style = f"--l:{l:.3f}%;--t:{t:.3f}%;--w:{w:.3f}%;--h:{h:.3f}%;--k:{r.get('k',1)}"
     links = "".join(f'<a href="{u}">{t_}</a>' for u, t_ in r["links"])
     s = r["slug"]
     return (
         f'<section class="rg" id="rg-{s}" aria-labelledby="rg-{s}-h">'
-        f'<picture><source media="(max-width:1139px)" srcset="/shots/region-{s}-m.jpg" width="800" height="800">'
+        f'<picture><source media="(max-width:1139px)" srcset="/shots/region-{s}-m.jpg" width="{r.get('mw',800)}" height="{r.get('mh',800)}">'
         f'<img src="/shots/region-{s}.jpg" alt="{r["alt"]}" width="1600" height="900" loading="lazy" decoding="async"></picture>'
         f'<div class="rg-card" style="{style}">'
-        f'<h2 id="rg-{s}-h">{r["name"]} train routes</h2><p class="st">{r["state"]}</p>'
+        f'<h2 id="rg-{s}-h">{r["name"]} train routes</h2><p class="st">{r.get("sub", r["state"])}</p>'
         f'<div class="rg-body"><svg viewBox="0 0 1000 1118" role="img" aria-label="Map of India with {r["state"]} highlighted">'
         f'<use href="/shots/india-map.svg#in-all" fill="#DDE3F6" stroke="#fff" stroke-width="3"/>'
         f'<use href="/shots/india-map.svg#st-{r["st"]}" fill="#3654FF" stroke="#2339C9" stroke-width="6"/></svg>'
