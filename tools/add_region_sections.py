@@ -156,7 +156,7 @@ REGIONS = [
          alt="A tiger and elephants by a river in the forest of Jim Corbett National Park",
          text="Ramnagar is the nearest railway station to Jim Corbett National Park. "
               "Kathgodam, Haridwar Jn and Dehradun are other major stations in Uttarakhand.",
-         links=[("/station/kgm/", "Kathgodam"), ("/station/hw/", "Haridwar Jn"), ("/station/ddn/", "Dehradun")]),
+         links=[("/station/rmr/", "Ramnagar"), ("/station/kgm/", "Kathgodam"), ("/station/hw/", "Haridwar Jn")]),
     dict(k=1.2, slug="assam", name="Assam", sub="North East India", state="Assam", st="assam",
          box=(40, 96, 759, 959),
          alt="Rang Ghar, an oval brick pavilion beside a pond in Assam",

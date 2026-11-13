@@ -21,7 +21,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import build_station_pages as bsp  # noqa: E402
 
-WANT = ['JRBM', 'VNGP', 'KGBP', 'RGBP', 'TGBP', 'NHLN', 'GMTO', 'BHNG']
+WANT = ['RMR', 'SHKV', 'JRBM', 'VNGP', 'KGBP', 'RGBP', 'TGBP', 'NHLN', 'GMTO', 'BHNG']
 TEMPLATE = 'aadr'   # an existing small station page used for the head / footer
 
 

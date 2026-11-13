@@ -41,6 +41,6 @@ On 13 Nov 2026 `tools/add_region_sections.py` added a regional section (the owne
    `python3 tools/add_region_sections.py --write`
 Safe to run twice (it replaces its own block). Station pages only, on the owner's instruction.
 
-## Stations added by hand: Naharlagun (NHLN) and Gumto (GMTO)
+## Stations added by hand: Naharlagun (NHLN), Gumto (GMTO) and Ramnagar (RMR)
 
-On 13 Nov 2026 `tools/add_northeast_stations.py` created /station/nhln/ and /station/gmto/ (Arunachal Pradesh), built from the timetables on the /train/ pages, so the Arunachal regional section has pages. The owner also asked for Jiribam, Vangaichungpao, Khongsang, Ranigaidinliu, Thingou (Manipur) and Bhalukpong: no /train/ page lists them, so no page was made. build_station_pages.py only rewrites existing pages, so these two survive a rebuild; re-run `python3 tools/add_northeast_stations.py --write`, then add_region_sections.py and add_internal_links.py, if they are lost.
+On 13 Nov 2026 `tools/add_northeast_stations.py` created /station/nhln/ and /station/gmto/ (Arunachal Pradesh) and /station/rmr/ (Uttarakhand, Jim Corbett), built from the timetables on the /train/ pages, so the Arunachal regional section has pages. The owner also asked for Jiribam, Vangaichungpao, Khongsang, Ranigaidinliu, Thingou (Manipur) , Bhalukpong and Shokhuvi (Nagaland): no /train/ page lists them, so no page was made. build_station_pages.py only rewrites existing pages, so these two survive a rebuild; re-run `python3 tools/add_northeast_stations.py --write`, then add_region_sections.py and add_internal_links.py, if they are lost.
