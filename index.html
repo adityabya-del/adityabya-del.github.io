@@ -1582,7 +1582,8 @@ body.ck-noscroll{overflow:hidden}
         appNote(out);
         return true;
       }
-      if (d && (d.code === 404 || /invalid train/i.test(String(d.message || '')))) { msg(out, 'Train number not found. Check the number.', true); return false; }
+      if (d && d.error === 'TRAIN_NOT_RUNNING') { msg(out, 'Oops! Train ' + no + ' does not run on this day. Please input correct date.', true); return false; }
+          if (d && (d.code === 404 || /invalid train/i.test(String(d.message || '')))) { msg(out, 'Train number not found. Check the number.', true); return false; }
       msg(out, HICCUP, true); return false;
     });
   });
