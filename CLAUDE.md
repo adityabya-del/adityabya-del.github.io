@@ -44,3 +44,9 @@ Safe to run twice (it replaces its own block). Station pages only, on the owner'
 ## Stations added by hand: Naharlagun (NHLN), Gumto (GMTO), Ramnagar (RMR) and Shokhuvi (SKHV)
 
 On 13 Nov 2026 `tools/add_northeast_stations.py` created /station/nhln/ and /station/gmto/ (Arunachal Pradesh) , /station/rmr/ (Uttarakhand, Jim Corbett) and /station/skhv/ (Nagaland; the timetable data spells it Sukhovi, the page says Shokhuvi on the owner's instruction), built from the timetables on the /train/ pages, so the Arunachal regional section has pages. The owner also asked for Jiribam, Vangaichungpao, Khongsang, Ranigaidinliu, Thingou (Manipur) , Bhalukpong: no /train/ page lists them, so no page was made. build_station_pages.py only rewrites existing pages, so these two survive a rebuild; re-run `python3 tools/add_northeast_stations.py --write`, then add_region_sections.py and add_internal_links.py, if they are lost.
+
+## Lock-screen alerts block on Train kahan hai and PNR status pages
+
+On 17 Nov 2026 `tools/add_lock_promo.py` put a lock-screen alerts block (lock-card image, ₹29 line, buttons to /lock-screen-train-alerts/ and /#get-app) between the lead paragraph and the checker on /train-kahan-hai/, /pnr-status/ and /hi/pnr-status/ (these are the Google Ads landing pages). If those pages are rebuilt, run:
+   `python3 tools/add_lock_promo.py --write`
+Safe to run twice (it replaces its own block).
