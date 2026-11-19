@@ -50,3 +50,9 @@ On 13 Nov 2026 `tools/add_northeast_stations.py` created /station/nhln/ and /sta
 On 17 Nov 2026 `tools/add_lock_promo.py` put a lock-screen alerts block (lock-card image, ₹29 line, buttons to /lock-screen-train-alerts/ and /#get-app) between the lead paragraph and the checker on /train-kahan-hai/, /pnr-status/ and /hi/pnr-status/ (these are the Google Ads landing pages). If those pages are rebuilt, run:
    `python3 tools/add_lock_promo.py --write`
 Safe to run twice (it replaces its own block).
+
+## State templates on station and train pages: re-run after ANY rebuild
+
+On 19 Nov 2026 `tools/add_state_templates.py` gave each of the 23 states its own accent colour, and added a highlighted note on station pages ("Got a photo of this station? Message us on X at @ClearBerthApp...") under the regional section. Train pages whose first station is in one of those states got "States on this route", "Tatkal for <no>" and the start state's regional section. Stations not in `tools/_station_states.json` (e.g. New Delhi) get none of this. The generators were NOT changed, so after any rebuild run, in this order:
+   `python3 tools/add_region_sections.py --write && python3 tools/add_state_templates.py --state ALL --write`
+Safe to run twice (each replaces its own blocks).

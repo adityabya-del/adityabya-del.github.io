@@ -205,7 +205,7 @@ def section(r):
         f'<img src="/shots/region-{s}.jpg" alt="{r["alt"]}" width="1600" height="900" loading="lazy" decoding="async"></picture>'
         f'<div class="rg-card" style="{style}">'
         f'<h2 id="rg-{s}-h">{r["name"]} train routes</h2><p class="st">{r.get("sub", r["state"])}</p>'
-        f'<div class="rg-body"><svg viewBox="0 0 1000 1118" role="img" aria-label="Map of India with {r["state"]} highlighted">'
+        f'<div class="rg-body"><svg viewBox="0 0 1000 1118" role="img" aria-label="Map of India with {r["state"].replace("Arunanchal", "Arunachal")} highlighted">'
         f'<use href="/shots/india-map.svg#in-all" fill="#DDE3F6" stroke="#fff" stroke-width="3"/>'
         f'<use href="/shots/india-map.svg#st-{r["st"]}" fill="#3654FF" stroke="#2339C9" stroke-width="6"/></svg>'
         f'<p>{r["text"]}</p></div>'
