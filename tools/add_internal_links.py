@@ -2,6 +2,7 @@
 """Adds internal links so Google can find pages it has not indexed. Safe to run again (skips what is already there).
   python3 tools/add_internal_links.py --test    # only count
   python3 tools/add_internal_links.py --write
+  python3 tools/add_internal_links.py --write --refresh-guides   # after adding guides
 Adds: (1) guide links on train / Hindi train / route / station / hub pages and between guides,
 (2) station links in every train timetable, (3) links to routes that no train page links to,
 (4) English <-> Hindi links between the two versions of each train page.
@@ -9,6 +10,7 @@ Re-run after ANY rebuild of train / route / station pages (see CLAUDE.md)."""
 import os, re, sys, html, collections
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WRITE = '--write' in sys.argv
+REFRESH = '--refresh-guides' in sys.argv   # rewrite existing guide link blocks with the current guide list
 U = 'style="text-decoration:underline"'
 def rd(p): return open(p, encoding='utf-8').read()
 def wr(p, s):
@@ -83,6 +85,8 @@ def process(path, kind, num=None):
                 if m:
                     s = s[:m.end()] + '\n<p class="il-lang" style="margin:10px 0 0"><a %s href="%s">%s</a></p>' % (U, other[0], other[1]) + s[m.end():]
                     stats['language links'] += 1
+    if kind != 'guide' and REFRESH and 'id="il-guides"' in s:
+        s = re.sub(r'<h2 id="il-guides">.*?</div>\n', lambda m: guide_block(hi), s, count=1, flags=re.S)
     if kind != 'guide' and 'id="il-guides"' not in s:
         s = insert_before_footer(s, guide_block(hi)); stats['guide blocks'] += 1
     if s != o: wr(path, s); stats['pages changed'] += 1
@@ -95,6 +99,10 @@ for d in os.listdir(os.path.join(ROOT, 'station')):
 process(pg('train'), 'hub')
 for g, _ in guides:
     p = pg('guides/' + g); s = rd(p)
+    if REFRESH and 'id="il-guides"' in s:
+        n = re.sub(r'<h2 id="il-guides">.*?</div>\n', lambda m: guide_block(False, skip=g), s, count=1, flags=re.S)
+        if n != s: wr(p, n); stats['pages changed'] += 1
+        continue
     if 'id="il-guides"' not in s:
         wr(p, insert_before_footer(s, guide_block(False, skip=g))); stats['pages changed'] += 1; stats['guide blocks'] += 1
 print(dict(stats), '(WRITTEN)' if WRITE else '(dry run, nothing written)')
