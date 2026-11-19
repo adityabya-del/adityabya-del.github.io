@@ -53,7 +53,7 @@ Safe to run twice (it replaces its own block).
 
 ## State templates on station and train pages: re-run after ANY rebuild
 
-On 19 Nov 2026 `tools/add_state_templates.py` gave each of the 23 states its own accent colour, and added a highlighted note on station pages ("Got a photo of this station? Message us on X at @ClearBerthApp...") under the regional section. Train pages whose first station is in one of those states got "States on this route", "Tatkal for <no>" and the start state's regional section. Delhi, Mumbai, Kolkata and Chennai stations get a city banner instead (below). The generators were NOT changed, so after any rebuild run, in this order:
+On 19 Nov 2026 `tools/add_state_templates.py` gave each of the 23 states its own accent colour, and added a highlighted note on station pages ("Got a photo of a famous landmark in your city, or of your station? Message us on X at @ClearBerthApp...") under the regional section. Train pages whose first station is in one of those states got "States on this route", "Tatkal for <no>" and the start state's regional section. Delhi, Mumbai, Kolkata and Chennai stations get a city banner instead (below). The generators were NOT changed, so after any rebuild run, in this order:
    `python3 tools/add_region_sections.py --write && python3 tools/add_state_templates.py --state ALL --write && python3 tools/add_metro_sections.py --write`
 Safe to run twice (each replaces its own blocks).
 

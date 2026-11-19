@@ -35,7 +35,7 @@ ACCENT = {
     "Nagaland": "#8D3B2F", "Arunanchal Pradesh": "#5D4E9A", "Manipur": "#7B3F8C",
 }
 
-NOTE = ('<!--stx-note-start--><div class="stx-note"><b>Got a photo of this station?</b> '
+NOTE = ('<!--stx-note-start--><div class="stx-note"><b>Got a photo of a famous landmark in your city, or of your station?</b> '
         'Message us on X at <a href="https://x.com/ClearBerthApp" rel="noopener">@ClearBerthApp</a> '
         'and ask us to put your preferred photo on this page.</div><!--stx-note-end-->')
 
