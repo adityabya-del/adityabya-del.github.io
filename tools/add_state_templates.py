@@ -85,8 +85,10 @@ def train_blocks(page, no, name):
     if len(order) == 1:
         lead = f'The stops of {name} that we have placed on the map are all in {H.escape(show(order[0]))}.'
     else:
+        ut = any(x in ('Delhi', 'Jammu & Kashmir') for x in order)
+        kind = 'states and union territories' if ut else 'states'
         lead = (f'{name} has {total} scheduled stops. In route order, they are in these '
-                f'{len(order)} states. The number is how many stops fall in each state.')
+                f'{len(order)} {kind}. The number is how many stops fall in each.')
     note = ''
     if unknown:
         note = (f'<p style="font-size:14px;color:#7A819E">{unknown} stop{"s are" if unknown > 1 else " is"} '

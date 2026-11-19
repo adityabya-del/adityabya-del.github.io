@@ -53,6 +53,14 @@ Safe to run twice (it replaces its own block).
 
 ## State templates on station and train pages: re-run after ANY rebuild
 
-On 19 Nov 2026 `tools/add_state_templates.py` gave each of the 23 states its own accent colour, and added a highlighted note on station pages ("Got a photo of this station? Message us on X at @ClearBerthApp...") under the regional section. Train pages whose first station is in one of those states got "States on this route", "Tatkal for <no>" and the start state's regional section. Stations not in `tools/_station_states.json` (e.g. New Delhi) get none of this. The generators were NOT changed, so after any rebuild run, in this order:
-   `python3 tools/add_region_sections.py --write && python3 tools/add_state_templates.py --state ALL --write`
+On 19 Nov 2026 `tools/add_state_templates.py` gave each of the 23 states its own accent colour, and added a highlighted note on station pages ("Got a photo of this station? Message us on X at @ClearBerthApp...") under the regional section. Train pages whose first station is in one of those states got "States on this route", "Tatkal for <no>" and the start state's regional section. Delhi, Mumbai, Kolkata and Chennai stations get a city banner instead (below). The generators were NOT changed, so after any rebuild run, in this order:
+   `python3 tools/add_region_sections.py --write && python3 tools/add_state_templates.py --state ALL --write && python3 tools/add_metro_sections.py --write`
 Safe to run twice (each replaces its own blocks).
+
+## City banners for Delhi, Mumbai, Kolkata, Chennai (19 Nov 2026)
+
+`tools/add_metro_sections.py` puts a coloured city banner (counts from our timetables) and cards for all of that city's stations on 26 station pages (the list of stations per city is in the script), replacing the state photo section there, and on the 510 train pages that start in those cities (with "States on this route" and "Tatkal"). It must run LAST, after add_region_sections.py and add_state_templates.py (command above), or those put the state blocks back.
+
+## Guide photos (19 Nov 2026)
+
+Each of the 8 guides has the owner's photo under the "Last checked" line (`<!--ghero-->` block, /shots/guide-<slug>.webp and -m.webp), also used as its og:image.
