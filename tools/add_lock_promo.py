@@ -1,6 +1,6 @@
 """Insert a lock-screen alerts block between the lead paragraph and the checker
 on /train-kahan-hai/, /pnr-status/ and /hi/pnr-status/. Safe to run twice."""
-import sys, pathlib
+import re, sys, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 WRITE = '--write' in sys.argv
@@ -29,20 +29,20 @@ PAGES = {
         b1='Kaise kaam karta hai', b1href='/lock-screen-train-alerts/',
         b2='App lein'),
     'pnr-status/index.html': dict(
-        img='/shots/lock-card-en.webp',
-        alt='ClearBerth lock-screen card: your station and time, your stop, the train moving and your platform',
-        h='Your train, live on your lock screen',
-        p='No app to open. No refreshing.',
-        price='₹29 per journey · pay once · no subscription',
-        b1='See how it works', b1href='/lock-screen-train-alerts/',
+        img='/shots/lock-pnr-en.webp', w=200, hgt=157,
+        alt='ClearBerth PNR Update notification on the lock screen: PNR status RLWL 3 now (was RLWL 6)',
+        h='Your PNR status, on your lock screen',
+        p='A notification every time your PNR status changes. When it is confirmed, you see your coach and berth.',
+        price='₹29 per PNR · pay once · no subscription',
+        b1='See how it works', b1href='/lock-screen-train-alerts/#pnr',
         b2='Get the app'),
     'hi/pnr-status/index.html': dict(
-        img='/shots/lock-card-hi.webp',
-        alt='ClearBerth लॉक स्क्रीन कार्ड: आपका स्टेशन, समय, ट्रेन की लाइव स्थिति और प्लेटफ़ॉर्म',
-        h='आपकी ट्रेन, लाइव, आपकी लॉक स्क्रीन पर',
-        p='न ऐप खोलना, न रिफ़्रेश करना।',
-        price='एक यात्रा ₹29 · एक बार पेमेंट · कोई सब्सक्रिप्शन नहीं',
-        b1='देखें कैसे काम करता है', b1href='/hi/lock-screen-train-alerts/',
+        img='/shots/lock-pnr-en.webp', w=200, hgt=157,
+        alt='ClearBerth का PNR Update नोटिफ़िकेशन लॉक स्क्रीन पर: PNR स्टेटस RLWL 6 से RLWL 3',
+        h='आपका PNR स्टेटस, आपकी लॉक स्क्रीन पर',
+        p='PNR स्टेटस बदलते ही हर बार नोटिफ़िकेशन। कन्फ़र्म होने पर कोच और बर्थ भी दिखते हैं।',
+        price='एक PNR ₹29 · एक बार पेमेंट · कोई सब्सक्रिप्शन नहीं',
+        b1='देखें कैसे काम करता है', b1href='/hi/lock-screen-train-alerts/#pnr',
         b2='ऐप लें'),
 }
 
@@ -59,7 +59,7 @@ for rel, d in PAGES.items():
         a = s.index('<style id="lockpromo-css">'); b = s.index('</style>', a) + len('</style>')
         s = s[:a] + s[b:]
     block = (f'{START}<div class="lockpromo">'
-             f'<img src="{d["img"]}" alt="{d["alt"]}" width="200" height="168" loading="eager">'
+             f'<img src="{d["img"]}" alt="{d["alt"]}" width="{d.get("w",200)}" height="{d.get("hgt",168)}" loading="eager">'
              f'<div><h2>{d["h"]}</h2><p>{d["p"]}</p><p class="lp-price">{d["price"]}</p>'
              f'<div class="lp-btns"><a class="btn btn-coral" href="{d["b1href"]}">{d["b1"]}</a>'
              f'<a class="btn btn-ghost" href="/#get-app">{d["b2"]}</a></div></div></div>{END}')
@@ -72,5 +72,43 @@ for rel, d in PAGES.items():
     s = s.replace('</head>', CSS + '</head>', 1)
     assert s.count(START) == 1 and s.count('id="lockpromo-css"') == 1
     print(rel, 'ok')
+    if WRITE:
+        f.write_text(s, encoding='utf-8')
+
+
+# --- PNR section on the lock-screen pages (20 Nov 2026), target of the PNR pages' "See how it works"
+PNR = {
+    'lock-screen-train-alerts/index.html': dict(
+        h='Your PNR status on your lock screen',
+        p='Every time your PNR status changes, ClearBerth sends a <b>PNR Update</b> notification to your lock screen. When your ticket is confirmed, it shows your coach and berth.',
+        alt='ClearBerth PNR Update notification on the lock screen: PNR status RLWL 3 now (was RLWL 6)',
+        how='<b>Turn it on:</b> open ClearBerth, tap <b>PNR</b>, enter your PNR and tap <b>Get PNR Status Alerts (₹29)</b>.',
+        sched='<h3 id="pnr-timing">When ClearBerth checks your PNR</h3><div class="tt wr"><table><thead><tr><th>Time left before your train leaves</th><th>ClearBerth checks your PNR</th></tr></thead><tbody><tr><td>The moment you turn on the alert</td><td>Once, straight away. You get your current status.</td></tr><tr><td>More than 7 days</td><td>Every 2 days, at 6 PM</td></tr><tr><td>7 days or less</td><td>Every day, at 6 PM</td></tr><tr><td>Last 24 hours</td><td>Every 2 hours</td></tr><tr><td>Last 24 hours, in the hours around chart preparation</td><td>Every 30 minutes</td></tr><tr><td>After that, until departure</td><td>Every hour</td></tr><tr><td>About 90 to 30 minutes before departure (final chart)</td><td>Every 30 minutes</td></tr></tbody></table></div><p>You get a notification only when your status <b>changes</b>; if nothing changed at a check, no message is sent. Checks stop when every passenger on the ticket is confirmed, or when the train leaves.</p>',
+        steps=('<h2>Turn it on in 3 steps</h2>', '<h2>Turn on the live train card in 3 steps</h2>')),
+    'hi/lock-screen-train-alerts/index.html': dict(
+        h='आपका PNR स्टेटस, आपकी लॉक स्क्रीन पर',
+        p='जब भी आपका PNR स्टेटस बदलता है, ClearBerth आपकी लॉक स्क्रीन पर <b>PNR Update</b> नोटिफ़िकेशन भेजता है। टिकट कन्फ़र्म होने पर कोच और बर्थ भी दिखते हैं।',
+        alt='ClearBerth का PNR Update नोटिफ़िकेशन लॉक स्क्रीन पर: PNR स्टेटस RLWL 6 से RLWL 3',
+        how='<b>चालू करें:</b> ClearBerth खोलें, <b>PNR</b> दबाएँ, अपना PNR डालें और <b>PNR स्थिति अलर्ट पाएं (₹29)</b> दबाएँ।',
+        sched='<h3 id="pnr-timing">ClearBerth आपका PNR कब चेक करता है</h3><div class="tt wr"><table><thead><tr><th>ट्रेन छूटने में बचा समय</th><th>ClearBerth आपका PNR चेक करता है</th></tr></thead><tbody><tr><td>अलर्ट चालू करते ही</td><td>तुरंत एक बार। आपको अभी का स्टेटस मिल जाता है।</td></tr><tr><td>7 दिन से ज़्यादा</td><td>हर 2 दिन में, शाम 6 बजे</td></tr><tr><td>7 दिन या उससे कम</td><td>रोज़, शाम 6 बजे</td></tr><tr><td>आख़िरी 24 घंटे</td><td>हर 2 घंटे में</td></tr><tr><td>आख़िरी 24 घंटों में, चार्ट बनने के आसपास के घंटे</td><td>हर 30 मिनट में</td></tr><tr><td>उसके बाद, ट्रेन छूटने तक</td><td>हर घंटे</td></tr><tr><td>ट्रेन छूटने से लगभग 90 से 30 मिनट पहले (फ़ाइनल चार्ट)</td><td>हर 30 मिनट में</td></tr></tbody></table></div><p>नोटिफ़िकेशन तभी आता है जब आपका स्टेटस <b>बदलता</b> है; चेक में कुछ न बदले तो कोई मैसेज नहीं आता। टिकट के सभी यात्री कन्फ़र्म होने पर, या ट्रेन छूटने पर, चेक बंद हो जाते हैं।</p>',
+        steps=('<h2>3 कदम में चालू करें</h2>', '<h2>लाइव ट्रेन कार्ड 3 कदम में चालू करें</h2>')),
+}
+for rel, d in PNR.items():
+    f = ROOT / rel
+    s = f.read_text(encoding='utf-8')
+    if '<!--pnrlock-->' in s:
+        a = s.index('<!--pnrlock-->'); b = s.index('<!--/pnrlock-->') + len('<!--/pnrlock-->')
+        s = s[:a] + s[b:]
+    s = s.replace(d['steps'][0], d['steps'][1])
+    block = (f'<!--pnrlock--><h2 id="pnr">{d["h"]}</h2><p>{d["p"]}</p>'
+             f'<img class="shot" src="/shots/lock-pnr-en.webp" alt="{d["alt"]}" width="920" height="720" loading="lazy">'
+             f'{d["sched"]}<p>{d["how"]}</p><!--/pnrlock-->')
+    k = s.index(d['steps'][1])
+    s = s[:k] + block + '\n' + s[k:]
+    tcss = '<style id="pnrlock-css">.tt{overflow-x:auto;margin:14px 0}.tt table{border-collapse:collapse;width:100%;font-size:15px}.tt th,.tt td{border:1px solid var(--line,#E3E6F0);padding:9px 12px;text-align:left;vertical-align:top}.tt th{background:#F4F6FC}.tt.wr th,.tt.wr td{white-space:normal}.tt.wr table{table-layout:fixed}</style>'
+    s = re.sub(r'<style id="pnrlock-css">.*?</style>', '', s, flags=re.S)
+    s = s.replace('</head>', tcss + '</head>', 1)
+    assert s.count('<!--pnrlock-->') == 1
+    print(rel, 'pnr section ok')
     if WRITE:
         f.write_text(s, encoding='utf-8')
