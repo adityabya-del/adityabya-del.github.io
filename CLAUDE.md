@@ -69,4 +69,5 @@ Each of the 8 guides has the owner's photo under the "Last checked" line (`<!--g
 
 `tools/build_guides_batch3.py` added 17 guides (25 in all), facts only from IRCTC, Indian Railways, Railway Board and PIB pages cited on each. It also adds them to /guides/ and the sitemap. The 8 older guides come from build_more_guides.py and earlier scripts; do not re-run build_more_guides.py, it would drop the guide photos on the cancel and VIKALP guides. After adding or removing a guide, refresh the guide link lists on every page:
    `python3 tools/add_internal_links.py --write --refresh-guides`
-The 17 new guides have no photo yet (og:image is /shots/og.png).
+On 20 Nov 2026 the owner's photos were added to these 17 guides by `tools/add_guide_photos.py` (`<!--ghero-->` block, /shots/guide-<slug>.webp, also the og:image). build_guides_batch3.py writes the pages without photos, so after re-running it run:
+   `python3 tools/add_guide_photos.py && python3 tools/add_internal_links.py --write --refresh-guides`
