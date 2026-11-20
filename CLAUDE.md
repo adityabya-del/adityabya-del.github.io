@@ -71,3 +71,8 @@ Each of the 8 guides has the owner's photo under the "Last checked" line (`<!--g
    `python3 tools/add_internal_links.py --write --refresh-guides`
 On 20 Nov 2026 the owner's photos were added to these 17 guides by `tools/add_guide_photos.py` (`<!--ghero-->` block, /shots/guide-<slug>.webp, also the og:image). build_guides_batch3.py writes the pages without photos, so after re-running it run:
    `python3 tools/add_guide_photos.py && python3 tools/add_internal_links.py --write --refresh-guides`
+
+## Thumbnails on /guides/ (20 Nov 2026)
+
+`tools/add_guide_thumbs.py` adds a small photo (/shots/guide-<slug>-t.webp, cropped from the guide photo) on the right of each card on /guides/. Re-run after adding a guide or changing a guide photo:
+   `python3 tools/add_guide_thumbs.py`
