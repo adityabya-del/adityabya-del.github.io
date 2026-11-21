@@ -40,7 +40,7 @@ def build(path, title, desc, short, h1, lead, body, srcs):
     h = re.sub(r'<script type="application/ld\+json">.*?</script>', lambda m: '<script type="application/ld+json">%s</script>' % next(lds), h, flags=re.S)
     src = '<h2>Sources</h2><ul class="src">' + ''.join('<li><a %s href="%s" rel="noopener">%s</a></li>' % (A, u, E(t)) for t, u in srcs) + '</ul>'
     top = ('\n<body><div class="wrap art">\n'
-           '<div class="top"><a class="logo" href="/"><img src="/shots/icon.png" alt="" width="30" height="30">ClearBerth</a><a class="btn sm" href="/#get-app">Get the app</a></div>\n'
+           '<div class="top"><a class="logo" href="/"><img src="/shots/icon.png?v=2" alt="" width="30" height="30">ClearBerth</a><a class="btn sm" href="/#get-app">Get the app</a></div>\n'
            '<p class="crumb"><a href="/">ClearBerth</a> / <a href="/guides/">Guides</a> / %s</p>\n<h1>%s</h1>\n<p class="lead">%s</p>\n'
            '<p class="meta">Last checked: %s. Railway rules change, so confirm on IRCTC before you book or travel.</p>\n') % (
         E(short), E(h1), E(lead), CHECKED)

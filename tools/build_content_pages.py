@@ -35,7 +35,7 @@ def head(title, desc, path, crumbs):
 def page(path, title, desc, crumbs, crumb_html, h1, lead, body):
     out = head(title, desc, path, crumbs)
     out += ('\n<body><div class="wrap">\n'
-            '<div class="top"><a class="logo" href="/"><img src="/shots/icon.png" alt="" width="30" height="30">ClearBerth</a><a class="btn sm" href="/#get-app">Get the app</a></div>\n'
+            '<div class="top"><a class="logo" href="/"><img src="/shots/icon.png?v=2" alt="" width="30" height="30">ClearBerth</a><a class="btn sm" href="/#get-app">Get the app</a></div>\n'
             '<p class="crumb">%s</p>\n<h1>%s</h1>\n<p class="lead">%s</p>\n%s\n'
             '<h2>Easier in the app</h2>\n<p>ClearBerth shows your berth on a diagram, tracks your PNR and alerts you when your waitlist moves.</p>\n%s\n'
             '<p style="margin-top:22px"><a %s href="/pnr-status/">Check PNR status</a> &nbsp;·&nbsp; <a %s href="/train-kahan-hai/">Train kahan hai?</a> &nbsp;·&nbsp; <a %s href="/guides/">All guides</a></p>\n'

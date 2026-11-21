@@ -175,7 +175,7 @@ def page(tr, routes, css, other, site):
             '<meta property="og:title" content="%s"><meta property="og:description" content="%s">\n'
             '<meta property="og:url" content="https://clearberth.app/train/%s/"><meta property="og:image" content="https://clearberth.app/shots/og.png">\n'
             '<meta name="twitter:card" content="summary_large_image">\n'
-            '<link rel="icon" type="image/png" href="/shots/favicon.png"><link rel="apple-touch-icon" href="/shots/apple-touch-icon.png">\n'
+            '<link rel="icon" type="image/png" href="/shots/favicon.png?v=2"><link rel="apple-touch-icon" href="/shots/apple-touch-icon.png?v=2">\n'
             '<link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>\n'
             '%s<script type="application/ld+json">%s</script>\n%s</head>\n') % (
         e(title, quote=False), e(desc), n, n, n, n, e(title), e(desc), n, css[0], json.dumps(ld), css[1])
@@ -187,7 +187,7 @@ def page(tr, routes, css, other, site):
     rl = ''.join('<a href="/route/%s/">%s to %s</a>' % (sl, e(tr.names[i]), e(tr.names[j])) for _, i, j, sl in route_links(tr, routes))
     routes_h = '<h2>Routes this train runs</h2><div class="links">%s</div>\n' % rl if rl else ''
     body = ('<body><div class="wrap">\n'
-            '<div class="top"><a class="logo" href="/"><img src="/shots/icon.png" alt="" width="30" height="30">ClearBerth</a><a class="btn sm" href="/#get-app">Get the app</a></div>\n'
+            '<div class="top"><a class="logo" href="/"><img src="/shots/icon.png?v=2" alt="" width="30" height="30">ClearBerth</a><a class="btn sm" href="/#get-app">Get the app</a></div>\n'
             '<p class="crumb"><a href="/">ClearBerth</a> / Trains / %s &nbsp;·&nbsp; <a href="/hi/train/%s/">हिंदी में देखें</a></p>\n'
             '<h1>%s %s: live running status</h1>\n'
             '<p class="lead">%s (%s) runs from %s to %s. Check where it is right now, how late it is and which station comes next.</p>\n'

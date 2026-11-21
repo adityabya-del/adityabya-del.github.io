@@ -63,7 +63,7 @@ def build(tr, routes, css, site, endpoints, names, order, stores):
     routes_h = '<h2>इस ट्रेन के रूट</h2><div class="links">%s</div>\n' % rl if rl else '\n'
     nm = e(tr.name)
     body = ('<body><div class="wrap">\n'
-            '<div class="top"><a class="logo" href="/"><img src="/shots/icon.png" alt="" width="30" height="30">ClearBerth</a><a class="btn sm" href="/#get-app">ऐप पाएँ</a></div>\n'
+            '<div class="top"><a class="logo" href="/"><img src="/shots/icon.png?v=2" alt="" width="30" height="30">ClearBerth</a><a class="btn sm" href="/#get-app">ऐप पाएँ</a></div>\n'
             '<p class="crumb"><a href="/">ClearBerth</a> / ट्रेनें / %s &nbsp;·&nbsp; <a href="/train/%s/">View in English</a></p>\n'
             '<h1>%s %s: लाइव रनिंग स्टेटस (ट्रेन कहाँ है)</h1>\n'
             '<p class="lead">%s (%s) %s से %s तक चलती है। देखें कि ट्रेन अभी कहाँ है, कितनी लेट है और अगला स्टेशन कौन सा है।</p>\n'
