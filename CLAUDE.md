@@ -76,3 +76,9 @@ On 20 Nov 2026 the owner's photos were added to these 17 guides by `tools/add_gu
 
 `tools/add_guide_thumbs.py` adds a small photo (/shots/guide-<slug>-t.webp, cropped from the guide photo) on the right of each card on /guides/. Re-run after adding a guide or changing a guide photo:
    `python3 tools/add_guide_thumbs.py`
+
+## Google Ads website conversion on every page (21 Nov 2026)
+
+`tools/add_ads_conversion.py` adds the Google Ads tag (AW-18479728139) after the GA4 config on every page, plus a click listener: a tap on any App Store / Google Play link sends the GA4 event `store_click` ({store: app_store | google_play}) and the Google Ads conversion "Website: App Store or Google Play tap" (send_to AW-18479728139/-2OGCNGux7wdEIuM6etE). The Search campaign is optimised on it. The generators were NOT changed, so after any rebuild run:
+   `python3 tools/add_ads_conversion.py --write`
+Safe to run twice (marker `/*adsconv*/`).
