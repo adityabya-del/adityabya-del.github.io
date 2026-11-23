@@ -82,3 +82,9 @@ On 20 Nov 2026 the owner's photos were added to these 17 guides by `tools/add_gu
 `tools/add_ads_conversion.py` adds the Google Ads tag (AW-18479728139) after the GA4 config on every page, plus a click listener: a tap on any App Store / Google Play link sends the GA4 event `store_click` ({store: app_store | google_play}) and the Google Ads conversion "Website: App Store or Google Play tap" (send_to AW-18479728139/-2OGCNGux7wdEIuM6etE). The Search campaign is optimised on it. The generators were NOT changed, so after any rebuild run:
    `python3 tools/add_ads_conversion.py --write`
 Safe to run twice (marker `/*adsconv*/`).
+
+## Page-specific facts block on train, Hindi train, route and station pages (23 Nov 2026)
+
+After AdSense rejected the site for low value content, `tools/add_unique_facts.py` added a `<!--uf-start-->`...`<!--uf-end-->` block of facts computed from ClearBerth's own timetable catalog to every /train/<no>/ and /hi/train/<no>/ page (stop-by-stop table with km, leg time, speed, halts, trains per stop, plus fastest/slowest leg, standing time, night stops, rank among trains on the same endpoints), every /route/ page (journey-time range, arrival spread, train types, stops most trains share, return trains, per-train speed table; it also fixes the wrong "X to Y at a glance" heading) and every /station/ page (arrivals by time of day, longest gap, typical halt, common next/previous stop, longest rides in and out). Needs the catalog (collect-trains export, 300 rows per page, saved as p0.json, p300.json ...). The generators were NOT changed, so after any rebuild run (after the other scripts):
+   `python3 tools/add_unique_facts.py --catalog <dir> --write`
+Safe to run twice (it replaces its own block).
