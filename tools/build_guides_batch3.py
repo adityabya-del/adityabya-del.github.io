@@ -94,6 +94,8 @@ S_PIB_2026 = ("PIB, 11 March 2026: Lok Sabha reply on fares, concessions and low
 S_PIB_SR20 = ("PIB, 19 March 2020: withdrawal of senior citizen concessions", "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1607179")
 S_PIB_SR16 = ("PIB, 2 December 2016: concessions to railway passengers in various categories", "https://www.pib.gov.in/newsite/PrintRelease.aspx?relid=154835")
 S_PIB_LB25 = ("PIB, 19 March 2025: lower berths for senior citizens, women and persons with disabilities", "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2112957")
+S_PIB_WC = ("PIB, 2025: wheelchairs and battery vehicles at stations", "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2201576&reg=48&lang=2")
+S_PIB_YMS = ("PIB: Yatri Mitra Sewa and station facilities for Divyangjan", "https://www.pib.gov.in/newsite/PrintRelease.aspx?relid=191504&reg=48&lang=2")
 S_PIB_DIV = ("PIB, 3 December 2019: facilities for Divyangjan passengers", "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1594758")
 S_DIVF = ("IRCTC: Facilities for persons with disability on IRCTC", "https://contents.irctc.co.in/en/Facilities_for_Divyaang_Users_English.pdf")
 S_SR_DIV = ("Southern Railway press release: online Divyangjan ID card application", "https://sr.indianrailways.gov.in/view_detail.jsp?lang=0&id=0,4,268&dcd=17088&did=17327858974165693C1AA3C62161A537E7AC53FCF05CB")
@@ -495,9 +497,13 @@ G.append(('/guides/divyangjan-railway-concession/',
 <p>In the March 2026 reply, the Ministry said a quota for persons with disabilities and their attendants is kept in mail/express trains, including Rajdhani and Shatabdi type trains:</p>
 ''' + ul('Four berths in Sleeper (two lower and two middle)', 'Four berths in 3AC/3E (two lower and two middle)', 'Four seats in Second Sitting (2S) or AC Chair Car (CC), where the train has more than two coaches of that class') + '''
 <p>Persons with disabilities are also allotted lower berths automatically, subject to availability, and get priority for lower berths that fall vacant during the journey.</p>
+<h2>Help at the station and in the train</h2>
+<p>Press Information Bureau releases from the Ministry of Railways list these facilities:</p>
+''' + ul('Wheelchairs are provided by Railways and are given to the attendants of Divyangjan and senior citizens free of cost, to escort them from and to the trains. Where attendants are not available, licensed porters (Sahayaks) can be hired at pre-fixed nominal rates. Wheelchairs are available at 5,868 stations.', '196 battery operated vehicles are available at 79 major stations, with priority for Divyangjan, senior citizens, sick passengers and pregnant women.', 'Yatri Mitra Sewa lets passengers book wheelchair-cum-porter service at major stations. IRCTC has been given the responsibility for this facility.', 'Specially designed SLRD coaches have wider entrance doors for a wheelchair, wider aisles, a modified toilet and four berths, the lower two for persons with disability and the upper two for attendants.') + '''
+<p>Information on these facilities is displayed at prominent places in station premises. What is available differs from station to station, so ask at the station or call 139.</p>
 <h2>In short</h2>
-''' + ul('Four categories qualify; the escort gets the same concession.', 'Book online with the Railway photo ID card and carry it on the train.', 'Four berths per class are kept in mail/express trains.'),
-  [S_PIB_2026, S_PIB_DIV, S_DIVF, S_SR_DIV, S_ID21]))
+''' + ul('Four categories qualify; the escort gets the same concession.', 'Book online with the Railway photo ID card and carry it on the train.', 'Four berths per class are kept in mail/express trains.', 'Wheelchairs are free at stations; ask the station staff.'),
+  [S_PIB_2026, S_PIB_DIV, S_DIVF, S_SR_DIV, S_ID21, S_PIB_WC, S_PIB_YMS]))
 
 # 15 ---------------- complaints
 G.append(('/guides/train-complaint-railmadad-139/',
