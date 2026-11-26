@@ -10,6 +10,8 @@ CSS = ('<style id="gthumb-css">.cards a{display:grid;grid-template-columns:1fr a
        '.cards a b{grid-column:1;grid-row:1}.cards a span{grid-column:1;grid-row:2}'
        '.cards a .gthumb{grid-column:2;grid-row:1/3;width:88px;height:88px;border-radius:14px;object-fit:cover;display:block}'
        '@media(max-width:560px){.cards a .gthumb{width:64px;height:64px;border-radius:12px}}</style>')
+# guides whose banner has text: thumbnail uses this part of the banner (x0, y0, x1, y1 as fractions) so no text is cut in half
+CROP = {'train-class-codes-explained': (0.775, 0.30, 1.0, 0.70)}
 p = os.path.join(ROOT, 'guides', 'index.html')
 h = open(p, encoding='utf-8').read()
 h = re.sub(r'<img class="gthumb"[^>]*>', '', h)
@@ -22,7 +24,11 @@ def card(m):
     if not os.path.exists(src):
         print('no photo', slug); return m.group(0)
     out = os.path.join(ROOT, 'shots', 'guide-%s-t.webp' % slug)
-    ImageOps.fit(Image.open(src).convert('RGB'), (176, 176), Image.LANCZOS).save(out, 'WEBP', quality=78)
+    im = Image.open(src).convert('RGB')
+    if slug in CROP:
+        W, H = im.size; f = CROP[slug]
+        im = im.crop((int(f[0] * W), int(f[1] * H), int(f[2] * W), int(f[3] * H)))
+    ImageOps.fit(im, (176, 176), Image.LANCZOS).save(out, 'WEBP', quality=78)
     n += 1
     return m.group(0) + '<img class="gthumb" src="/shots/guide-%s-t.webp" alt="" width="88" height="88" loading="lazy">' % slug
 h = re.sub(r'<a href="/guides/([a-z0-9-]+)/"><b>.*?</b><span>.*?</span>', card, h)

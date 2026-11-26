@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Owner's photos on the 17 guides made by build_guides_batch3.py (20 Nov 2026).
+"""Owner's photos on the 17 guides made by build_guides_batch3.py (20 Nov 2026) and the 8 made by
+build_guides_batch4.py (26 Nov 2026; images from the owner's Downloads).
 Puts a <!--ghero--> block under the "Last checked" line and makes the photo the og:image.
 Images: /shots/guide-<slug>.webp (1200 wide) and -m.webp (720 wide), made from the owner's files.
 Safe to run twice (replaces its own block). Re-run after build_guides_batch3.py:
@@ -45,12 +46,32 @@ P = {
    'Optional IRCTC travel insurance costs 45 paise per passenger.'),
  'luggage-stolen-on-train-complaint': ('A passenger in a sleeper coach at night reporting a theft to a railway police officer who writes on a form',
    'Ask the TTE, guard, coach attendant or GRP escort for the FIR form; you do not need to break your journey.'),
+ 'irctc-account-and-passenger-list-help': ('A woman at a home desk looks at her phone, with a laptop and a cup of tea beside her',
+   'IRCTC allows one user registration per email ID and mobile number, and advises a master passenger list of at most six.'),
+ 'book-train-ticket-for-someone-else': ('A man and his elderly mother sit on a sofa and look at a phone together',
+   'You can enter any passenger\'s details on the booking page; one passenger on the e-ticket must show an original ID.'),
+ 'irctc-payment-failed-money-deducted': ('A man in a hallway looks worried at his phone, one hand on his head, a bag at his feet',
+   'If no ticket was issued, IRCTC says the full amount is credited back to the account you paid from.'),
+ 'lost-or-torn-train-ticket-duplicate': ('A woman on a railway platform searches her handbag, with a suitcase beside her and a train behind',
+   'IRCTC does not issue duplicates for lost or torn tickets, but an e-ticket can be shown again from Booked Ticket History.'),
+ 'group-booking-train-tickets': ('A group of relatives and friends with bags talk and smile on a railway platform beside a train',
+   'One booking holds at most six berths or seats, and four passengers on a Tatkal e-ticket, so a bigger group needs more than one booking.'),
+ 'train-food-irctc-ecatering': ('A family in a train compartment, a father passes a plate of food to his daughter by the window',
+   'IRCTC eCatering takes orders against your PNR, for delivery at the station you choose, on its website or the Food on Track app.'),
+ 'train-class-codes-explained': ('The inside of a train carriage with rows of seats and a passenger walking down the aisle, with the text SL 3A 2A 1A CC EC 3E 2S, Class codes explained',
+   'In IRCTC\'s Terms for Tatkal, the AC classes are 2A, 3A, CC, EC and 3E, and the non-AC classes are SL, FC and 2S.'),
+ 'train-concessions-students-and-patients': ('A young woman with a backpack and an older woman with a folder sit facing each other by a train window',
+   'IRCTC says the student concession is not available on e-tickets; ask at a Railway reservation counter.'),
 }
 
 
 def main():
+    import sys
+    only = set(sys.argv[1:])  # optional: only these slugs
     n = 0
     for slug, (alt, cap) in P.items():
+        if only and slug not in only:
+            continue
         p = os.path.join(ROOT, 'guides', slug, 'index.html')
         img = os.path.join(ROOT, 'shots', 'guide-%s.webp' % slug)
         if not (os.path.exists(p) and os.path.exists(img)):
