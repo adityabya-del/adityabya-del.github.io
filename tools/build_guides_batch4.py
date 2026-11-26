@@ -72,6 +72,10 @@ S_CAN = ("IRCTC: E-ticket cancellation", "https://contents.irctc.co.in/en/eticke
 S_QUOTA = ("Indian Railways: Quota codes", "https://www.indianrail.gov.in/enquiry/StaticPages/StaticEnquiry.jsp?StaticPage=quota_Code.html")
 S_TATS = ("Indian Railways: Tatkal scheme", "https://www.indianrail.gov.in/enquiry/StaticPages/StaticEnquiry.jsp?StaticPage=tatkal_Scheme.html")
 S_CATIR = ("Indian Railways: Catering charges and complaints", "https://www.indianrail.gov.in/enquiry/StaticPages/StaticEnquiry.jsp?StaticPage=CateringCharge.html")
+S_MR_M = ("IRCTC menu rates: standard meals", "https://menurates.irctc.co.in/standared_meal.html")
+S_MR_B = ("IRCTC menu rates: standard breakfast", "https://menurates.irctc.co.in/standared_breakfast.html")
+S_MR_V = ("IRCTC menu rates: beverages", "https://menurates.irctc.co.in/standared_beverages.html")
+S_PIB_FOOD = ("PIB, 15 November 2019: catering menu and rates", "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1591774&reg=48&lang=2")
 S_ECAT = ("IRCTC eCatering", "https://www.ecatering.irctc.co.in/")
 S_PIB_CONC = ("PIB, 2 December 2016: concession to railway passengers in various categories", "https://www.pib.gov.in/newsite/PrintRelease.aspx?relid=154835")
 S_PIB_2026 = ("PIB, 11 March 2026: Lok Sabha reply on fares, concessions and lower berths", "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2238430")
@@ -220,12 +224,15 @@ G.append(('/guides/train-food-irctc-ecatering/',
 <p>IRCTC eCatering lists automatic cancellation of an order if the PNR gets cancelled as one of the benefits of ordering through it.</p>
 <h2>Meals served by the railway</h2>
 <p>Indian Railways publishes catering charges for Rajdhani, Shatabdi and Duronto Express trains, with a revised tariff for tea or coffee, breakfast and standard meals. Check the tariff on the <a href="https://www.indianrail.gov.in/enquiry/StaticPages/StaticEnquiry.jsp?StaticPage=CateringCharge.html" rel="noopener">Indian Railways catering charges page</a>, as the figures are shown there.</p>
+<p>IRCTC lists these menu rates for standard items, one rate for food bought at a station and one for food served in the train.</p>
+''' + table(['Item','At station','In train'], [['Tea (standard)','&#8377;5','&#8377;5'],['Tea with tea bag, or instant coffee','&#8377;10','&#8377;10'],['Vegetarian breakfast','&#8377;35','&#8377;40'],['Non-vegetarian breakfast (egg omelette)','&#8377;45','&#8377;50'],['Vegetarian standard meal','&#8377;70','&#8377;80'],['Egg curry meal','&#8377;80','&#8377;90'],['Chicken curry meal','&#8377;120','&#8377;130']]) + '''
+<p>The Press Information Bureau (15 November 2019) also lists a Janta meal at &#8377;20, a snack meal at &#8377;50 and biryani at &#8377;80 (vegetarian), &#8377;90 (egg) and &#8377;110 (chicken). Catering on Rajdhani, Shatabdi and Duronto Express trains is included in the ticket fare, so there is no separate rate for it. Rates can change, so confirm on the <a href="https://menurates.irctc.co.in/standared_meal.html" rel="noopener">IRCTC menu rate pages</a> or the ordering screen before you pay.</p>
 <h2>How to complain about food</h2>
 ''' + ul('Call the toll-free number <b>1800111321</b>.', 'Ask for the complaint book, which Indian Railways says is available with the TTE, the Pantry Car Manager and the Station Manager.', 'For any other complaint, Indian Railways gives its customer care site, <b>customercare.indianrailways.gov.in</b>.') + '''
 <p>For a wider complaint such as cleanliness or staff, see our ''' + link('/guides/train-complaint-railmadad-139/', 'RailMadad and 139 guide') + '''.</p>
 <h2>In short</h2>
 ''' + ul('Use the official IRCTC eCatering site or app with your PNR.', 'The order cancels automatically if the PNR is cancelled.', 'Food complaints: 1800111321 or the complaint book.'),
-  [S_ECAT, S_CATIR]))
+  [S_ECAT, S_CATIR, S_MR_M, S_MR_B, S_MR_V, S_PIB_FOOD]))
 
 # 7 ---------------- class codes
 G.append(('/guides/train-class-codes-explained/',
