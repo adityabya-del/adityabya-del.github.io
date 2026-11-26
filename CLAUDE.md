@@ -88,3 +88,9 @@ Safe to run twice (marker `/*adsconv*/`).
 After AdSense rejected the site for low value content, `tools/add_unique_facts.py` added a `<!--uf-start-->`...`<!--uf-end-->` block of facts computed from ClearBerth's own timetable catalog to every /train/<no>/ and /hi/train/<no>/ page (stop-by-stop table with km, leg time, speed, halts, trains per stop, plus fastest/slowest leg, standing time, night stops, rank among trains on the same endpoints), every /route/ page (journey-time range, arrival spread, train types, stops most trains share, return trains, per-train speed table; it also fixes the wrong "X to Y at a glance" heading) and every /station/ page (arrivals by time of day, longest gap, typical halt, common next/previous stop, longest rides in and out). Needs the catalog (collect-trains export, 300 rows per page, saved as p0.json, p300.json ...). The generators were NOT changed, so after any rebuild run (after the other scripts):
    `python3 tools/add_unique_facts.py --catalog <dir> --write`
 Safe to run twice (it replaces its own block).
+
+## Extra facts in guides (27 Nov 2026)
+
+`tools/add_guide_facts.py` adds sections found missing in a review against Indian Railways, IRCTC and PIB pages (cancel: waitlisted/RAC clerkage, GST, Vande Bharat Sleeper; dog: IRCTC pet booking; child: under 5 berth optional; RailMadad: 139 menu; concessions: general rules; luggage: brake van). The Divyangjan station-help section is in build_guides_batch3.py. After re-running a guide generator run:
+   `python3 tools/add_guide_facts.py --write`
+Safe to run twice (markers `<!--gf:id-->`).
