@@ -16,6 +16,8 @@ WR_139 = ('Western Railway: Helpline numbers', 'https://wr.indianrailways.gov.in
 IR_CONC = ('Indian Railways: Concession rules', 'https://www.indianrail.gov.in/enquiry/StaticPages/StaticEnquiry.jsp?StaticPage=conc_Rules.html')
 RB_CONC = ('Railway Board: General rules for concession', 'https://indianrailways.gov.in/railwayboard/uploads/directorate/traffic_comm/Comm_Cir_2025/ANNEXURE%204%20%20%20%20%20%20%20General%20Rules%20for%20Concession.pdf')
 
+
+PIB_REFORM = ('PIB, 24 March 2026: Indian Railways announces five new reforms under Reform Express', 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2244597&reg=48&lang=2')
 BLOCKS = [
  ('cancel-rac', 'cancel-irctc-e-ticket', '<h2>In short</h2>',
   '<h2>Waitlisted and RAC tickets</h2><p>IRCTC\'s refund rules (12 November 2015) say a waitlisted or RAC ticket can be cancelled up to 30 minutes before the scheduled departure of the train, with clerkage deducted: %s60 per passenger, plus GST for AC classes. After that, no refund is given on an RAC or waitlisted ticket.</p>'
@@ -50,6 +52,102 @@ BLOCKS = [
   []),
 ]
 
+
+PIB_TATKAL_A = ('PIB, December 2025: Indian Railways strengthens ticket reservation system with cyber security', 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2202197&reg=3&lang=2')
+PIB_TATKAL_B = ('PIB: RailOne app and Aadhaar-based OTP for Tatkal', 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2287719&reg=48&lang=2')
+ER_NAME = ('Eastern Railway: Change in name of passenger holding confirmed reservation', 'https://er.indianrailways.gov.in/view_section.jsp?fontColor=black&backgroundColor=LIGHTSTEELBLUE&lang=0&id=0,2,279')
+SER_NAME = ('South Eastern Railway: Change of name of passengers on confirmed tickets', 'https://ser.indianrailways.gov.in/view_section.jsp?lang=0&id=0,2,406,453,564,1155,1183')
+PIB_VIK_A = ('PIB: More than 43,000 passengers provided accommodation under Vikalp during 2022-23', 'https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=1910035')
+PIB_VIK_B = ('PIB, 2017: Alternate Train Accommodation Scheme (VIKALP)', 'https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=1485240')
+
+BLOCKS += [
+ ('aadhaar-rollout', 'aadhaar-train-ticket-booking-rules', '<h2>General reserved tickets</h2>',
+  '<h2>The OTP is being rolled out train by train</h2><p>Later releases from the Ministry of Railways say the Aadhaar-based OTP for online Tatkal booking was introduced in a phased manner, and was working in 322 trains as on 4 December 2025. The OTP for Tatkal bookings at reservation counters was in 211 trains on the same date. A later release still describes the online OTP as introduced on selected trains.</p>',
+  [PIB_TATKAL_A, PIB_TATKAL_B]),
+ ('name-others', 'transfer-train-ticket-change-name', '<h2>What to take to the counter</h2>',
+  '<h2>Other cases on Railway pages</h2><p>Indian Railways zone pages list more cases than the two above. A reservation can also be transferred for students of a recognised educational institution, on a request from the head of the institution, and from one National Cadet Corps cadet to another, on a written request by the head of the group made 24 hours before the scheduled departure.</p>',
+  [ER_NAME, SER_NAME]),
+ ('vikalp-later', 'vikalp-alternate-trains', '<h2>Check your PNR twice</h2>',
+  '<h2>Opting in later, and boarding the original train</h2><p>A Press Information Bureau release says passengers who did not opt for VIKALP at the time of booking can also opt for it up to 24 hours before the scheduled departure. Waitlisted passengers who are allotted alternate accommodation are not allowed to board the original train; if found travelling, they are treated as travelling without a ticket and charged accordingly.</p>',
+  [PIB_VIK_A, PIB_VIK_B]),
+]
+
+
+PIB_REFUND23 = ('PIB: Refund of cancelled tickets', 'https://www.pib.gov.in/Pressreleaseshare.aspx?PRID=1945094&reg=48&lang=2')
+PIB_LIMIT_A = ('PIB: Various measures for fast, safe and transparent e-ticketing', 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1896104&reg=48&lang=2')
+PIB_LIMIT_B = ('PIB: Opening of reservation centres round the clock', 'https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=1602083&reg=3&lang=2')
+IR_CONC2 = ('Indian Railways: Lost, misplaced, torn or mutilated tickets (refund rules)', 'https://www.indianrail.gov.in/enquiry/StaticPages/StaticEnquiry.jsp?StaticPage=conc_Rules.html')
+SER_LOST = ('South Eastern Railway: Lost, misplaced, torn or mutilated tickets', 'https://ser.indianrailways.gov.in/view_section.jsp?lang=0&id=0,2,406,1611,1612,1624,1650')
+WCR_DUP = ('West Central Railway: Duplicate ticket', 'https://wcr.indianrailways.gov.in/view_section.jsp?lang=0&id=0,2,393,395,856')
+IRCTC_TC2 = ('IRCTC: Terms and Conditions (user registration)', 'https://www.pmf.irctc.co.in/cn/TermsAndConditions.html')
+RB_ADV = ('Railway Board: Advance reservation through internet', 'https://indianrailways.gov.in/railwayboard/uploads/directorate/coaching/pdf/AdvanceReservation_Internet.pdf')
+PIB_SMS12 = ('PIB: SMS sent by IRCTC accepted on par with the ERS', 'https://www.pib.gov.in/newsite/PrintRelease.aspx?relid=80101&reg=3&lang=2')
+
+BLOCKS += [
+ ('pay-days', 'irctc-payment-failed-money-deducted', '<h2>Do not pay twice for the same ticket</h2>',
+  '<h2>What the Ministry of Railways says about timing</h2><p>A Ministry of Railways release says that if money is debited and the ticket is not booked, IRCTC starts an automatic refund on the following day, and the refund is advised to the payment gateway or bank. It then takes 3 to 4 business days for net banking, wallet or cash card payments, and 6 to 7 business days for credit or debit card payments.</p>',
+  [PIB_REFUND23]),
+ ('limits-checks', 'irctc-booking-limits-and-timings', '<h2>One account per person</h2>',
+  '<h2>Checks while you book</h2><ul><li>Press Information Bureau releases say individual users are logged out if their enquiries exceed 25 per session during the opening hours of 08:00 to 12:00.</li><li>Checks are applied on the minimum time needed to enter the passenger details and the CAPTCHA, and a ticket cannot be booked before 35 seconds.</li></ul>',
+  [PIB_LIMIT_A, PIB_LIMIT_B]),
+ ('acct-rpf', 'irctc-account-and-passenger-list-help', '<h2>Who to contact</h2>',
+  '<h2>Multiple user IDs</h2><p>IRCTC\'s Terms and Conditions say that if a user registers more than one user ID, or books tickets on such multiple IDs, IRCTC can deactivate all those registrations, refer the case to the Railway Protection Force for prosecution under the relevant section of law, and cancel any or all tickets booked with them.</p>',
+  [IRCTC_TC2]),
+ ('lost-counter', 'lost-or-torn-train-ticket-duplicate', '<h2>Tatkal tickets</h2>',
+  '<h2>Paper tickets: what the Railway rules say</h2><ul>'
+  '<li>No refund of fare is given for a lost or misplaced ticket. A refund is given for a torn or mutilated ticket after the due cancellation charge, if its genuineness can be verified from the ticket.</li>'
+  '<li>If a reserved or RAC ticket is lost, misplaced, torn or mutilated and a duplicate is sought before the reservation chart is prepared, the station master issues a duplicate ticket on collection of the clerkage charge per passenger.</li>'
+  '<li>After the chart is prepared, a duplicate for a lost or misplaced reserved ticket is issued on collection of 50% of the total fare. For a torn or mutilated reserved or RAC ticket it is 25% of the total fare.</li>'
+  '<li>Duplicate tickets are not issued for RAC tickets after the chart is prepared.</li></ul>',
+  [IR_CONC2, SER_LOST, WCR_DUP]),
+ ('cur-chart', 'current-booking-after-chart', "<h2>IRCTC's own trains</h2>",
+  '<h2>When the chart is prepared</h2><p>The Railway Board\'s booking page says reservation charts are normally prepared 4 hours before the departure of the train from its originating station. A Ministry of Railways release of 24 March 2026 says charts now happen 9 to 18 hours before departure instead of 4 hours. Current booking starts after the chart.</p>',
+  [RB_ADV, PIB_REFORM]),
+ ('id-tatkal', 'id-proof-for-train-travel', '<h2>One ID covers the whole ticket</h2>',
+  '<h2>Tatkal tickets, and what if you cannot show the ID</h2><p>The Railway Board says that for a Tatkal ticket, the same identity card that was mentioned at the time of booking has to be presented during the journey. IRCTC says that if the prescribed ID is not shown in original, the passengers are treated as travelling without a ticket and dealt with as per Railway rules.</p>',
+  [RB_ADV]),
+ ('sms-2012', 'e-ticket-on-phone-sms-printout', '<h2>The ID still matters</h2>',
+  '<h2>Since when SMS is accepted</h2><p>A Ministry of Railways release says the SMS sent by IRCTC was accepted on par with the Electronic Reservation Slip from 1 February 2012. It lists a valid authority to travel as the ERS, SMS or VRM along with a confirmed or RAC reservation, a valid ID proof, and the passenger\'s name on the chart.</p>',
+  [PIB_SMS12]),
+]
+
+
+BLOCKS += [
+ ('reform-cancel', 'cancel-irctc-e-ticket', '<h2>Can you cancel an e-ticket online?</h2>',
+  '<div class="note"><b>Newer announcement.</b> A Ministry of Railways release of 24 March 2026 says the earlier cancellation windows of 48, 12 and 4 hours before departure have been revised to 72, 24 and 8 hours, linked to reservation charts now being prepared 9 to 18 hours before departure instead of 4 hours. It also says the requirement to file a TDR for e-tickets has been removed and refunds will be processed automatically on cancellation. The release gives no effective date, and the IRCTC cancellation page we read still lists the 48, 12 and 4 hour windows below. Check the timings IRCTC shows when you cancel.</div>',
+  [PIB_REFORM]),
+ ('reform-tdr', 'train-cancelled-diverted-late-refund-tdr', '<h2>If the railway cancels your train</h2>',
+  '<div class="note"><b>Newer announcement.</b> A Ministry of Railways release of 24 March 2026 says the requirement to file a TDR for e-tickets has been removed and refunds will be processed automatically on cancellation. It gives no effective date. The IRCTC refund rules this guide follows are dated 12 November 2015, so check what IRCTC shows for your ticket.</div>',
+  [PIB_REFORM]),
+ ('reform-chart', 'waitlisted-e-ticket-after-chart', '<h2>When is the chart prepared?</h2>',
+  '<div class="note"><b>Newer announcement.</b> A Ministry of Railways release of 24 March 2026 says reservation charts are now prepared 9 to 18 hours before departure instead of 4 hours. The IRCTC pages we read do not state a time.</div>',
+  [PIB_REFORM]),
+ ('reform-board', 'change-boarding-station-irctc', '<h2>How to change it on IRCTC</h2>',
+  '<div class="note"><b>Newer announcement.</b> A Ministry of Railways release of 24 March 2026 says passengers will be able to change their boarding station digitally up to 30 minutes before the train departs from its origin station, where earlier changes were allowed only before chart preparation. Its headline says "soon" and it gives no date. Check the time limit IRCTC shows when you change.</div>',
+  [PIB_REFORM]),
+]
+
+
+IR_TATKAL = ('Indian Railways: Tatkal scheme', 'https://www.indianrail.gov.in/enquiry/StaticPages/StaticEnquiry.jsp?StaticPage=tatkal_Scheme.html')
+PIB_QUOTA = ('PIB, 4 January 2019: categories of reservation quotas in Indian Railways', 'https://www.pib.gov.in/newsite/PrintRelease.aspx?relid=187186&reg=48&lang=2')
+PIB_SEC = ('PIB: Measures to improve safety and security in Railways', 'https://pib.gov.in/PressReleasePage.aspx?PRID=1657352')
+
+BLOCKS += [
+ ('tatkal-other', 'tatkal-ticket-booking-rules', '<h2>Questions people ask</h2>',
+  '<h2>Other Tatkal rules</h2><ul>'
+  '<li>A maximum of four passengers can be booked on one PNR for Tatkal tickets.</li>'
+  '<li>Change of name is not permitted on bookings made under the Tatkal scheme.</li>'
+  '<li>No duplicate Tatkal tickets are issued. They are issued only in exceptional cases, on payment of the full fare including the Tatkal charges.</li>'
+  '<li>Premium Tatkal is a separate quota that the Ministry of Railways lists alongside Tatkal.</li></ul>',
+  [IR_TATKAL, PIB_QUOTA]),
+ ('quota-cancer', 'railway-quota-codes-explained', '<h2>In short</h2>',
+  '<h2>Other quotas the Ministry lists</h2><p>A Ministry of Railways release of 4 January 2019 also lists a Cancer Patient quota, for cancer patients.</p>',
+  [PIB_QUOTA]),
+ ('stolen-zero', 'luggage-stolen-on-train-complaint', '<h2>At the station</h2>',
+  '<h2>If the crime happened somewhere else</h2><p>A Ministry of Railways release says policing on the railways is handled by the Government Railway Police or the district police of each State. If the place where the crime happened is not in the jurisdiction of the police station where you report it, the case is registered as a Zero FIR and transferred to the Government Railway Police station that has jurisdiction.</p>',
+  [PIB_SEC]),
+]
+
 def main(write):
     for bid, slug, anchor, html, srcs in BLOCKS:
         p = 'guides/%s/index.html' % slug
@@ -68,6 +166,8 @@ def main(write):
             old = 'The cancellation page gives no separate refund rule for ordinary waitlisted tickets.'
             if old in h:
                 h = h.replace(old, 'The cancellation page gives no separate rule for ordinary waitlisted tickets; the refund rules are in the next section.')
+        if slug == 'irctc-payment-failed-money-deducted':
+            h = h.replace('The pages we read do not give a number of days.', 'IRCTC\'s own pages give no number of days; the Ministry of Railways release below does.')
         print('add', bid)
         if write: open(p, 'w', encoding='utf-8').write(h)
 
