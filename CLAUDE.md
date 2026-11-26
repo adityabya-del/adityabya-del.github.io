@@ -94,3 +94,9 @@ Safe to run twice (it replaces its own block).
 `tools/add_guide_facts.py` adds sections found missing in a review against Indian Railways, IRCTC and PIB pages (cancel: waitlisted/RAC clerkage, GST, Vande Bharat Sleeper; dog: IRCTC pet booking; child: under 5 berth optional; RailMadad: 139 menu; concessions: general rules; luggage: brake van). The Divyangjan station-help section is in build_guides_batch3.py. After re-running a guide generator run:
    `python3 tools/add_guide_facts.py --write`
 Safe to run twice (markers `<!--gf:id-->`).
+
+## Short guide titles (27 Nov 2026)
+
+`tools/shorten_guide_titles.py` sets the `<title>`, og:title and twitter:title of 28 guides to 60 characters or less (H1 and link lists keep the full title). The guide generators were NOT changed, so after re-running any guide generator run:
+   `python3 tools/shorten_guide_titles.py --write`
+Safe to run twice.

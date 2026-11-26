@@ -286,7 +286,7 @@ G.append(('/guides/travel-with-dog-on-train/',
 <p>An unbooked dog is charged at six times the luggage scale rate, with a minimum of ''' + R + '''50.</p>
 <h2>Railway liability</h2>
 <p>Unless the owner declares a higher value and pays the percentage charge on it, the Railway's liability for dogs (along with donkeys, sheep, goats, other animals and birds) is limited to ''' + R + '''30 per head.</p>
-<div class="note">The Indian Railways page these rules come from shows no date. Ask at the parcel or luggage office of your station before you travel.</div>
+<div class="note">The Indian Railways page these rules come from shows no date. Ask at the booking office (parcel or luggage office) of your station before you book or travel.</div>
 <h2>In short</h2>
 ''' + ul('Brake van dog box, or First Class / AC First with fellow passengers\' consent.', 'Not in AC sleeper, AC chair car, sleeper or second class.', 'Book in advance; unbooked dogs cost six times the rate (minimum ' + R + '50).'),
   [S_LUG]))

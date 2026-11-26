@@ -30,7 +30,7 @@ BLOCKS = [
   '<li>Pet booking can be done on the IRCTC e-ticketing website, for both e-tickets and counter tickets. It is allowed only after the first chart is prepared and up to the time the final chart is prepared.</li>'
   '<li>Booking needs a login on the Railway Parcel website with a mobile OTP and email ID, then the PNR and an ID card number.</li>'
   '<li>No refund of the freight charges is given on the luggage ticket, including when the PNR is cancelled, the train is cancelled or the train runs late.</li></ul>'
-  '<p>These terms and the luggage rules above describe travel in First Class differently, so ask at the parcel or luggage office of your station before you travel.</p>',
+  '<p>These terms and the luggage rules above describe travel in First Class differently, so ask at the booking office (parcel or luggage office) of your station before you book or travel.</p>',
   [IRCTC_PET]),
  ('child-under5', 'child-train-ticket-rules', "<h2>IRCTC's own trains</h2>",
   '<h2>Under 5: a berth is optional</h2><p>A Ministry of Railways release says Indian Railways has not changed the booking rule for children. Children below 5 travel free if no berth is booked, and passengers have the option to buy a ticket and book a berth for a child under 5 if they want. The release cites a Ministry of Railways circular dated 6 March 2020.</p>',
@@ -101,7 +101,7 @@ BLOCKS += [
   '<li>Duplicate tickets are not issued for RAC tickets after the chart is prepared.</li></ul>',
   [IR_CONC2, SER_LOST, WCR_DUP]),
  ('cur-chart', 'current-booking-after-chart', "<h2>IRCTC's own trains</h2>",
-  '<h2>When the chart is prepared</h2><p>The Railway Board\'s booking page says reservation charts are normally prepared 4 hours before the departure of the train from its originating station. A Ministry of Railways release of 24 March 2026 says charts now happen 9 to 18 hours before departure instead of 4 hours. Current booking starts after the chart.</p>',
+  '<h2>When the chart is prepared</h2><p>The Railway Board\'s booking page says reservation charts are normally prepared 4 hours before the departure of the train from its originating station. A Ministry of Railways release of 24 March 2026 says charts now happen 9 to 18 hours before departure instead of 4 hours. Current booking starts after the chart. Both are given here; check the timing with the booking office or IRCTC.</p>',
   [RB_ADV, PIB_REFORM]),
  ('id-tatkal', 'id-proof-for-train-travel', '<h2>One ID covers the whole ticket</h2>',
   '<h2>Tatkal tickets, and what if you cannot show the ID</h2><p>The Railway Board says that for a Tatkal ticket, the same identity card that was mentioned at the time of booking has to be presented during the journey. IRCTC says that if the prescribed ID is not shown in original, the passengers are treated as travelling without a ticket and dealt with as per Railway rules.</p>',
@@ -114,16 +114,16 @@ BLOCKS += [
 
 BLOCKS += [
  ('reform-cancel', 'cancel-irctc-e-ticket', '<h2>Can you cancel an e-ticket online?</h2>',
-  '<div class="note"><b>Newer announcement.</b> A Ministry of Railways release of 24 March 2026 says the earlier cancellation windows of 48, 12 and 4 hours before departure have been revised to 72, 24 and 8 hours, linked to reservation charts now being prepared 9 to 18 hours before departure instead of 4 hours. It also says the requirement to file a TDR for e-tickets has been removed and refunds will be processed automatically on cancellation. The release gives no effective date, and the IRCTC cancellation page we read still lists the 48, 12 and 4 hour windows below. Check the timings IRCTC shows when you cancel.</div>',
+  '<div class="note"><b>Newer announcement.</b> A Ministry of Railways release of 24 March 2026 says the earlier cancellation windows of 48, 12 and 4 hours before departure have been revised to 72, 24 and 8 hours, linked to reservation charts now being prepared 9 to 18 hours before departure instead of 4 hours. It also says the requirement to file a TDR for e-tickets has been removed and refunds will be processed automatically on cancellation. The release gives no effective date, and the IRCTC cancellation page we read still lists the 48, 12 and 4 hour windows below. Both the rule and the announcement are given here: check the timings IRCTC shows when you cancel, or ask at the booking office.</div>',
   [PIB_REFORM]),
  ('reform-tdr', 'train-cancelled-diverted-late-refund-tdr', '<h2>If the railway cancels your train</h2>',
-  '<div class="note"><b>Newer announcement.</b> A Ministry of Railways release of 24 March 2026 says the requirement to file a TDR for e-tickets has been removed and refunds will be processed automatically on cancellation. It gives no effective date. The IRCTC refund rules this guide follows are dated 12 November 2015, so check what IRCTC shows for your ticket.</div>',
+  '<div class="note"><b>Newer announcement.</b> A Ministry of Railways release of 24 March 2026 says the requirement to file a TDR for e-tickets has been removed and refunds will be processed automatically on cancellation. It gives no effective date. The IRCTC refund rules this guide follows are dated 12 November 2015, so check what IRCTC shows for your ticket, or ask at the booking office.</div>',
   [PIB_REFORM]),
  ('reform-chart', 'waitlisted-e-ticket-after-chart', '<h2>When is the chart prepared?</h2>',
-  '<div class="note"><b>Newer announcement.</b> A Ministry of Railways release of 24 March 2026 says reservation charts are now prepared 9 to 18 hours before departure instead of 4 hours. The IRCTC pages we read do not state a time.</div>',
+  '<div class="note"><b>Newer announcement.</b> A Ministry of Railways release of 24 March 2026 says reservation charts are now prepared 9 to 18 hours before departure instead of 4 hours. The IRCTC pages we read do not state a time. Check with the booking office.',
   [PIB_REFORM]),
  ('reform-board', 'change-boarding-station-irctc', '<h2>How to change it on IRCTC</h2>',
-  '<div class="note"><b>Newer announcement.</b> A Ministry of Railways release of 24 March 2026 says passengers will be able to change their boarding station digitally up to 30 minutes before the train departs from its origin station, where earlier changes were allowed only before chart preparation. Its headline says "soon" and it gives no date. Check the time limit IRCTC shows when you change.</div>',
+  '<div class="note"><b>Newer announcement.</b> A Ministry of Railways release of 24 March 2026 says passengers will be able to change their boarding station digitally up to 30 minutes before the train departs from its origin station, where earlier changes were allowed only before chart preparation. Its headline says "soon" and it gives no date. Check the time limit IRCTC shows when you change, or ask at the booking office.',
   [PIB_REFORM]),
 ]
 
