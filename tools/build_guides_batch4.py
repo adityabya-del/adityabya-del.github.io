@@ -219,7 +219,7 @@ G.append(('/guides/train-food-irctc-ecatering/',
 <h2>If your ticket is cancelled</h2>
 <p>IRCTC eCatering lists automatic cancellation of an order if the PNR gets cancelled as one of the benefits of ordering through it.</p>
 <h2>Meals served by the railway</h2>
-<p>Indian Railways publishes catering charges for Rajdhani, Shatabdi and Duronto Express trains, with a revised tariff for tea or coffee, breakfast and standard meals. Check the tariff on the Indian Railways catering charges page, as the figures are shown there.</p>
+<p>Indian Railways publishes catering charges for Rajdhani, Shatabdi and Duronto Express trains, with a revised tariff for tea or coffee, breakfast and standard meals. Check the tariff on the <a href="https://www.indianrail.gov.in/enquiry/StaticPages/StaticEnquiry.jsp?StaticPage=CateringCharge.html" rel="noopener">Indian Railways catering charges page</a>, as the figures are shown there.</p>
 <h2>How to complain about food</h2>
 ''' + ul('Call the toll-free number <b>1800111321</b>.', 'Ask for the complaint book, which Indian Railways says is available with the TTE, the Pantry Car Manager and the Station Manager.', 'For any other complaint, Indian Railways gives its customer care site, <b>customercare.indianrailways.gov.in</b>.') + '''
 <p>For a wider complaint such as cleanliness or staff, see our ''' + link('/guides/train-complaint-railmadad-139/', 'RailMadad and 139 guide') + '''.</p>
