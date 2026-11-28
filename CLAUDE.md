@@ -104,3 +104,7 @@ Safe to run twice.
 ## Station / train finder in the home page footer (28 Nov 2026)
 
 `tools/add_footer_finder.py --write` builds `/search-index.json` (every /train/<no>/ and /station/<code>/ page) and puts a search box ("Find your station or train", `<!--finder-start-->`) above "Track a popular train" in the footer of /index.html. Matches link to /station/<code>/ and /train/<no>/. Re-run it after any rebuild or when trains/stations are added (it refreshes the index and replaces its own block). Safe to run twice.
+
+## Live search on the /train/ page (28 Nov 2026)
+
+`tools/add_train_list_search.py --write` puts a "Search all trains" box (`<!--tsearch-start-->`) above the list of all trains on /train/index.html. It filters the list as the visitor types (number or name, any word order, no Enter). Re-run after any rebuild of /train/index.html; safe to run twice.
