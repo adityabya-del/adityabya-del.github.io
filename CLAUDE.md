@@ -100,3 +100,7 @@ Safe to run twice (markers `<!--gf:id-->`).
 `tools/shorten_guide_titles.py` sets the `<title>`, og:title and twitter:title of 28 guides to 60 characters or less (H1 and link lists keep the full title). The guide generators were NOT changed, so after re-running any guide generator run:
    `python3 tools/shorten_guide_titles.py --write`
 Safe to run twice.
+
+## Station / train finder in the home page footer (28 Nov 2026)
+
+`tools/add_footer_finder.py --write` builds `/search-index.json` (every /train/<no>/ and /station/<code>/ page) and puts a search box ("Find your station or train", `<!--finder-start-->`) above "Track a popular train" in the footer of /index.html. Matches link to /station/<code>/ and /train/<no>/. Re-run it after any rebuild or when trains/stations are added (it refreshes the index and replaces its own block). Safe to run twice.

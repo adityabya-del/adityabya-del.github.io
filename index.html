@@ -965,6 +965,68 @@ body.ck-noscroll{overflow:hidden}
         </div>
       </div>
     </div>
+<!--finder-start-->
+    <div class="ffind" id="ffind">
+      <h5>Find your station or train</h5>
+      <label class="sr" for="ffq">Station name or code, train number or name</label>
+      <input id="ffq" type="search" autocomplete="off" placeholder="Station (Kanpur or CNB) or train (12301 or Rajdhani)" aria-controls="ffres">
+      <div id="ffres" aria-live="polite"></div>
+    </div>
+    <style>
+    .ffind{margin-top:30px}.ffind h5{color:#fff;font:600 16px var(--font-head);margin-bottom:12px}
+    .ffind .sr{position:absolute;left:-9999px}
+    .ffind input{width:100%;max-width:560px;box-sizing:border-box;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);color:#fff;font:16px var(--font-body)}
+    .ffind input::placeholder{color:rgba(255,255,255,.6)}
+    .ffind input:focus{outline:2px solid #fff;outline-offset:2px}
+    #ffres{margin-top:12px;display:grid;gap:14px;max-width:760px}
+    #ffres h6{color:rgba(255,255,255,.7);font:600 12px var(--font-body);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+    #ffres div{display:flex;flex-wrap:wrap;gap:8px}
+    #ffres a{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 12px;font-size:13px}
+    #ffres p{color:rgba(255,255,255,.75);font-size:14px}
+    </style>
+    <script>
+    (function(){
+      var q=document.getElementById('ffq'),out=document.getElementById('ffres'),idx=null,loading=false,wait=[];
+      function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+      function load(cb){
+        if(idx){cb();return}
+        wait.push(cb);
+        if(loading)return;loading=true;
+        fetch('/search-index.json').then(function(r){return r.json()}).then(function(j){
+          idx={t:j.t.map(function(x){return {k:x[0],n:x[1],h:(x[0]+' '+x[1]).toLowerCase()}}),
+               s:j.s.map(function(x){return {k:x[0],n:x[1],h:(x[0]+' '+x[1]).toLowerCase()}})};
+          loading=false;var w=wait;wait=[];w.forEach(function(f){f()});
+        }).catch(function(){loading=false;wait=[];out.innerHTML='<p>Search could not load. Please try again.</p>'});
+      }
+      function rank(list,toks,raw){
+        var res=[];
+        for(var i=0;i<list.length;i++){
+          var e=list[i],ok=true;
+          for(var j=0;j<toks.length;j++){if(e.h.indexOf(toks[j])<0){ok=false;break}}
+          if(!ok)continue;
+          var kl=e.k.toLowerCase(),nl=e.n.toLowerCase(),sc=3;
+          if(kl===raw)sc=0;else if(kl.indexOf(raw)===0||nl.indexOf(raw)===0)sc=1;else if((' '+nl).indexOf(' '+toks[0])>=0)sc=2;
+          res.push([sc,e]);
+        }
+        res.sort(function(a,b){return a[0]-b[0]||(a[1].n<b[1].n?-1:1)});
+        return res.slice(0,8).map(function(x){return x[1]});
+      }
+      function show(){
+        var raw=q.value.trim().toLowerCase();
+        if(raw.length<2){out.innerHTML='';return}
+        load(function(){
+          var toks=raw.split(/\s+/),st=rank(idx.s,toks,raw),tr=rank(idx.t,toks,raw),h='';
+          if(st.length)h+='<section><h6>Stations</h6><div>'+st.map(function(e){return '<a href="/station/'+e.k.toLowerCase()+'/">'+esc(e.n)+' ('+esc(e.k)+')</a>'}).join('')+'</div></section>';
+          if(tr.length)h+='<section><h6>Trains</h6><div>'+tr.map(function(e){return '<a href="/train/'+e.k+'/">'+esc(e.k+' '+e.n)+'</a>'}).join('')+'</div></section>';
+          out.innerHTML=h||'<p>No station or train found for &ldquo;'+esc(q.value.trim())+'&rdquo;.</p>';
+        });
+      }
+      q.addEventListener('focus',function(){load(function(){})},{once:true});
+      q.addEventListener('input',show);
+      q.addEventListener('keydown',function(ev){if(ev.key==='Enter'){var a=out.querySelector('a');if(a){ev.preventDefault();location.href=a.getAttribute('href')}}});
+    })();
+    </script>
+<!--finder-end-->
     <div class="ftrains"><h5>Track a popular train</h5><div><a href="/train/12301/">12301 Howrah - New Delhi Rajdhani Express</a><a href="/train/12302/">12302 New Delhi - Howrah Rajdhani Express</a><a href="/train/12951/">12951 Mumbai Central - New Delhi Tejas Rajdhani Express</a><a href="/train/12952/">12952 New Delhi - Mumbai Central Tejas Rajdhani Express</a><a href="/train/12423/">12423 Dibrugarh - New Delhi Rajdhani Express</a><a href="/train/12424/">12424 New Delhi - Dibrugarh Rajdhani Express</a><a href="/train/12627/">12627 Karnataka Express</a><a href="/train/12841/">12841 Coromandel Express</a><a href="/train/12723/">12723 Telangana Express</a><a href="/train/12615/">12615 Grand Trunk Express</a><a href="/train/12259/">12259 Sealdah - Bikaner AC Duronto Express</a><a href="/train/22691/">22691 KSR Bengaluru - Hazrat Nizamuddin Rajdhani Express</a><a href="/train/12433/">12433 Chennai Central - Hazrat Nizamuddin Rajdhani Express</a><a href="/train/12621/">12621 Tamil Nadu Express</a><a href="/train/12009/">12009 Mumbai Central - Ahmedabad Shatabdi Express</a><a href="/train/">All trains</a></div></div>
     <div class="fine"><span>© 2026 ClearBerth. All rights reserved.</span><span>Screens and alerts on this page use sample data.</span></div>
   </div>
